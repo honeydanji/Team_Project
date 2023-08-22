@@ -1,7 +1,7 @@
 # 다중 객체 이미지 판별 웹 서비스
 
 ## 팀원 
-|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/70638717?v=4">|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/86204430?v=4">|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/129818881?v=4">|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/98063854?v=4">|
+|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/129818881?v=4">|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/129818936?v=4">|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/129819084?v=4">|
 | :---------------------------------: | :-----------------------------------:|:-----------------------------------:|
 |              Back                   |           Front                      |                Data                 |
 |             하성진                   |          박수현                      |                  조원준              |      
