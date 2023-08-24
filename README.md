@@ -36,6 +36,8 @@
 ## 2023/08/24
 - 프로젝트 계획서 제출
 - 서비스화면 설계(2차 수정)
-  <img src='https://github.com/honeydanji/Team_Project/assets/129818881/fe846c34-77f5-4dde-8ad6-0ced7d3701f3'>
+  <img src='https://github.com/honeydanji/Team_Project/assets/129818881/fe846c34-77f5-4dde-8ad6-0ced7d3701f3'/>
+- DB 설계(2차 수정)
+  <img src="https://github.com/honeydanji/Team_Project/assets/129818881/4b86ac13-a64f-40b4-a4da-5226c2ef80fa"/>
 
 
