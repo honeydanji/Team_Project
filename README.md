@@ -4,6 +4,9 @@
 - 개발환경
     - IDE : vscode
     - Virtual Environment 생성
-        - Python 3.11.4
+        - Python 3.9.0
         - Flask 2.3.2
         - Werkzeug 2.3.7
+## 2023/08/24
+- DB 설계 마무리
+- 
