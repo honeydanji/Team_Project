@@ -10,6 +10,6 @@
 ## 2023/08/24
 <details>
     <summary> DB 설계도  </summary>
-    <img src="https://github.com/honeydanji/Team_Project/assets/129818881/7ca695d2-15e4-4482-806e-387443932d2c"/>
+    <img src="https://github.com/honeydanji/Team_Project/assets/129818881/4b86ac13-a64f-40b4-a4da-5226c2ef80fa"/>
 </details>
 
