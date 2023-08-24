@@ -8,9 +8,8 @@
         - Flask 2.3.2
         - Werkzeug 2.3.7
 ## 2023/08/24
-- DB 설계
-    - <details>
-          <summary>DB 설계도</summary>
-          <img src="https://github.com/honeydanji/Team_Project/assets/129818881/7ca695d2-15e4-4482-806e-387443932d2c"/>
-      </details>
+<details>
+    <summary> ▶ DB 설계도  </summary>
+    <img src="https://github.com/honeydanji/Team_Project/assets/129818881/7ca695d2-15e4-4482-806e-387443932d2c"/>
+</details>
 
