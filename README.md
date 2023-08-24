@@ -8,7 +8,7 @@
 | [GitHub](https://github.com/sou05091/)  | [GitHub](https://github.com/SuHyunParkSunshine/)  | [GitHub](https://github.com/jwjb1020/)  
 
 ## 프로젝트 구성도
-<img src='https://github.com/honeydanji/Team_Project/assets/129818881/d6924632-570e-4522-9d86-ac39a6a61a6e'>
+<img src='https://github.com/honeydanji/Team_Project/assets/129818881/29e59f96-04a8-4aeb-9802-529b8ec92b0d'>
 
 ## 2023/08/19
 - 프로젝트 회의 및 계획서작성
