@@ -7,6 +7,7 @@
     <img src='https://github.com/honeydanji/Team_Project/assets/129818936/276adf8c-1114-4e2e-9f4d-7854afe6214c'/>
     </details>
     - 교수님 피드백 후, 회사 측에서 필요한 데이터를 화면에 표시하는 페이지를 추가로 설계
+- Signin & Signup 페이지 구현
 
 ## 2023/08/24
 <details>
