@@ -20,4 +20,7 @@
 ## ALL Programing
 ### Flask와 MySQL 연동(2023/08/25)
 >>
+### 회원가입 구현
+>>
+
 
