@@ -16,3 +16,8 @@
 ## 2023/08/25
 - REST API 설계
 
+
+## ALL Programing
+### Flask와 MySQL 연동(2023/08/25)
+>>
+
