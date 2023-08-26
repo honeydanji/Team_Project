@@ -1,0 +1,13 @@
+train: C:/Team_Project/testdataset/train
+val: C:/Team_Project/testdataset/valid
+test: C:/Team_Project/testdataset/test
+
+nc: 5
+names: ['bongji', 'box', 'canSnack', 'energdrink', 'milk']
+
+roboflow:
+  workspace: pusanuniversity-zuc6q
+  project: testdataset-fpvll
+  version: 6
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/pusanuniversity-zuc6q/testdataset-fpvll/dataset/6
