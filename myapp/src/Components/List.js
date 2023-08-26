@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 const people = [
     {
       name: 'Leslie Alexander',
@@ -55,10 +57,21 @@ const people = [
 
 export default function List() {
 
-     return (
+  const [selectedPerson, setSelectedPerson] = useState(null);
+
+  const handleItemClick = (person) => {
+    setSelectedPerson(person === selectedPerson ? null : person);
+  };
+
+  return (
     <ul role="list" className="divide-y divide-gray-100">
       {people.map((person) => (
-        <li key={person.email} className="flex justify-between gap-x-6 py-5 px-9">
+        <li
+          key={person.email}
+          className={`flex justify-between gap-x-6 py-5 px-9 ${selectedPerson === person ? 'bg-gray-100' : ''}`}
+          onClick={() => handleItemClick(person)}
+          style={{ cursor: 'pointer' }}
+        >
           <div className="flex min-w-0 gap-x-4">
             <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={person.imageUrl} alt="" />
             <div className="min-w-0 flex-auto">
@@ -85,5 +98,4 @@ export default function List() {
       ))}
     </ul>
   )
-
 }
