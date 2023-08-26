@@ -49,6 +49,9 @@
     - 기존 : 과자 패키지 모양에 따른 객체 데이터셋 선정
     - 수정 : 특정 서비스 이용자(공구, 재활용품 등)에 맞는 객체 데이터셋 선정
 - 서비스화면 설계(3차 수정)
-  <img src="">
+  <details>
+    <summary>추가페이지 이미지</summary>
+    <img src='https://github.com/honeydanji/Team_Project/assets/129818936/276adf8c-1114-4e2e-9f4d-7854afe6214c'/>
+  </details>
 
 
