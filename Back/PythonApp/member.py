@@ -29,7 +29,8 @@ class UserRegisterResource(Resource) :
         # 비밀번호 암호화, passlib 사용
         # data['password']
         hashed_password = hash_password( data['password'] )
-        hashed_password_confirm = hash_password( data['confirm_password'])
+        hashed_password_confirm = hashed_password
+        # hashed_password_confirm = hash_password( data['confirm_password'])
         
         query = '''
         insert into members
