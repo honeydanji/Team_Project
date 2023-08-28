@@ -1,5 +1,10 @@
 # 다중 객체 이미지 판별 웹 서비스
 
+## 2023/08.28
+- Sign up 시
+    - RestAPI로 Back-end단에 정보 전달 후 DB 저장하기 위해 클라이언트로부터 정보 받은 후 전달하는 코드 작성
+    - cors 연결에러 해결 후 연결 되는 것 확인 완
+
 ## 2023/08/25
 - UI 설계(3차)
     <details>
@@ -21,6 +26,7 @@
     - React
     - Node.js : v18.17.0
     - npm version : 9.6.7
+    - swiper version : 9.3.2 
 - UI 설계 프로그램
     - Figma
 
