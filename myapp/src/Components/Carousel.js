@@ -74,6 +74,17 @@ export default function Carousel({ carouselList }) {
     }
   };
 
+  // 자동 슬라이드 인터벌
+  useEffect(() => {
+    const autoSlideInterval = setInterval(() => {
+        handleSwipe(1); // 다음 슬라이드로 이동        
+    }, 5000) // 5초마다 슬라이드 변경
+
+    return () => {
+        clearInterval(autoSlideInterval); // 컴포넌트 언마운트 시 인터벌 해제
+    };
+  }, [currIndex]);
+
   return (
     <div className="container">
       <div
