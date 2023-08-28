@@ -1,6 +1,6 @@
-train: C:/Team_Project/testdataset/train
-val: C:/Team_Project/testdataset/valid
-test: C:/Team_Project/testdataset/test
+train: C:\Team_Project-1\testdataset\train
+val: C:\Team_Project-1\testdataset\valid
+test: C:\Team_Project-1\testdataset\test
 
 nc: 5
 names: ['bongji', 'box', 'canSnack', 'energdrink', 'milk']
