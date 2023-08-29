@@ -5,6 +5,7 @@
     - 업로드한 이미지를 Back-end에서 DB에서 저장할 수 있도록 서버로 전송하는 코드 작성
 - Stats Component : tailwind 사용하여 Component 생성
 - Data Results : tailwind 사용하여 Page 생성
+- ChartBar Component: js와 css를 이용하여 animation이 들어가 있는 horizontal ChartBar 생성
 
 ## 2023/08/28
 - Sign up 시
