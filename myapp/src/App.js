@@ -11,6 +11,8 @@ import Carousel from './Components/Carousel';
 import Test from './Components/Test';
 import Stats from './Components/Stats';
 import DataResults from './Pages/DataResults';
+import ChartBar from './Components/ChartBar';
+
 
 const CAROUSEL_IMAGES = [
   'https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg',
@@ -34,6 +36,7 @@ export default function App() {
           <Route path='/test' element = {<Test />} />
           <Route path='/stats' element = {<Stats />} />
           <Route path='/dataresults' element = {<DataResults />} />
+          <Route path='/chartbar' element = {<ChartBar />} />
         </Routes>
       </main>
     </BrowserRouter>

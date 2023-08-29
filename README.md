@@ -1,6 +1,12 @@
 # 다중 객체 이미지 판별 웹 서비스
 
-## 2023/08.28
+## 2023/08/29
+- DragDrop
+    - 업로드한 이미지를 Back-end에서 DB에서 저장할 수 있도록 서버로 전송하는 코드 작성
+- Stats Component : tailwind 사용하여 Component 생성
+- Data Results : tailwind 사용하여 Page 생성
+
+## 2023/08/28
 - Sign up 시
     - RestAPI로 Back-end단에 정보 전달 후 DB 저장하기 위해 클라이언트로부터 정보 받은 후 전달하는 코드 작성
     - cors 연결에러 해결 후 연결 되는 것 확인 완
