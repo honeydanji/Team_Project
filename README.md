@@ -1,12 +1,17 @@
 # 다중 객체 이미지 판별 웹 서비스
 
 ## 2023/08/21
-- 개발환경 셋팅
+- 개발환경
     - IDE : vscode
-    - Virtual Environment 생성
-        - Python 3.9.0
+    - Server
+        - SprinBoot 3.1.3
+        - jdk 17
+        - port 8080
+    - 외부 API
+        - Python 3.9.13
         - Flask 2.3.2
-        - Werkzeug 2.3.7
+        - port 5000
+        
 ## 2023/08/24
 <details>
     <summary> DB 설계도  </summary>
@@ -22,6 +27,9 @@
     - SpringBoot : 클라이언트와 직접 상호작용     
 - RESTAPI 명세 작성
 - 클라이언트와 서버 (SpringBoot, Flask) 구조 시각화
+
+## 2023/08/29
+- RestTemplate 사용
 
 ## ALL Programing
 ### Flask와 MySQL 연동(2023/08/25)
