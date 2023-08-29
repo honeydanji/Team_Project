@@ -45,7 +45,6 @@ public class imageSendService {
         map.add("pngFile", new FileSystemResource(localFile2d));
         map.add("pngFile", new FileSystemResource(localFile3d));
 
-
         // HTTP Headers 설정
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
