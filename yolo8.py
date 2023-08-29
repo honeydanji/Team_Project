@@ -2,9 +2,9 @@ from flask import Flask, request, jsonify
 from ultralytics import YOLO
 from PIL import Image
 from flask_cors import CORS
-import numpy as np
 import os
-from werkzeug.utils import secure_filename
+import base64
+from io import BytesIO
 
 app = Flask(__name__)
 CORS(app)
@@ -29,13 +29,21 @@ def home():
         # 모델로 이미지 예측 수행
         # results = model(temp_image_path, conf=0.6, save_txt=True, device="cpu",save=True, project="results",name="output")/
         results = model(temp_image_path, conf=0.6, device="cpu",project="results",name="output")
-        
+      
          # 임시 이미지 파일을 삭제합니다.
         os.remove(temp_image_path)
         
         response_data = []  # 응답 데이터를 담을 리스트 초기화
 
         for result in results:
+            im_array = result.plot()  # plot a BGR numpy array of predictions
+            im = Image.fromarray(im_array[..., ::-1])  # RGB PIL image
+
+            # Encode the image as Base64
+            buffered = BytesIO()
+            im.save(buffered, format="JPEG")
+            encoded_image = base64.b64encode(buffered.getvalue()).decode("utf-8")
+            
             # 탐지된 객체 정보 추출
             # 모두 tesor 타입이라서 json에서 읽을 수 있는 형태로 전처리 해야함
             class_name = result.boxes.cls.tolist()
@@ -47,10 +55,11 @@ def home():
             x_coords = [coord[0].item() for coord in coords]
             y_coords = [coord[1].item() for coord in coords]
     
-            print(f"Object {index} - Class: {class_val}, Accuracy: {acc_val}, x coordinates: {x_coords} ,y coordinates: {y_coords}")
+            # print(f"Object {index} - Class: {class_val}, Accuracy: {acc_val}, x coordinates: {x_coords} ,y coordinates: {y_coords}")
             
             # 응답 데이터를 딕셔너리로 구성하여 리스트에 추가
             object_data = {
+                "image": encoded_image, 
                 "Object_num" : index,
                 "class_name": class_val,
                 "accuracy": acc_val,
