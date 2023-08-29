@@ -63,5 +63,7 @@
 - 프로젝트 3차 회의
   - Back :
     - 기존 : Flask로 서버 구현
-    - 수정 : StringBoot와 Flask 동시 사용. StringBoot는 클라이언트로 부터 직접 request, response 하고 flask는 ai 모델을 위한 데이터 전처리용으로 사용 
+    - 수정 : StringBoot와 Flask 동시 사용. StringBoot는 클라이언트로 부터 직접 request, response 하고 flask는 ai 모델을 위한 데이터 전처리용으로 사용
 
+## 2023/08/29
+- 클라이언트, server(SpringBoot), 외부api(Flask) 이미지데이터 통신 성공
