@@ -59,4 +59,5 @@ public class imageUploadController {
                 .contentType(MediaType.IMAGE_PNG)
                 .body(imageResource);
     }
+    
 }

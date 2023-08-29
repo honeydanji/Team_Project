@@ -23,7 +23,6 @@ public class imageUploadService {
 	//private final String imageBaseURL = "http://10.125.121.183:8080/upload/image/"; // 클라이언트 실행
     private final String imageBaseURL = "http://localhost:8080/upload/image/"; // 로컬 실행
 
-
     public ResponseEntity<String> uploadService(MultipartFile pngFile, MultipartFile plyFile) {
 
         twoOriginalImage twooriginalimage = new twoOriginalImage();
