@@ -1,13 +1,16 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
-import Frontpage from './Components/Frontpage';
-import LogIn from './Components/LogIn';
+import Frontpage from './Pages/Frontpage';
+import LogIn from './Pages/LogIn';
 import ServiceMain from './Components/ServiceMain';
 import DragDrop from './Components/DragDrop';
 import List from './Components/List';
 import SignUp from './Components/SignUp';
 import Carousel from './Components/Carousel';
+import Test from './Components/Test';
+import Stats from './Components/Stats';
+import DataResults from './Pages/DataResults';
 
 const CAROUSEL_IMAGES = [
   'https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg',
@@ -27,7 +30,10 @@ export default function App() {
           <Route path='/dragdrop' element = {<DragDrop />}/>   
           <Route path='/list' element = {<List />}/>
           <Route path='/signup' element = {<SignUp />}/>
-          <Route path='/carousel' element ={<Carousel carouselList={CAROUSEL_IMAGES}/>} />
+          <Route path='/carousel' element = {<Carousel carouselList={CAROUSEL_IMAGES}/>} />
+          <Route path='/test' element = {<Test />} />
+          <Route path='/stats' element = {<Stats />} />
+          <Route path='/dataresults' element = {<DataResults />} />
         </Routes>
       </main>
     </BrowserRouter>

@@ -22,7 +22,7 @@ export default function SignUp() {
             phone_number,
             company_name
         };
-        axios.post('http://10.125.121.183/register', data)
+        axios.post('http://10.125.121.183:8080/register', data)
             .then((res) => {
                 alert("회원가입 성공")
             })

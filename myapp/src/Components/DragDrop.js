@@ -1,15 +1,41 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import './DragDrop.css'
+import axios from "axios";
 
-export default function DragDrop() {
+export default function DragDrop() { 
+
+    const handleImageUploadClick = () => {
+        const formData = new FormData();
+
+        for(const file of imageFile.map(fileObj => fileObj.object)) {
+            formData.append("imageFile", file);
+            console.log(file);
+        }
+
+        console.log(formData);
+        console.log(imageFile);
+
+        axios.post('http://10.125.121.183:8080/upload', formData, {
+            headers: {
+                'Content-Type' : 'multipart/form-data'
+            }
+        })
+        .then((res) => {
+            alert("이미지 전송 완")
+        })
+        .catch((err) => {
+            alert("오류 발생")
+        });
+    };
+
     const [isDragging, setIsDragging] = useState(false);
-    const [files, setFiles] = useState([]);
+    const [imageFile, setImageFile] = useState([]);
     const dragRef = useRef(null);
     const fileId = useRef(0);
 
     const onChangeFiles = useCallback((e) => {
         let selectFiles = [];
-        let tempFiles = files;
+        let tempFiles = imageFile;
 
         if (e.type === "drop") {
             selectFiles = e.dataTransfer.files;
@@ -21,12 +47,12 @@ export default function DragDrop() {
             tempFiles = [...tempFiles, {id: fileId.current++, object: file}];
         }
 
-        setFiles(tempFiles);
-    }, [files]);
+        setImageFile(tempFiles);
+    }, [imageFile]);
 
     const handleFilterFile = useCallback((id) => {
-        setFiles(files.filter((file) => file.id !== id));
-    }, [files]);
+        setImageFile(imageFile.filter((file) => file.id !== id));
+    }, [imageFile]);
 
     const handleDragIn = useCallback((e) => {
         e.preventDefault();
@@ -88,7 +114,7 @@ export default function DragDrop() {
             </label>
 
             <div className="DragDrop-Files">
-                {files.length > 0 && files.map((file) => {
+                {imageFile.length > 0 && imageFile.map((file) => {
                     const { id, object } = file;
 
                     return (
@@ -100,7 +126,7 @@ export default function DragDrop() {
                 })}
             </div>
         <div className="Upload-Button">
-            <button>Upload</button>
+            <button onClick={handleImageUploadClick}>Upload</button>
         </div>
         </div>
     )
