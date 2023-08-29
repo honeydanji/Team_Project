@@ -16,6 +16,12 @@
 ## 2023/08/25
 - REST API 설계
 
+## 2023/08/28
+- 기존 Flask 서버에서 SpringBoot 서버 추가
+    - Flask : AI 모델 및 데이터 전처리
+    - SpringBoot : 클라이언트와 직접 상호작용     
+- RESTAPI 명세 작성
+- 클라이언트와 서버 (SpringBoot, Flask) 구조 시각화
 
 ## ALL Programing
 ### Flask와 MySQL 연동(2023/08/25)
