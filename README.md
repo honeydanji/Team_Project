@@ -66,4 +66,13 @@
     - 수정 : StringBoot와 Flask 동시 사용. StringBoot는 클라이언트로 부터 직접 request, response 하고 flask는 ai 모델을 위한 데이터 전처리용으로 사용
 
 ## 2023/08/29
-- 클라이언트, server(SpringBoot), 외부api(Flask) 이미지데이터 통신 성공
+- 클라이언트, server(SpringBoot), 외부api(Flask) 이미지데이터 통신(Request) 성공
+
+## 2023/08/30
+- 클라이언트, server(SpringBoot), 외부api(Flask) 이미지데이터 통신(Request, Response) 성공
+- 입력 : 2D, 3D(Pointcloud)
+- 출력 : 2D에 대한 segmentation 이미지
+<div style="display: flex;">
+  <img src="https://github.com/honeydanji/Team_Project/assets/129818881/72cadef3-ad77-42d1-ae95-63f312b3bef4" alt="Image 1" style="margin-right: 10px;">
+  <img src="https://github.com/honeydanji/Team_Project/assets/129818881/367a7b9a-e02e-4f3e-bc8b-c649cb43ac83" alt="Image 2">
+</div>
