@@ -14,11 +14,18 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.RequiredArgsConstructor;
+
+
 @Service
+@RequiredArgsConstructor
 public class imageSendService {
+
+    // base64 디코딩
+    private final flaskResponse flaskresponse;
     
+    // 로컬 이미지 파일을 Flask 서버로 전송하는 로직 구현
     public void sendImage(MultipartFile pngFile, MultipartFile plyFile) {
-        // 로컬 이미지 파일을 Flask 서버로 전송하는 로직 구현
 
         // Flask 서버의 엔드포인트 URL
         String flaskServerUrl = "http://10.125.121.180:80/uploadFlask";
@@ -57,9 +64,12 @@ public class imageSendService {
         if (response.getStatusCode().is2xxSuccessful()) {
             System.out.println("로컬 이미지 전송 성공");
 
-             // 받아온 응답 데이터 확인
+            // 받아온 응답 데이터 확인
             String responseBody = response.getBody();
-            System.out.println("Response from Flask: " + responseBody);
+
+            // 응답 데이터 파싱하기.
+            flaskresponse.parsing(responseBody);
+
         } else {
             System.out.println("로컬 이미지 전송 실패: " + response.getStatusCode());
             // 실패 시 예외 처리 또는 로그 등 추가 작업 수행
