@@ -10,15 +10,15 @@ app = Flask(__name__)
 CORS(app)
 
 # 모델 초기화
-model = YOLO("model_v3.pt")
+model = YOLO("models/model_v3.pt")
 
 @app.route("/uploadFlask", methods=["POST"])
 def home():
     try:
-        if "imageFile" not in request.files:
+        if "pngFile" not in request.files:
             return "No image part"
 
-        image = request.files["imageFile"]
+        image = request.files["pngFile"]
         if image.filename == "":
             return "No selected file"
                 
@@ -41,15 +41,22 @@ def home():
 
             # Encode the image as Base64
             buffered = BytesIO()
-            im.save(buffered, format="JPEG")
+            im.save(buffered, format="jpeg")
             encoded_image = base64.b64encode(buffered.getvalue()).decode("utf-8")
-            
+            data_uri = f"{encoded_image}"
+            # 이미지 데이터를 딕셔너리에 추가
+            object_data = {
+                "image_name" : image.filename,
+                "image": data_uri,
+                "detections": []
+            }
             # 탐지된 객체 정보 추출
             # 모두 tesor 타입이라서 json에서 읽을 수 있는 형태로 전처리 해야함
             class_name = result.boxes.cls.tolist()
             accuracy = result.boxes.conf.tolist()
             xy_list = result.masks.xyn  
-        
+            # print(xy_list)
+          
         
         for index, (coords, class_val, acc_val) in enumerate(zip(xy_list, class_name, accuracy)):
             x_coords = [coord[0].item() for coord in coords]
@@ -58,15 +65,17 @@ def home():
             # print(f"Object {index} - Class: {class_val}, Accuracy: {acc_val}, x coordinates: {x_coords} ,y coordinates: {y_coords}")
             
             # 응답 데이터를 딕셔너리로 구성하여 리스트에 추가
-            object_data = {
-                "image": encoded_image, 
-                "Object_num" : index,
-                "class_name": class_val,
-                "accuracy": acc_val,
-                "x_coordinates": x_coords,
-                "y_coordinates": y_coords
-            }
-            response_data.append(object_data)
+            detection = {
+                    "Object_num": index,
+                    "class_name": class_val,
+                    "accuracy": acc_val,
+                    "x_coordinates": x_coords,
+                    "y_coordinates": y_coords
+                }
+
+            object_data["detections"].append(detection)
+
+        response_data.append(object_data)
            
 
         # JSON 형식으로 응답 데이터 전송
