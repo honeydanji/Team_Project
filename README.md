@@ -74,5 +74,5 @@
 - 출력 : 2D에 대한 segmentation 이미지
 <div style="display: flex; flex-direction: row;">
   <img src="https://github.com/honeydanji/Team_Project/assets/129818881/72cadef3-ad77-42d1-ae95-63f312b3bef4" alt="Image 1", style="width: 40%; style="margin-right: 5px;">
-  <img src="https://github.com/honeydanji/Team_Project/assets/129818881/367a7b9a-e02e-4f3e-bc8b-c649cb43ac83" alt="Image 2", style="width: 40%;>
+  <img src="https://github.com/honeydanji/Team_Project/assets/129818881/367a7b9a-e02e-4f3e-bc8b-c649cb43ac83" alt="Image 2", style="width: 40%;">
 </div>
