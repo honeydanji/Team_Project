@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './Carousel.css'
+import '../Styles/Carousel.css'
 
 export default function Carousel({ carouselList }) {
   const [currIndex, setCurrIndex] = useState(1);

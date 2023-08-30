@@ -1,0 +1,35 @@
+.breadcrumbBox {    
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.boxes {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.imageBox {
+    width: 700px;
+    height: 800px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+
+/* INFORMATIONBOX */
+.information_coordinates {
+    width: 700px;
+    height: 300px;
+    border: 2px solid black;        
+}
+
+.information_lists {
+    width: 700px;
+    height: 500px;
+    border: 2px solid black;
+}

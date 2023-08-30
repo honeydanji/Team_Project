@@ -3,15 +3,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import Frontpage from './Pages/Frontpage';
 import LogIn from './Pages/LogIn';
-import ServiceMain from './Components/ServiceMain';
-import DragDrop from './Components/DragDrop';
+import DragDrop from './Pages/DragDrop';
 import List from './Components/List';
 import SignUp from './Components/SignUp';
 import Carousel from './Components/Carousel';
-import Test from './Components/Test';
 import Stats from './Components/Stats';
 import DataResults from './Pages/DataResults';
 import ChartBar from './Components/ChartBar';
+import ChartDonut from './Components/ChartDonut';
+import Test from './Pages/Test';
+import Service from './Pages/Service';
+import SelectDate from './Components/SelectDate';
 
 
 const CAROUSEL_IMAGES = [
@@ -27,7 +29,6 @@ export default function App() {
       <main>
         <Routes>
           <Route path='/' element = {<Frontpage />}/>
-          <Route path='/servicemain' element = {<ServiceMain />} />
           <Route path='/login' element = {<LogIn />} />  
           <Route path='/dragdrop' element = {<DragDrop />}/>   
           <Route path='/list' element = {<List />}/>
@@ -37,6 +38,9 @@ export default function App() {
           <Route path='/stats' element = {<Stats />} />
           <Route path='/dataresults' element = {<DataResults />} />
           <Route path='/chartbar' element = {<ChartBar />} />
+          <Route path='/chartdonut' element = {<ChartDonut />} />
+          <Route path='/service' element = {<Service />} />
+          <Route path='/selectdate' element = {<SelectDate />}/>
         </Routes>
       </main>
     </BrowserRouter>

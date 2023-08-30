@@ -1,4 +1,16 @@
 # 다중 객체 이미지 판별 웹 서비스
+## 2023/08/30
+- ChartBar Component
+    - fake data를 넣은 component 1차완성
+    - 추후 퍼센트 계산식을 넣어서 퍼센트가 들어오는 값에 따라 유동적으로 변경 될 수 있도록 해야 함
+
+- Data Results
+    - 페이지 framework 구축 중: header, logo 등등
+    - js와 css 사용하여 처음부터 하나하나 설계하는 중
+
+- Service
+    - 업로드한 이미지에 대한 결과값을 띄워주는 페이지 구축 중
+    - 이미지 박스, 결과값(좌표값, 6D좌표값), 클래스 리스트 나타나는 화면 뼈대(framework) 구현
 
 ## 2023/08/29
 - DragDrop

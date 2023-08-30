@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Breadcrumb() {
+export default function Breadcrumb() {
   return (
     <nav aria-label="Breadcrumb" className="flex">
       <ol className="flex overflow-hidden rounded-lg border border-gray-200 text-gray-600">
@@ -45,4 +45,3 @@ function Breadcrumb() {
   );
 }
 
-export default Breadcrumb;

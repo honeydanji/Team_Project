@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import './DragDrop.css'
+import '../Styles/DragDrop.css'
 import axios from "axios";
 
 export default function DragDrop() { 
@@ -8,14 +8,15 @@ export default function DragDrop() {
         const formData = new FormData();
 
         for(const file of imageFile.map(fileObj => fileObj.object)) {
-            formData.append("imageFile", file);
+            formData.append("pngFile", file);
+            formData.append("plyFile", file);
             console.log(file);
         }
 
         console.log(formData);
         console.log(imageFile);
 
-        axios.post('http://10.125.121.183:8080/upload', formData, {
+        axios.post('http://10.125.121.183:8080/uploadSpring', formData, {
             headers: {
                 'Content-Type' : 'multipart/form-data'
             }
