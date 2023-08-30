@@ -37,12 +37,29 @@ public class imageUploadController {
     }
 
     // 이미지 파일이 저장된 디렉토리 경로를 설정.
-	private final String imageDirectory = "C:/Team_Project/Back(SpringBoot)/TeamProject/image";
+	private final String twoDImageDirectory = "C:/Team_Project/Back(SpringBoot)/TeamProject/image/2D"; // 2d 원본이미지
+    private final String segmentationImageDirectory = "C:/Team_Project/Back(SpringBoot)/TeamProject/image/Segmentation"; // segmentation 이미지
+    private final String threeDImageDirectory = "C:/Team_Project/Back(SpringBoot)/TeamProject/image/3D"; // 3d 포인트클라우드
 
 	// 이미지 조회
 	@GetMapping("/upload/image/{imageName:.+}")
 	public ResponseEntity<Resource> getImage(@PathVariable String imageName) throws MalformedURLException {
 
+        // 이미지 확장자에 따라 저장 경로 선택
+        String imageExtension = imageName.substring(imageName.lastIndexOf(".") + 1);
+        String imageDirectory;
+
+        // 확장자에 따른 경로 설정
+        if("png".equalsIgnoreCase(imageExtension)) {
+            imageDirectory = twoDImageDirectory;
+        } else if("jpeg".equalsIgnoreCase(imageExtension)) {
+            imageDirectory = segmentationImageDirectory;
+        } else if ("ply".equalsIgnoreCase(imageExtension)) {
+            imageDirectory = threeDImageDirectory;
+        } else {
+            return null;
+        }
+        
         // 요청된 이미지 파일 이름을 사용하여 이미지 파일의 경로를 가져오기.
         Path imagePath = Paths.get(imageDirectory).resolve(imageName);
         Resource imageResource = new UrlResource(imagePath.toUri());
