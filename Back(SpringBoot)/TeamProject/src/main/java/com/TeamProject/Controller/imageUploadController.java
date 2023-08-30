@@ -4,7 +4,6 @@ import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.MediaType;
@@ -19,14 +18,15 @@ import org.springframework.web.multipart.MultipartFile;
 import com.TeamProject.Service.FlaskService.imageSendService;
 import com.TeamProject.Service.SpringBootService.imageUploadService;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @RestController
 public class imageUploadController {
 
-    @Autowired
-    imageUploadService imageuploadservice;
+    private final imageUploadService imageuploadservice; // SpringBoot 
 
-    @Autowired
-    imageSendService imagesendservice;
+    private final imageSendService imagesendservice; // 외부 API 
     
     @PostMapping("/uploadSpring")
     public ResponseEntity<String> uploadController(@RequestParam(name = "pngFile", required = false) MultipartFile pngFile,

@@ -3,7 +3,6 @@ package com.TeamProject.Service.SpringBootService;
 import java.io.File;
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,13 +10,15 @@ import org.springframework.web.multipart.MultipartFile;
 import com.TeamProject.Domain.twoOriginalImage;
 import com.TeamProject.Repository.imageUploadRepository;
 
+import lombok.RequiredArgsConstructor;
 
 
+@RequiredArgsConstructor //초기화 되지 않은 모든 final 필드 & @NonNull 마크가 있는 필드를 초기화하는 생성자 생성
 @Service
 public class imageUploadService {
 
-    @Autowired
-    imageUploadRepository imageuploadrepository;
+    private final imageUploadRepository imageuploadrepository;
+    // final : 하나의 객체만 받을 수 있게한다.
 
     // 이미지 파일의 기본 URL
 	//private final String imageBaseURL = "http://10.125.121.183:8080/upload/image/"; // 클라이언트 실행
