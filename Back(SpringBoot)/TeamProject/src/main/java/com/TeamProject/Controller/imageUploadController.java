@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.TeamProject.Domain.historyTable;
 import com.TeamProject.Service.FlaskService.imageSendService;
+import com.TeamProject.Service.SpringBootService.historyTableService;
 import com.TeamProject.Service.SpringBootService.imageUploadService;
 
 import lombok.RequiredArgsConstructor;
@@ -27,13 +29,21 @@ public class imageUploadController {
     private final imageUploadService imageuploadservice; // SpringBoot 
 
     private final imageSendService imagesendservice; // 외부 API 
+
+    private final historyTableService historytableservice; 
     
     @PostMapping("/uploadSpring")
     public ResponseEntity<String> uploadController(@RequestParam(name = "pngFile", required = false) MultipartFile pngFile,
                                                    @RequestParam(name = "plyFile", required = false) MultipartFile plyFile) {
-        imageuploadservice.uploadService(pngFile, plyFile); // StringBoot 
+        
+        // history Service
+        historyTable history = historytableservice.historyUpdate();
+
+        imageuploadservice.uploadService(pngFile, plyFile, history); // StringBoot 
         imagesendservice.sendImage(pngFile, plyFile); // Flask
         return ResponseEntity.ok("SpringBoot 이미지 전송 성공");
+        //return ResponseEntity.ok(date); // 이미지 업로드 날짜 반환       
+        
     }
 
     // 이미지 파일이 저장된 디렉토리 경로를 설정.
@@ -52,7 +62,7 @@ public class imageUploadController {
         // 확장자에 따른 경로 설정
         if("png".equalsIgnoreCase(imageExtension)) {
             imageDirectory = twoDImageDirectory;
-        } else if("jpeg".equalsIgnoreCase(imageExtension)) {
+        } else if("jpg".equalsIgnoreCase(imageExtension)) {
             imageDirectory = segmentationImageDirectory;
         } else if ("ply".equalsIgnoreCase(imageExtension)) {
             imageDirectory = threeDImageDirectory;
