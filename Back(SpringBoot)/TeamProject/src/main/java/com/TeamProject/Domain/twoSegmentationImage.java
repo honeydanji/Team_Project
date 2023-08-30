@@ -9,31 +9,27 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
-@Setter
-@Getter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Builder
-@Table(name="2d_original_image")
-public class twoOriginalImage {
-    
-    @Id()
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="2d_original_id")
-    private Integer twoOriginalId;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="2d_segmentation_image")
+public class twoSegmentationImage {
 
-    @Column(name="2d_original_path")
-    private String twoOriginalPath;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="2d_segmentation_id")
+    private Integer twoSegmentationId;
+
+    @Column(name="2d_process_path")
+    private String twoSegmentationPath;
 
     @OneToOne
-    @JoinColumn(name="history_id", nullable=false)
+    @JoinColumn(name="history_id", nullable = false)
     private historyTable history_id;
 }

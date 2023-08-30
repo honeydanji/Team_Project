@@ -1,6 +1,6 @@
 package com.TeamProject.Domain;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +26,7 @@ public class historyTable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer history_id;
 
-    private Date uploadDate;
+    private LocalDate uploadDate;
 
     private String userId;
 }
