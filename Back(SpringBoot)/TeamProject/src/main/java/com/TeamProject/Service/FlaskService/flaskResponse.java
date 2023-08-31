@@ -48,7 +48,7 @@ public class flaskResponse {
 
         // DB 파일 url 저장
         twosegmentationimage.setTwoSegmentationPath(imageBaseURL + imageName);
-        twosegmentationimage.setHistory_id(history);
+        twosegmentationimage.setHistoryId(history);
         twosegmentationrepository.save(twosegmentationimage);
 
         // 이미지 저장

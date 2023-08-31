@@ -31,5 +31,5 @@ public class twoSegmentationImage {
 
     @OneToOne
     @JoinColumn(name="history_id", nullable = false)
-    private historyTable history_id;
+    private historyTable historyId;
 }
