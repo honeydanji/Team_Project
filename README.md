@@ -1,4 +1,8 @@
 # 다중 객체 이미지 판별 웹 서비스
+## 2023/08/31
+- ChartPie Component
+    - fake data를 넣은 component 1차완성
+    - 추후 Back에서 데이터를 전달 받아서 웹에 띄우는 코드 작성 예정
 ## 2023/08/30
 - ChartBar Component
     - fake data를 넣은 component 1차완성
@@ -45,7 +49,7 @@
 ## 2023/08/21
 - 개발환경 셋팅
     - IDE : vscode
-    - React
+    - React : ^18.2.0
     - Node.js : v18.17.0
     - npm version : 9.6.7
     - swiper version : 9.3.2 

@@ -16,7 +16,7 @@ export default function ChartDonut() {
         let t = 0;
         const donutAnimation = setInterval(() => {
             donut.dataset.percent = t;
-            donut.style.background = `conic-gradient(#4F98FF 0 ${t}%, #DEDEDE ${t}% 100%)`;
+            donut.style.background = `conic-gradient(#3F8BC9 0 ${t}%, #DEDEDE ${t}% 100%)`;
 
             t++ >= correctness && clearInterval(donutAnimation);
         }, 10);

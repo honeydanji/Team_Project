@@ -14,6 +14,7 @@ import ChartDonut from './Components/ChartDonut';
 import Test from './Pages/Test';
 import Service from './Pages/Service';
 import SelectDate from './Components/SelectDate';
+import PieChart from './Components/ChartPie';
 
 
 const CAROUSEL_IMAGES = [
@@ -41,6 +42,7 @@ export default function App() {
           <Route path='/chartdonut' element = {<ChartDonut />} />
           <Route path='/service' element = {<Service />} />
           <Route path='/selectdate' element = {<SelectDate />}/>
+          <Route path='/chartpie' element = {<PieChart/>} />
         </Routes>
       </main>
     </BrowserRouter>
