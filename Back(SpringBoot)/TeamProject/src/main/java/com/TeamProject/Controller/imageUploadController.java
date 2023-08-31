@@ -64,7 +64,8 @@ public class imageUploadController {
 
         imageuploadservice.uploadService(pngFile, plyFile, history); // StringBoot 
         imagesendservice.sendImage(pngFile, plyFile, history); // Flask
-        return ResponseEntity.ok("SpringBoot 이미지 전송 성공");
+        //return ResponseEntity.ok("/upload/image/" + pngFile.getOriginalFilename());
+        return ResponseEntity.ok(pngFile.getOriginalFilename());
         //return ResponseEntity.ok(date); // 이미지 업로드 날짜 반환       
     }
 
