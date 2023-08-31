@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -26,17 +27,19 @@ public class twoSegmentationCoordinates {
     private Integer twoCoordinateId;
 
     @Column(name="2d_object_id")
-    private int twoObjectId;
+    private String twoObjectId;
 
     @Column(name="2d_object_acc")
-    private float twoObjectAcc;
+    private double twoObjectAcc;
 
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String xList;
 
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String yList;
 
     @OneToOne
-    @Column(name="2d_segmentation_id")
+    @JoinColumn(name="2d_segmentation_id")
     private twoSegmentationImage twoSegmentationId;
     
 }
