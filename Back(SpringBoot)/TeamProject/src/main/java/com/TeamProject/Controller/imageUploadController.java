@@ -35,15 +35,37 @@ public class imageUploadController {
     @PostMapping("/uploadSpring")
     public ResponseEntity<String> uploadController(@RequestParam(name = "pngFile", required = false) MultipartFile pngFile,
                                                    @RequestParam(name = "plyFile", required = false) MultipartFile plyFile) {
+
+        String pngFileCount = pngFile.getOriginalFilename();
+        String plyFileCount = plyFile.getOriginalFilename();
+
+        int dotCountPng = 0; // dot 갯수
+        int dotCountPly = 0;
+
+        // 파일 이름 제한
+        for(int i = 0; i < pngFileCount.length(); i++) {
+            if(pngFileCount.charAt(i) == '.') {
+                dotCountPng++;
+            }
+        }
+            
+        for(int i = 0; i < plyFileCount.length(); i++) {
+            if(plyFileCount.charAt(i) == '.'){
+                dotCountPly++;
+            }
+        }
+        
+        if(dotCountPng >= 2 || dotCountPly >= 2) {
+            return ResponseEntity.ok("파일명을 수정해주세요.");
+        }
         
         // history Service
         historyTable history = historytableservice.historyUpdate();
 
         imageuploadservice.uploadService(pngFile, plyFile, history); // StringBoot 
-        imagesendservice.sendImage(pngFile, plyFile); // Flask
+        imagesendservice.sendImage(pngFile, plyFile, history); // Flask
         return ResponseEntity.ok("SpringBoot 이미지 전송 성공");
         //return ResponseEntity.ok(date); // 이미지 업로드 날짜 반환       
-        
     }
 
     // 이미지 파일이 저장된 디렉토리 경로를 설정.
@@ -57,6 +79,7 @@ public class imageUploadController {
 
         // 이미지 확장자에 따라 저장 경로 선택
         String imageExtension = imageName.substring(imageName.lastIndexOf(".") + 1);
+        System.out.println("이미지 확장자 : " + imageExtension);
         String imageDirectory;
 
         // 확장자에 따른 경로 설정
@@ -85,6 +108,5 @@ public class imageUploadController {
                 .contentType(MediaType.IMAGE_JPEG)
                 .contentType(MediaType.IMAGE_PNG)
                 .body(imageResource);
-    }
-    
+    }  
 }
