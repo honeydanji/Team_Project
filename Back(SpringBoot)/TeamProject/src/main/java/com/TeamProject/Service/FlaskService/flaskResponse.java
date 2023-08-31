@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import com.TeamProject.Domain.historyTable;
 import com.TeamProject.Domain.twoSegmentationImage;
 import com.TeamProject.Repository.twoSegmentationRepository;
 
@@ -23,7 +24,7 @@ public class flaskResponse {
 	private final String imageBaseURL = "http://10.125.121.183:8080/upload/image/"; // 클라이언트 실행
 
     // Json 데이터 파싱
-    public void parsing(String json) {
+    public void parsing(String json, historyTable history) {
         JSONArray jsonArray = new JSONArray(json);
 
         // "image" value 추출 후 변수 저장
@@ -32,22 +33,22 @@ public class flaskResponse {
         String imageName = jsonObject.getString("image_name");
 
         // 추출된 이미지 값 
-        //System.out.println(imageValue);
-        decoding(imageValue, imageName);
+        decoding(imageValue, imageName, history);
     }
     
     // Base64 디코딩
-    public void decoding(String imageValue, String image_name) {
+    public void decoding(String imageValue, String imageName, historyTable history) {
 
         twoSegmentationImage twosegmentationimage = new twoSegmentationImage();
 
         byte[] imageData = Base64.getDecoder().decode(imageValue);
 
         // 이미지 파일 저장 및 경로
-        String imagePath = "C:/Team_Project/Back(SpringBoot)/TeamProject/image/Segmentation/" + image_name;
-    
+        String imagePath = "C:/Team_Project/Back(SpringBoot)/TeamProject/image/Segmentation/" + imageName;
+
         // DB 파일 url 저장
-        twosegmentationimage.setTwoSegmentationPath(imageBaseURL + image_name);
+        twosegmentationimage.setTwoSegmentationPath(imageBaseURL + imageName);
+        twosegmentationimage.setHistory_id(history);
         twosegmentationrepository.save(twosegmentationimage);
 
         // 이미지 저장

@@ -14,6 +14,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.TeamProject.Domain.historyTable;
+
 import lombok.RequiredArgsConstructor;
 
 
@@ -25,7 +27,7 @@ public class imageSendService {
     private final flaskResponse flaskresponse;
     
     // 로컬 이미지 파일을 Flask 서버로 전송하는 로직 구현
-    public void sendImage(MultipartFile pngFile, MultipartFile plyFile) {
+    public void sendImage(MultipartFile pngFile, MultipartFile plyFile, historyTable history) {
 
         // Flask 서버의 엔드포인트 URL
         String flaskServerUrl = "http://10.125.121.180:80/uploadFlask";
@@ -50,7 +52,7 @@ public class imageSendService {
 
         // 2d, 3d map 추가
         map.add("pngFile", new FileSystemResource(localFile2d));
-        map.add("pngFile", new FileSystemResource(localFile3d));
+        map.add("plyFile", new FileSystemResource(localFile3d));
 
         // HTTP Headers 설정
         HttpHeaders headers = new HttpHeaders();
@@ -68,7 +70,7 @@ public class imageSendService {
             String responseBody = response.getBody();
 
             // 응답 데이터 파싱하기.
-            flaskresponse.parsing(responseBody);
+            flaskresponse.parsing(responseBody, history);
 
         } else {
             System.out.println("로컬 이미지 전송 실패: " + response.getStatusCode());
