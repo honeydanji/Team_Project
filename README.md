@@ -6,7 +6,7 @@
 - DataResults Page
     - fake data를 넣은 차트들을 배치한 DataResults Page 1차 뼈대 완성
     - 추후 Back에서 데이터를 전달 받아서 이미지에 따라 변하는 차트로 변경 예정
-- ChartPie Component
+- ChartPie Componentㄴ
     - fake data를 넣은 component 1차완성
     - 추후 Back에서 데이터를 전달 받아서 웹에 띄우는 코드 작성 예정
 ## 2023/08/30
