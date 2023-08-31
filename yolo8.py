@@ -21,11 +21,11 @@ def home():
         image = request.files["pngFile"]
         if image.filename == "":
             return "No selected file"
-                
+        print(image.filename)        
         img = Image.open(image)
         # 이미지를 임시 파일로 저장합니다.
-        temp_image_path = "temp_image.jpg"
-        img.save(temp_image_path)
+        temp_image_path = f"{image.filename}.jpg"
+        img.save(temp_image_path, format="JPEG")
         # 모델로 이미지 예측 수행
         # results = model(temp_image_path, conf=0.6, save_txt=True, device="cpu",save=True, project="results",name="output")/
         results = model(temp_image_path, conf=0.6, device="cpu",project="results",name="output")
@@ -33,20 +33,28 @@ def home():
          # 임시 이미지 파일을 삭제합니다.
         os.remove(temp_image_path)
         
+       # 파일 이름에서 확장자를 제거합니다.
+        image_name_without_extension = image.filename.split(".")[0]
+
+        
         response_data = []  # 응답 데이터를 담을 리스트 초기화
 
         for result in results:
-            im_array = result.plot()  # plot a BGR numpy array of predictions
+            im_array = result.plot()  # plot a RGB numpy array of predictions
             im = Image.fromarray(im_array[..., ::-1])  # RGB PIL image
+            
 
             # Encode the image as Base64
             buffered = BytesIO()
             im.save(buffered, format="jpeg")
             encoded_image = base64.b64encode(buffered.getvalue()).decode("utf-8")
             data_uri = f"{encoded_image}"
+            print("ddd",result.path )
+            print(result.names)
+            
             # 이미지 데이터를 딕셔너리에 추가
             object_data = {
-                "image_name" : image.filename,
+                "image_name" : f"{image_name_without_extension}.jpg",
                 "image": data_uri,
                 "detections": []
             }
