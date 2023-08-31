@@ -5,7 +5,7 @@
 | :---------------------------------: | :-----------------------------------:|:-----------------------------------:|
 |              Back                   |           Front                      |                Data                 |
 |             하성진                   |          박수현                      |                  조원준              |      
-| [GitHub](https://github.com/sou05091/)  | [GitHub](https://github.com/SuHyunParkSunshine/)  | [GitHub](https://github.com/jwjb1020/)  
+| [GitHub](https://github.com/honeydanji/)  | [GitHub](https://github.com/SuHyunParkSunshine/)  | [GitHub](https://github.com/jwjb1020/)  
 
 ## 프로젝트 구성도
 <img src='https://github.com/honeydanji/Team_Project/assets/129818881/29e59f96-04a8-4aeb-9802-529b8ec92b0d'>
