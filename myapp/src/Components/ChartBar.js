@@ -23,7 +23,7 @@ export default function ChartBar() {
 
     return (
         <div className='chartBar'>
-            <div className="progress-bar">
+            <div className="progress-bar" style={{backgroundColor: '#5bc959'}}>
                 <div id="item-bar">
                     <div ref={barRef} className="progress"></div>
                 </div>
@@ -32,14 +32,14 @@ export default function ChartBar() {
             <div className='bar_details'>
                 <div className='recognized_items'>
                     <div className='decorated_bar_recog'></div>
-                    <p style={{fontSize: '50px', fontWeight: 'bold'}}>Recognized<br />Items</p>
+                    <p style={{fontSize: '30px', fontWeight: 'bold'}}>Recognized<br />Items</p>
                     <p className='value_recog'>
                         1,622,632
                     </p>
                 </div>
                 <div className='undefined_items'>
                     <div className='decorated_bar_undef'></div>
-                    <p style={{fontSize: '50px', fontWeight: 'bold'}}>Undefined<br />Items</p>
+                    <p style={{fontSize: '30px', fontWeight: 'bold'}}>Undefined<br />Items</p>
                     <p className='value_undef'>
                         513,323
                     </p>

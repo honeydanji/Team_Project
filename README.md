@@ -1,5 +1,11 @@
 # 다중 객체 이미지 판별 웹 서비스
 ## 2023/08/31
+- Service Page
+    - Back에서 처리한 이미지 데이터를 받기위해 fetch 시도중
+    - uploadSpring으로 font단에서 request하면 Back단에서 response로 이미지 URL을 전달해주는 방식 시도 중
+- DataResults Page
+    - fake data를 넣은 차트들을 배치한 DataResults Page 1차 뼈대 완성
+    - 추후 Back에서 데이터를 전달 받아서 이미지에 따라 변하는 차트로 변경 예정
 - ChartPie Component
     - fake data를 넣은 component 1차완성
     - 추후 Back에서 데이터를 전달 받아서 웹에 띄우는 코드 작성 예정

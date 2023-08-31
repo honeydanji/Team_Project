@@ -18,13 +18,13 @@ const pieOptions = {
     legend: { position: 'bottom'}
 }
 
-class PieChart extends Component {
+class ChartPie extends Component {
     render() {
         return (
-            <div>
+            <div className='chart-container'>
                 {/* <h2>React Donut Chart Example</h2> */}
                 <Chart 
-                    width={'1125px'}
+                    width={'600px'}
                     height={'600px'}
                     chartType='PieChart'
                     loader={<div>Loading Chart</div>}
@@ -36,4 +36,4 @@ class PieChart extends Component {
         );
     }
 }
-export default PieChart;
+export default ChartPie;

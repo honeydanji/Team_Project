@@ -1,7 +1,16 @@
+import { useEffect } from 'react';
 import Breadcrumb from '../Components/Breadcrumb';
 import '../Styles/Service.css'
 
 export default function Service() {
+
+    useEffect(() => {
+        fetch('http://10.125.121.183:8080/uploadSpring')
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+        })
+    }, []);
 
     return (
         <main>

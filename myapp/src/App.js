@@ -4,17 +4,19 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Frontpage from './Pages/Frontpage';
 import LogIn from './Pages/LogIn';
 import DragDrop from './Pages/DragDrop';
+import DataResults from './Pages/DataResults';
+import Test from './Pages/Test';
+import Service from './Pages/Service';
+
 import List from './Components/List';
 import SignUp from './Components/SignUp';
 import Carousel from './Components/Carousel';
 import Stats from './Components/Stats';
-import DataResults from './Pages/DataResults';
 import ChartBar from './Components/ChartBar';
 import ChartDonut from './Components/ChartDonut';
-import Test from './Pages/Test';
-import Service from './Pages/Service';
 import SelectDate from './Components/SelectDate';
-import PieChart from './Components/ChartPie';
+import ChartPie from './Components/ChartPie';
+
 
 
 const CAROUSEL_IMAGES = [
@@ -42,7 +44,7 @@ export default function App() {
           <Route path='/chartdonut' element = {<ChartDonut />} />
           <Route path='/service' element = {<Service />} />
           <Route path='/selectdate' element = {<SelectDate />}/>
-          <Route path='/chartpie' element = {<PieChart/>} />
+          <Route path='/chartpie' element = {<ChartPie/>} />
         </Routes>
       </main>
     </BrowserRouter>
