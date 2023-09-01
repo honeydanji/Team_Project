@@ -3,6 +3,8 @@ package com.TeamProject.Controller;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -10,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,10 +34,11 @@ public class imageUploadController {
 
     private final historyTableService historytableservice; 
     
-    @GetMapping("/uploadSpring")
-    public ResponseEntity<String> uploadController(@RequestParam(name = "pngFile", required = false) MultipartFile pngFile,
-                                                   @RequestParam(name = "plyFile", required = false) MultipartFile plyFile) {
+    @PostMapping("/uploadSpring")
+    public ResponseEntity<Object> uploadController(@RequestParam(name = "pngFile", required = false) MultipartFile pngFile,
+                                                @RequestParam(name = "plyFile", required = false) MultipartFile plyFile) {
 
+        Map<String, String> resopnse = new HashMap<>();
         String pngFileCount = pngFile.getOriginalFilename();
         String plyFileCount = plyFile.getOriginalFilename();
 
@@ -55,17 +59,20 @@ public class imageUploadController {
         }
         
         if(dotCountPng >= 2 || dotCountPly >= 2) {
-            return ResponseEntity.ok("파일명을 수정해주세요.");
+            return ResponseEntity.ok(resopnse.put("Error", "파일명을 수정해주세요."));
+            //return ResponseEntity.ok("파일명을 수정해주세요.");
         }
         
         // history Service
         historyTable history = historytableservice.historyUpdate();
 
         imageuploadservice.uploadService(pngFile, plyFile, history); // StringBoot 
-        imagesendservice.sendImage(pngFile, plyFile, history); // Flask
-        //return ResponseEntity.ok("http://10.125.121.183:8080/upload/image/" + pngFile.getOriginalFilename());
-        return ResponseEntity.ok(pngFile.getOriginalFilename());
-        //return ResponseEntity.ok(date); // 이미지 업로드 날짜 반환       
+        String name = imagesendservice.sendImage(pngFile, plyFile, history); // Flask
+        //return ResponseEntity.ok("http://10.125.121.183:8080/upload/image/" + name);
+        //return ResponseEntity.ok(pngFile.getOriginalFilename());
+        //return ResponseEntity.ok(""); // 이미지 업로드 날짜 반환
+        resopnse.put("url", "http://10.125.121.183:8080/upload/image/" + name); 
+        return ResponseEntity.ok(resopnse);
     }
 
     // 이미지 파일이 저장된 디렉토리 경로를 설정.
