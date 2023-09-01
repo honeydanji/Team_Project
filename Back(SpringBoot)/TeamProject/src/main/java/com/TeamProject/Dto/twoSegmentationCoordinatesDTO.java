@@ -14,6 +14,10 @@ public class twoSegmentationCoordinatesDTO {
     private double twoObjectAcc;
     private String xList;
     private String yList;
+    private double xBox;
+    private double yBox;
+    private double width;
+    private double height;
     private twoSegmentationImage twoSegmentationId;
     
 }

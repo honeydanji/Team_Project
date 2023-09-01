@@ -15,7 +15,7 @@ public class twoSegmentationCooridnatesController {
 
     private final twoSegmentationCoordinatesService twosegmentationcoordinatesservice;
 
-    @GetMapping("/segResponse")
+    @GetMapping("/segResponse/{}")
     public List<Object[]> segResponse() {
         return twosegmentationcoordinatesservice.segResponseAll();
     }
