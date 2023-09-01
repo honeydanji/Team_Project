@@ -76,3 +76,6 @@
   <img src="https://github.com/honeydanji/Team_Project/assets/129818881/63269691-002d-4292-a185-1bd748843e6b" alt="Image 1", style="width: 45%; style="margin-right: 5px;">
   <img src="https://github.com/honeydanji/Team_Project/assets/129818881/367a7b9a-e02e-4f3e-bc8b-c649cb43ac83" alt="Image 2", style="width: 45%;">
 </div>
+
+## 2023/09/01
+- (생략)
