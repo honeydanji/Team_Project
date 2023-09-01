@@ -1,6 +1,8 @@
 package com.TeamProject.Service.SpringBootService;
 
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,7 @@ public class historyTableService {
 
         historyTable historytable = new historyTable();
 
+        historytable.setUploadTime(Time.valueOf(LocalTime.now()));
         historytable.setUploadDate(LocalDate.now());
 
         historytablerepositroy.save(historytable);

@@ -1,5 +1,6 @@
 package com.TeamProject.Domain;
 
+import java.sql.Time;
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
@@ -27,6 +28,7 @@ public class historyTable {
     private Integer history_id;
 
     private LocalDate uploadDate;
+    private Time uploadTime;
 
-    private String userId;
+    //private String userId;
 }
