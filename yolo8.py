@@ -62,11 +62,12 @@ def home():
             # 모두 tesor 타입이라서 json에서 읽을 수 있는 형태로 전처리 해야함
             class_name = result.boxes.cls.tolist()
             accuracy = result.boxes.conf.tolist()
+            boxing = result.boxes.xywh.tolist()
             xy_list = result.masks.xyn  
             # print(xy_list)
-          
+            print("boxing",boxing)
         
-        for index, (coords, class_val, acc_val) in enumerate(zip(xy_list, class_name, accuracy)):
+        for index, (coords, class_val, acc_val,box_info) in enumerate(zip(xy_list, class_name, accuracy,boxing)):
             x_coords = [coord[0].item() for coord in coords]
             y_coords = [coord[1].item() for coord in coords]
     
@@ -78,7 +79,9 @@ def home():
                     "class_name": class_val,
                     "accuracy": acc_val,
                     "x_coordinates": x_coords,
-                    "y_coordinates": y_coords
+                    "y_coordinates": y_coords,
+                    "box_info": box_info
+                    
                 }
 
             object_data["detections"].append(detection)
