@@ -6,6 +6,7 @@ import com.TeamProject.Domain.twoSegmentationImage;
 import com.TeamProject.Dto.twoSegmentationImageDTO;
 import com.TeamProject.Repository.twoSegmentationRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -14,13 +15,14 @@ public class twoSegmentationImageService {
 
     private final twoSegmentationRepository twosegmentationrepository;
 
-    public void segmentationImage(twoSegmentationImageDTO twosegmentationimagedto) {
+    @Transactional
+    public twoSegmentationImage segmentationImage(twoSegmentationImageDTO twosegmentationimagedto) {
 
         twoSegmentationImage twosegmentationimage = new twoSegmentationImage();
 
         twosegmentationimage.setTwoSegmentationPath(twosegmentationimagedto.getTwoSegmentationPath());
         twosegmentationimage.setHistoryId(twosegmentationimagedto.getHistoryId());
 
-        twosegmentationrepository.save(twosegmentationimage);
+        return twosegmentationrepository.save(twosegmentationimage);
     }    
 }

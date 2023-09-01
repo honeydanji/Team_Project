@@ -8,6 +8,7 @@ import com.TeamProject.Domain.twoSegmentationCoordinates;
 import com.TeamProject.Dto.twoSegmentationCoordinatesDTO;
 import com.TeamProject.Repository.twoSegmentationCoordinatesRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -16,6 +17,7 @@ public class twoSegmentationCoordinatesService {
     
     private final twoSegmentationCoordinatesRepository twosegmentationcoordinatesrepository;
 
+    @Transactional
     public void twoCoordinates(twoSegmentationCoordinatesDTO twosegmentationcorrdinatesdto) {
 
         twoSegmentationCoordinates twosegmentationcoordinates = new twoSegmentationCoordinates();
