@@ -16,6 +16,7 @@ import ChartBar from './Components/ChartBar';
 import ChartDonut from './Components/ChartDonut';
 import SelectDate from './Components/SelectDate';
 import ChartPie from './Components/ChartPie';
+import History from './Pages/History';
 
 
 
@@ -45,6 +46,7 @@ export default function App() {
           <Route path='/service' element = {<Service />} />
           <Route path='/selectdate' element = {<SelectDate />}/>
           <Route path='/chartpie' element = {<ChartPie/>} />
+          <Route path='/history' element = {<History />} />
         </Routes>
       </main>
     </BrowserRouter>

@@ -8,7 +8,7 @@ export default function Carousel({ carouselList }) {
   const carouselRef = useRef(null);
 
   useEffect(() => {
-    if (carouselList.length !== 0) {
+    if (carouselList && carouselList.length !== 0) {
       const startData = carouselList[0];
       const endData = carouselList[carouselList.length - 1];
       const newList = [endData, ...carouselList, startData];

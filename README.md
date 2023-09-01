@@ -1,4 +1,18 @@
 # 다중 객체 이미지 판별 웹 서비스
+
+## 2023/09/01
+- History Page
+    - fake data를 넣은 History page 1차 뼈대 완성
+- Service Page
+    - DragDrop에서 업로드한 이미지를 모델돌려서 segmentaion된 이미지를 받아서 화면에 띄우는 코드 작성
+    - DragDrop에서 클릭을 하면 이미지를 업로드하고 서버에서 url을 응답을 받아, 전달 받은 url을 Service로 넘겨 띄우려고 구상
+    - 페이지를 넘김과 동시에 url을 파라미터로 넘기는 방식 사용. useNavigation으로 페이지와 파라미터를 함께 넘기고 Service Page에서 useLocation으로 파라미터를 받음
+    - url이 잘 받아지다가 안 받아지는 문제가 발생, 계속해서 null값이 뜨는 문제가 발생
+    - 'uploadImageUrl' 상태 업데이트가 문제 인 것으로 보여 'useEffect'를 활용하여 해결 시도
+    - 시도 결과, 서버와의 통신 시간 때문에 uploadImageUrl이 다시 업데이트 되기 전에 다음 코드를 실행하려고 하다보니 null으로 처리되는 문제인 것 같았음
+    - useEffect를 이용하여 uploadImageUrl의 상태 업데이트가 완료 된 후 필요한 동작을 수행하도록 변경
+    - null 값이 아닌 url이 계속 잘 들어오도록 해결 완료
+
 ## 2023/08/31
 - Service Page
     - Back에서 처리한 이미지 데이터를 받기위해 fetch 시도중
@@ -6,7 +20,7 @@
 - DataResults Page
     - fake data를 넣은 차트들을 배치한 DataResults Page 1차 뼈대 완성
     - 추후 Back에서 데이터를 전달 받아서 이미지에 따라 변하는 차트로 변경 예정
-- ChartPie Componentㄴ
+- ChartPie Component
     - fake data를 넣은 component 1차완성
     - 추후 Back에서 데이터를 전달 받아서 웹에 띄우는 코드 작성 예정
 ## 2023/08/30

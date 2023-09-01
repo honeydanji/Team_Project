@@ -1,9 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import '../Styles/DragDrop.css'
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function DragDrop() { 
+    const navigate = useNavigate();
+    const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
 
+    // 이미지 업로드 및 URL 가져오기
     const handleImageUploadClick = () => {
         const formData = new FormData();
 
@@ -12,7 +16,7 @@ export default function DragDrop() {
             formData.append("plyFile", file);
             console.log(file);
         }
-
+       
         console.log(formData);
         console.log(imageFile);
 
@@ -22,12 +26,27 @@ export default function DragDrop() {
             }
         })
         .then((res) => {
-            alert("이미지 전송 완")
+            if (res.status === 200) {
+                const imageUrl = res.data.url; // 이미지 URL을 서버 응답에서 추출
+                setUploadedImageUrl(imageUrl); // 상태로 이미지 URL 저장              
+            } else {
+                console.error('Image upload failed.')
+            }
         })
         .catch((err) => {
+            console.error('Error uploading image:', err);
             alert("오류 발생")
         });
     };
+
+    useEffect(() => {
+        if(uploadedImageUrl !== null) {
+            console.log(uploadedImageUrl); // 이미지 URL이 업데이트될 때마다 로그 출력
+            alert("이미지 전송 완료");
+            navigate("/service", { state: { uploadedImageUrl } }); //Service 페이지로 이동
+        }
+    }, [uploadedImageUrl, navigate]);
+
 
     const [isDragging, setIsDragging] = useState(false);
     const [imageFile, setImageFile] = useState([]);
@@ -127,7 +146,7 @@ export default function DragDrop() {
                 })}
             </div>
         <div className="Upload-Button">
-            <button onClick={handleImageUploadClick}>Upload</button>
+            <button onClick={handleImageUploadClick}>Upload</button>           
         </div>
         </div>
     )
