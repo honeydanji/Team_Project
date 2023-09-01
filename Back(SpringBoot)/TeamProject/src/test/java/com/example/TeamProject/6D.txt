@@ -1,0 +1,52 @@
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
+public class SixDCoordinateExtractor {
+    public static void main(String[] args) {
+        // 포인트 클라우드 좌표 추출 예시
+        Vector3D pointCloudCoordinate = extractPointCloudCoordinate();
+        
+        // 6D 좌표 계산
+        double x = pointCloudCoordinate.getX();
+        double y = pointCloudCoordinate.getY();
+        double z = pointCloudCoordinate.getZ();
+        double roll = calculateRoll(x, y, z);
+        double pitch = calculatePitch(x, y, z);
+        double yaw = calculateYaw(x, y);
+        
+        // 추출된 6D 좌표 출력
+        System.out.println("X: " + x);
+        System.out.println("Y: " + y);
+        System.out.println("Z: " + z);
+        System.out.println("Roll: " + roll);
+        System.out.println("Pitch: " + pitch);
+        System.out.println("Yaw: " + yaw);
+    }
+
+    // 포인트 클라우드 좌표 추출
+    public static Vector3D extractPointCloudCoordinate() {
+        // 실제로는 포인트 클라우드 데이터를 어떻게 추출하는지에 따라 구현되어야 합니다.
+        // 이 함수는 예시일 뿐입니다.
+        double pointX = 0.5;
+        double pointY = -0.3;
+        double pointZ = 0.8;
+        return new Vector3D(pointX, pointY, pointZ);
+    }
+
+    // 롤(Roll) 각도 계산
+    public static double calculateRoll(double x, double y, double z) {
+        // 실제론 x, y, z 좌표를 활용하여 롤(Roll) 각도를 계산하는 로직을 추가해야 합니다.
+        return 0.0;  // 예시로 0.0도로 설정
+    }
+
+    // 피치(Pitch) 각도 계산
+    public static double calculatePitch(double x, double y, double z) {
+        // 실제론 x, y, z 좌표를 활용하여 피치(Pitch) 각도를 계산하는 로직을 추가해야 합니다.
+        return 0.0;  // 예시로 0.0도로 설정
+    }
+
+    // 요(Yaw) 각도 계산
+    public static double calculateYaw(double x, double y) {
+        // 실제론 x, y 좌표를 활용하여 요(Yaw) 각도를 계산하는 로직을 추가해야 합니다.
+        return 0.0;  // 예시로 0.0도로 설정
+    }
+}
