@@ -24,8 +24,11 @@ public class twoSegmentationCoordinatesService {
         twosegmentationcoordinates.setTwoObjectId(twosegmentationcorrdinatesdto.getTwoObjectId());
         twosegmentationcoordinates.setXList(twosegmentationcorrdinatesdto.getXList());
         twosegmentationcoordinates.setYList(twosegmentationcorrdinatesdto.getYList());
+        twosegmentationcoordinates.setXBox(twosegmentationcorrdinatesdto.getXBox());
+        twosegmentationcoordinates.setYBox(twosegmentationcorrdinatesdto.getYBox());
+        twosegmentationcoordinates.setWidth(twosegmentationcorrdinatesdto.getWidth());
+        twosegmentationcoordinates.setHeight(twosegmentationcorrdinatesdto.getHeight());
         twosegmentationcoordinates.setTwoSegmentationId(twosegmentationcorrdinatesdto.getTwoSegmentationId());
-
         twosegmentationcoordinatesrepository.save(twosegmentationcoordinates);
     }
 
