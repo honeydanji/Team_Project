@@ -1,12 +1,5 @@
 # 다중 객체 이미지 판별 웹 서비스
 
-## 팀원 
-|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/129818881?v=4">|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/129818936?v=4">|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/129819084?v=4">|
-| :---------------------------------: | :-----------------------------------:|:-----------------------------------:|
-|              Back                   |           Front                      |                Data                 |
-|             하성진                   |          박수현                      |                  조원준              |      
-| [GitHub](https://github.com/honeydanji/)  | [GitHub](https://github.com/SuHyunParkSunshine/)  | [GitHub](https://github.com/jwjb1020/)  
-
 ## 프로젝트 구성도
 <img src='https://github.com/honeydanji/Team_Project/assets/129818881/29e59f96-04a8-4aeb-9802-529b8ec92b0d'>
 
@@ -79,3 +72,10 @@
 
 ## 2023/09/01
 - (생략)
+
+## 팀원 
+|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/129818881?v=4">|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/129818936?v=4">|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/129819084?v=4">|
+| :---------------------------------: | :-----------------------------------:|:-----------------------------------:|
+|              Back                   |           Front                      |                Data                 |
+|             하성진                   |          박수현                      |                  조원준              |      
+| [GitHub](https://github.com/honeydanji/)  | [GitHub](https://github.com/SuHyunParkSunshine/)  | [GitHub](https://github.com/jwjb1020/)  
