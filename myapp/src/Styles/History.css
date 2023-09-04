@@ -54,4 +54,5 @@
     width: 950px;
     height: 580px;
     border: 2px solid black;
+    position: relative;
 }

@@ -1,4 +1,50 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 export default function LogIn() {
+  
+  const navigate = useNavigate();
+
+  // 로그인 필요 정보
+  const [loginEmail, setLoginEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  // 로그인 상태 여부 상태 관리
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if(token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handelLoginButtonClick = () => {
+    const data = {
+      loginEmail,
+      password
+    };
+    axios.post('http://10.125.121.183:8080/login', data)
+      .then((res) => {
+        localStorage.setItem('token', res.data.token);
+        setIsLoggedIn(true);
+        alert('로그인 성공')
+        // navigate("/dragdrop")
+      })
+      .catch((err) => {
+        alert('잘못된 아이디 혹은 패스워드 입니다')
+      });
+  };
+
+  const handelLogoutButtonClick = () => {
+    // 로컬 스토리지에서 토큰 삭제
+    localStorage.removeItem('token');
+    setIsLoggedIn(false); // 로그아웃 상태로 변경
+    alert('로그아웃 성공');
+    navigate('/')
+  }
+  
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
@@ -14,7 +60,7 @@ export default function LogIn() {
                 </svg>
               </span>
 
-              <input type="email" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address" />
+              <input type="email" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address" onChange={(e) => setLoginEmail(e.target.value)} required/>
             </div>
 
             <div className="relative flex items-center mt-4">
@@ -24,11 +70,11 @@ export default function LogIn() {
                 </svg>
               </span>
 
-              <input type="password" className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password" />
+              <input type="password" className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required/>
             </div>
 
             <div className="mt-6">
-              <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+              <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50" onClick={handelLoginButtonClick}>
                 Sign in
               </button>
 

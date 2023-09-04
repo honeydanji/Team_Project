@@ -1,5 +1,18 @@
 # 다중 객체 이미지 판별 웹 서비스
 
+## 2023/09/04
+- Modals Component
+    - History Page의 날짜 클릭 시 사용할 모달 창 1차 뼈대 완성
+    - 모달 창에 띄워둔 carousel의 크기를 줄어야 하는데 줄여지지 않는 문제 발생 width는 줄여지는데, height는 크기 조절이 이상함
+    - height의 크기가 작아지면 모달 창 안의 div들의 배열이 이상해지는 문제 有
+- Login Page
+    - 회원가입 후, 회원가입 정보를 바탕으로 백에서 토큰을 받아 로그인을 하는 코드 생성
+    - post로 주고 받고, 잘 작동 되는 것을 확인 완
+- List Component
+    - 1차로 생성해둔 List Component에 스크롤바를 생성 함.
+    - History Page에 Component를 끼워보니 크키가 너무 큰 문제가 발생
+    - 바라는 크기로 조절 불가. 너무 크거나 작게만 설정되는 문제 발생. 해결 중
+
 ## 2023/09/01
 - History Page
     - fake data를 넣은 History page 1차 뼈대 완성

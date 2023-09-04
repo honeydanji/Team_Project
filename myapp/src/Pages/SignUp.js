@@ -7,20 +7,20 @@ export default function SignUp() {
 
     //회원가입 정보
     const [name, setName] = useState('');
-    const [login_email, setLoginEmail] = useState('');
+    const [loginEmail, setLoginEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirm_password, setConfirmPassword] = useState('');
-    const [phone_number, setPhoneNumber] = useState('');
-    const [company_name, setCompanyName] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [companyName, setCompanyName] = useState('');
 
     const handleSignupButtonClick = () => {
         const data = {
             name,
-            login_email,
+            loginEmail,
             password,
-            confirm_password,
-            phone_number,
-            company_name
+            confirmPassword,
+            phoneNumber,
+            companyName
         };
         axios.post('http://10.125.121.183:8080/register', data)
             .then((res) => {

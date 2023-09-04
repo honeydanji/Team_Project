@@ -7,9 +7,9 @@ import DragDrop from './Pages/DragDrop';
 import DataResults from './Pages/DataResults';
 import Test from './Pages/Test';
 import Service from './Pages/Service';
+import SignUp from './Pages/SignUp';
 
 import List from './Components/List';
-import SignUp from './Components/SignUp';
 import Carousel from './Components/Carousel';
 import Stats from './Components/Stats';
 import ChartBar from './Components/ChartBar';
@@ -17,6 +17,7 @@ import ChartDonut from './Components/ChartDonut';
 import SelectDate from './Components/SelectDate';
 import ChartPie from './Components/ChartPie';
 import History from './Pages/History';
+import Modals from './Components/Modals';
 
 
 
@@ -47,6 +48,7 @@ export default function App() {
           <Route path='/selectdate' element = {<SelectDate />}/>
           <Route path='/chartpie' element = {<ChartPie/>} />
           <Route path='/history' element = {<History />} />
+          <Route path='/modals' element = {<Modals />} />
         </Routes>
       </main>
     </BrowserRouter>

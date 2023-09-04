@@ -1,6 +1,7 @@
 import '../Styles/History.css'
 import Stats from '../Components/Stats'
 import Carousel from '../Components/Carousel'
+import List from '../Components/List';
 
 const CAROUSEL_IMAGES = [
     'https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg',
@@ -31,7 +32,7 @@ export default function History() {
                         <Carousel carouselList={CAROUSEL_IMAGES}/>                        
                     </div>
                     <div className='content_dateList'>
-                        날짜 리스트 넣을 꼬얌
+                        <List />
                     </div>
                 </div>
             </div>
