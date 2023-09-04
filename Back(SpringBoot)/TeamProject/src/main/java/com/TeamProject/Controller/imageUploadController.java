@@ -10,6 +10,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,43 +37,49 @@ public class imageUploadController {
     
     @PostMapping("/uploadSpring")
     public ResponseEntity<Object> uploadController(@RequestParam(name = "pngFile", required = false) MultipartFile pngFile,
-                                                @RequestParam(name = "plyFile", required = false) MultipartFile plyFile) {
+                                                @RequestParam(name = "plyFile", required = false) MultipartFile plyFile,
+                                                Authentication authentication) {
 
-        Map<String, String> resopnse = new HashMap<>();
-        String pngFileCount = pngFile.getOriginalFilename();
-        String plyFileCount = plyFile.getOriginalFilename();
 
-        int dotCountPng = 0; // dot 갯수
-        int dotCountPly = 0;
+        if (authentication == null) {
+            return ResponseEntity.ok("회원이 아닙니다");
+        } else {
+            Map<String, String> resopnse = new HashMap<>();
+            String pngFileCount = pngFile.getOriginalFilename();
+            String plyFileCount = plyFile.getOriginalFilename();
 
-        // 파일 이름 제한
-        for(int i = 0; i < pngFileCount.length(); i++) {
-            if(pngFileCount.charAt(i) == '.') {
-                dotCountPng++;
+            int dotCountPng = 0; // dot 갯수
+            int dotCountPly = 0;
+
+            // 파일 이름 제한
+            for(int i = 0; i < pngFileCount.length(); i++) {
+                if(pngFileCount.charAt(i) == '.') {
+                    dotCountPng++;
+                }
             }
-        }
             
-        for(int i = 0; i < plyFileCount.length(); i++) {
-            if(plyFileCount.charAt(i) == '.'){
-                dotCountPly++;
+            for(int i = 0; i < plyFileCount.length(); i++) {
+                if(plyFileCount.charAt(i) == '.'){
+                    dotCountPly++;
+                }
             }
-        }
         
-        if(dotCountPng >= 2 || dotCountPly >= 2) {
-            return ResponseEntity.ok(resopnse.put("Error", "파일명을 수정해주세요."));
-            //return ResponseEntity.ok("파일명을 수정해주세요.");
-        }
+            if(dotCountPng >= 2 || dotCountPly >= 2) {
+                return ResponseEntity.ok(resopnse.put("Error", "파일명을 수정해주세요."));
+                //return ResponseEntity.ok("파일명을 수정해주세요.");
+            }
         
-        // history Service
-        historyTable history = historytableservice.historyUpdate();
+            // history Service
+            historyTable history = historytableservice.historyUpdate(authentication);
 
-        imageuploadservice.uploadService(pngFile, plyFile, history); // StringBoot 
-        String name = imagesendservice.sendImage(pngFile, plyFile, history); // Flask
-        //return ResponseEntity.ok("http://10.125.121.183:8080/upload/image/" + name);
-        //return ResponseEntity.ok(pngFile.getOriginalFilename());
-        //return ResponseEntity.ok(""); // 이미지 업로드 날짜 반환
-        resopnse.put("url", "http://10.125.121.183:8080/upload/image/" + name); 
-        return ResponseEntity.ok(resopnse);
+            imageuploadservice.uploadService(pngFile, plyFile, history); // StringBoot 
+            String name = imagesendservice.sendImage(pngFile, plyFile, history); // Flask
+            //return ResponseEntity.ok("http://10.125.121.183:8080/upload/image/" + name);
+            //return ResponseEntity.ok(pngFile.getOriginalFilename());
+            //return ResponseEntity.ok(""); // 이미지 업로드 날짜 반환
+            resopnse.put("url", "http://10.125.121.183:8080/upload/image/" + name); 
+            return ResponseEntity.ok(resopnse);
+        }
     }
 
     // 이미지 파일이 저장된 디렉토리 경로를 설정.
