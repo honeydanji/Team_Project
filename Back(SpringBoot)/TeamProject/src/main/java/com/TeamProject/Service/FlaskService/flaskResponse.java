@@ -12,7 +12,6 @@ import com.TeamProject.Domain.historyTable;
 import com.TeamProject.Domain.twoSegmentationImage;
 import com.TeamProject.Dto.twoSegmentationCoordinatesDTO;
 import com.TeamProject.Dto.twoSegmentationImageDTO;
-import com.TeamProject.Repository.twoSegmentationRepository;
 import com.TeamProject.Service.SpringBootService.twoSegmentationCoordinatesService;
 import com.TeamProject.Service.SpringBootService.twoSegmentationImageService;
 
@@ -27,7 +26,7 @@ public class flaskResponse {
     private final twoSegmentationImageService twosegmentationimageservice;
 
     // 2D_Segmentation_Repository
-    private final twoSegmentationRepository twosegmentationrepository;
+    //private final twoSegmentationRepository twosegmentationrepository;
 
     // 2D_coordinates
     private final twoSegmentationCoordinatesService twosegmentationcoordinatesservice;
