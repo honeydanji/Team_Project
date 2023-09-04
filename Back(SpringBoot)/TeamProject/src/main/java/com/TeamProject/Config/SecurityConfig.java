@@ -1,7 +1,9 @@
 package com.TeamProject.Config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -11,13 +13,20 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.TeamProject.Config.auth.JWTAuthorizationFilter;
+import com.TeamProject.Config.filter.JWTAuthenticationFilter;
+import com.TeamProject.Repository.membersRepository;
+
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-	// @Autowired
-	// private AuthenticationConfiguration authConfig;
+	@Autowired
+	private membersRepository memberrepository;
+
+	@Autowired
+	private AuthenticationConfiguration authConfig;
 	
 	@Bean // 리턴값을 IOC컨테이너에 올린다. 즉 외부 클래스에서 사용이 가능하다.
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -33,7 +42,7 @@ public class SecurityConfig {
         configuration.addAllowedHeader("*"); // 허용된 헤더 설정
         configuration.addAllowedHeader("*"); // 허용된 헤더 설정
         configuration.setAllowCredentials(false); // 교차 출처 요청에 쿠키/인증 정보 포함을 허용
-        configuration.addExposedHeader("*"); //헤더에 (Authorization) 포함
+        configuration.addExposedHeader("Authorization"); //헤더에 (Authorization) 포함
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration); // 모든 경로에 구성 적용
         return source;
@@ -61,11 +70,11 @@ public class SecurityConfig {
 		
 		// 시큐리티 세션을 만들지 않았기 때문에 필터를 쓰는 건가???
 		//// 필터 1
-		// http.addFilter(new JWTAuthenticationFilter()); 
+		//http.addFilter(new JWTAuthenticationFilter()); 
 		
 		//// 필터 2
-		// http.addFilter(new JWTAuthenticationFilter(authConfig.getAuthenticationManager())); // 1. 로그인 시도 > 토큰 생성 및 반환
-		// http.addFilter(new JWTAuthorizationFilter(authConfig.getAuthenticationManager(), petMemberRepository)); // 2. 토큰으로 로그인 시도 확인 및 인증 및 권한 부여
+		http.addFilter(new JWTAuthenticationFilter(authConfig.getAuthenticationManager())); // 1. 로그인 시도 > 토큰 생성 및 반환
+		http.addFilter(new JWTAuthorizationFilter(authConfig.getAuthenticationManager(), memberrepository)); // 2. 토큰으로 로그인 시도 확인 및 인증 및 권한 부여
 		return http.build();
 	}
 }
