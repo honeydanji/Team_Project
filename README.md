@@ -10,7 +10,12 @@
     - Python 3.9.13
     - Flask 2.3.2
     - port 5000
-   
+
+## 2023/09/04
+- JWT 로그인 구현
+- RESTAPI 권한 부여
+- member 및 history 1:N 맵핑
+
 ## 2023/09/01
 - DB 컬럼 추가
   - 객체탐지 영역 좌표, width, height
