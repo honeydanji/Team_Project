@@ -18,7 +18,7 @@
   - @Transaction 추가
 
 ## 2023/08/31
-- 통신(Request, Response) 성공
+- client와 server 통신(Request, Response) 성공
 - 모델링 변형
   - 기존 : Service <-> Entity <-> Repository
   - 수정 : Service <-> (DTO) <-> Entity <-> Repositroy 
