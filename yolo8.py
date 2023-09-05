@@ -16,10 +16,20 @@ def home():
         image = request.files["pngFile"]
         if image.filename == "":
             return "No selected file"
+        
+        if "plyFile" not in request.files:
+            return "No image part"
+
+        ply = request.files["plyFile"]
+        if ply.filename == "":
+            return "No selected file"
+        
+        
         print(image.filename)
+        print(ply.filename)
 
         # predict_objects 함수 호출하여 객체 탐지 수행
-        response_data = predict_objects(image)
+        response_data = predict_objects(image,ply)
 
         # JSON 형식으로 응답 데이터 전송
         return jsonify(response_data)
