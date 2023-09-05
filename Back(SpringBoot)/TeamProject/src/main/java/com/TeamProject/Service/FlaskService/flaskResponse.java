@@ -9,9 +9,13 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import com.TeamProject.Domain.historyTable;
+import com.TeamProject.Domain.threeOriginalPointCloud;
 import com.TeamProject.Domain.twoSegmentationImage;
+import com.TeamProject.Dto.threePointCloudCoordinatesDTO;
 import com.TeamProject.Dto.twoSegmentationCoordinatesDTO;
 import com.TeamProject.Dto.twoSegmentationImageDTO;
+import com.TeamProject.Repository.threeOriginalPointCloudRepository;
+import com.TeamProject.Service.SpringBootService.threePointCloudCoordinatesService;
 import com.TeamProject.Service.SpringBootService.twoSegmentationCoordinatesService;
 import com.TeamProject.Service.SpringBootService.twoSegmentationImageService;
 
@@ -25,11 +29,15 @@ public class flaskResponse {
     // 2D_Segmentation
     private final twoSegmentationImageService twosegmentationimageservice;
 
-    // 2D_Segmentation_Repository
-    //private final twoSegmentationRepository twosegmentationrepository;
-
     // 2D_coordinates
     private final twoSegmentationCoordinatesService twosegmentationcoordinatesservice;
+
+    // 3D_PointCloud
+    private final threeOriginalPointCloudRepository threeoriginalpointcloudrepository;
+
+    // 3D_coordinates
+    private final threePointCloudCoordinatesService threepointcloudcoordinatesservice;
+    
 
     // 이미지 파일의 기본 URL
 	private final String imageBaseURL = "http://10.125.121.183:8080/upload/image/";
@@ -45,11 +53,13 @@ public class flaskResponse {
         // base64, 파일명 추출
         String imageValue = jsonObject.getString("image");
         String imageName = jsonObject.getString("image_name");
+        //String pointCloudName = jsonObject.getString("ply_name");
 
         // 추출된 이미지 값 
         decoding(imageValue, imageName); // base64 Decoding
         twoSegmentationImage twosegmentationimage = SegDTO(imageName, history); // Segmentation 원본 저장
-
+        threeOriginalPointCloud threeoriginalpointcloud = PointDTO(history);
+        
         JSONArray detectionArray = jsonObject.getJSONArray("detections");
 
         for(int i = 0; i < detectionArray.length(); i++) {
@@ -76,6 +86,9 @@ public class flaskResponse {
        
             JSONArray xCoordinates = detectionObject.getJSONArray("x_coordinates");
             JSONArray yCoordinates = detectionObject.getJSONArray("y_coordinates");
+            JSONArray xPoint = detectionObject.getJSONArray("x_point"); // 3pd
+            JSONArray yPoint = detectionObject.getJSONArray("y_point"); // 3pd
+            JSONArray zPoint = detectionObject.getJSONArray("z_point"); // 3pd
             JSONArray boxInfo = detectionObject.getJSONArray("box_info"); // 제이슨에 배열 파싱
 
             double xBox = boxInfo.optDouble(0); // 배열값 저장
@@ -83,6 +96,7 @@ public class flaskResponse {
             double width = boxInfo.optDouble(2);
             double height = boxInfo.optDouble(3);
             twoCoorDTO(accuracy, classNameString, xCoordinates.toString(), yCoordinates.toString(), xBox, yBox, width, height, twosegmentationimage); // Segmentation수치 저장.
+            threeCoorDTO(classNameString, xPoint.toString(), yPoint.toString(), zPoint.toString(), threeoriginalpointcloud); // PointCloud 수치 저장
         }
         return imageName;
     }
@@ -129,5 +143,23 @@ public class flaskResponse {
         twosegmentationcorrdinatesdto.setHeight(height);
         twosegmentationcorrdinatesdto.setTwoSegmentationId(twosegmentationimage);
         twosegmentationcoordinatesservice.twoCoordinates(twosegmentationcorrdinatesdto);        
+    }
+
+    // 3D_PointCloud
+    public threeOriginalPointCloud PointDTO(historyTable history) {
+        return threeoriginalpointcloudrepository.findByHistoryId(history);
+    }
+
+    // 3D_coordinates
+    public void threeCoorDTO(String classNameString, String xPoint, String yPoint, String zPoint, threeOriginalPointCloud threeoriginalpointcloud) {
+
+        threePointCloudCoordinatesDTO threepointcloudcoordinatesdto = new threePointCloudCoordinatesDTO();
+
+        threepointcloudcoordinatesdto.setThreeObjectId(classNameString);
+        threepointcloudcoordinatesdto.setXList(xPoint);
+        threepointcloudcoordinatesdto.setYList(yPoint);
+        threepointcloudcoordinatesdto.setZList(zPoint);
+        threepointcloudcoordinatesdto.setThreeOriginalId(threeoriginalpointcloud);
+        threepointcloudcoordinatesservice.threeCoordinates(threepointcloudcoordinatesdto);
     }
 }
