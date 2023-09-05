@@ -8,38 +8,46 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.TeamProject.Domain.historyTable;
+import com.TeamProject.Domain.threeOriginalPointCloud;
 import com.TeamProject.Domain.twoOriginalImage;
 import com.TeamProject.Repository.imageUploadRepository;
+import com.TeamProject.Repository.threeOriginalPointCloudRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor //초기화 되지 않은 모든 final 필드 & @NonNull 마크가 있는 필드를 초기화하는 생성자 생성
 @Service
 public class imageUploadService {
 
-    private final imageUploadRepository imageuploadrepository;
-    // final : 하나의 객체만 받을 수 있게한다.
+    private final imageUploadRepository imageuploadrepository; // 2D 원본 이미지 
+    private final threeOriginalPointCloudRepository threeoriginalpointcloudrepository; // 3D 포인트클라우드
 
     // 이미지 파일의 기본 URL
 	private final String imageBaseURL = "http://10.125.121.183:8080/upload/image/"; // 클라이언트 실행
     //private final String imageBaseURL = "http://localhost:8080/upload/image/"; // 로컬 실행
 
+    @Transactional
     public ResponseEntity<String> uploadService(MultipartFile pngFile, MultipartFile plyFile, historyTable history) {
 
         twoOriginalImage twooriginalimage = new twoOriginalImage();
+        threeOriginalPointCloud threeoriginalpointcloud = new threeOriginalPointCloud();
 
         // 2d, 3d
         if (pngFile != null && !pngFile.isEmpty()) {
 		    try {
 		        String[] imageFileName = saveImage(pngFile, plyFile);
 		        twooriginalimage.setTwoOriginalPath(imageBaseURL + imageFileName[0]); // 2d 이미지 파일 이름 설정
-                twooriginalimage.setHistory_id(history);
-                // threeoriginalpointcloud.setThreeOriginalPointCloud(imageBaseURL + imageFileName[1]); 3d 이미지 파일 이름 설정
+                twooriginalimage.setHistoryId(history);
+
+                threeoriginalpointcloud.setThreeOriginalPath(imageBaseURL + imageFileName[1]);// 3d 이미지 파일 이름 설정
+                threeoriginalpointcloud.setHistoryId(history);
             } catch (IOException e) {
 		        e.printStackTrace();
 		    }
 		}
 		imageuploadrepository.save(twooriginalimage);
+        threeoriginalpointcloudrepository.save(threeoriginalpointcloud);
         return null;
     }
 
