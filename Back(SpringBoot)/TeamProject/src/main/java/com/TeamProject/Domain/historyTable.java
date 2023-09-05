@@ -27,12 +27,13 @@ public class historyTable {
     
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer history_id;
+    private Integer historyId;
 
     private LocalDate uploadDate;
     private Time uploadTime;
 
-    @JoinColumn
+    
     @ManyToOne
+    @JoinColumn(name="user_id")
     private members userId;
 }
