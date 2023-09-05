@@ -152,7 +152,7 @@ export default function List() {
   };
 
   return (
-    <ul role="list" className="divide-y divide-gray-100 pr-8 overflow-y-scroll">
+    <ul className="divide-y divide-gray-100 pr-8 overflow-y-scroll h-30" style={{height: '570px'}}>
       {people.map((person) => (
         <li
           key={person.email}

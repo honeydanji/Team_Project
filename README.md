@@ -1,5 +1,13 @@
 # 다중 객체 이미지 판별 웹 서비스
 
+## 2023/09/05
+- Login Page
+    - login 하면 token 안 받아와지는 문제 발생
+    - res.header['authorization'] 로 안 가져와서 문제가 발생한 거였음 소문자, 대문자 구분
+- List Component
+    - list 크기 조절 해결
+    - className에 인라인 스타일(style={{}})을 적용하면 안되고 className 밖에 적용해야지 된다.... 바보여따
+
 ## 2023/09/04
 - Modals Component
     - History Page의 날짜 클릭 시 사용할 모달 창 1차 뼈대 완성

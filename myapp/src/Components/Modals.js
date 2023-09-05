@@ -56,8 +56,8 @@ export default function Modals() {
                       <div>
                         <p className='font-semibold text-gray-500'>Aug 24, 2023</p>
                       </div>
-                      <div>
-                        <Carousel carouselList={CAROUSEL_IMAGES} style={{ width: '30px', height: '20px' }} />
+                      <div> 
+                        <Carousel carouselList={CAROUSEL_IMAGES} />
                       </div>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500">

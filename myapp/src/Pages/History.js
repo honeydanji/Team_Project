@@ -2,6 +2,7 @@ import '../Styles/History.css'
 import Stats from '../Components/Stats'
 import Carousel from '../Components/Carousel'
 import List from '../Components/List';
+// import { useEffect } from 'react';
 
 const CAROUSEL_IMAGES = [
     'https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg',
@@ -10,6 +11,19 @@ const CAROUSEL_IMAGES = [
   ]
 
 export default function History() {
+
+    
+    // useEffect(() => {
+    //     const token = localStorage.getItem('token');
+    //     console.log("token: ", token);
+        
+    //     fetch('http://10.125.121.183:8080/history')
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             console.log(data);
+    //         })
+    //         .catch((error) => console.error('데이터 불러오기 오류: ', error));
+    // }, []);
 
     return (
         <main>
