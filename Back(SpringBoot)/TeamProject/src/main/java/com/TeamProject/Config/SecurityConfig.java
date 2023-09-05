@@ -52,11 +52,12 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf->csrf.disable()); // CSRF 보호 비활성화 (JS에서 호출 가능)
 		http.cors().configurationSource(withCorsConfigurationSource());
-		//http.cors(cors->cors.disable()); // CORS 보호 비활성화 (React에서 호출 가능):RestAPI로 호출할 때
+		// http.cors(cors->cors.disable()); // CORS 보호 비활성화 (React에서 호출 가능):RestAPI로 호출할 때
 
 		// 모두, member, admin 접근 권한 설정
 		http.authorizeHttpRequests(security->{
-			security.anyRequest().permitAll();
+			security//.requestMatchers("/history").authenticated()
+					.anyRequest().permitAll();
 		});
 		
 		http.formLogin(frmLogin->frmLogin.disable()); 

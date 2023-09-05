@@ -74,9 +74,6 @@ public class imageUploadController {
 
             imageuploadservice.uploadService(pngFile, plyFile, history); // StringBoot 
             String name = imagesendservice.sendImage(pngFile, plyFile, history); // Flask
-            //return ResponseEntity.ok("http://10.125.121.183:8080/upload/image/" + name);
-            //return ResponseEntity.ok(pngFile.getOriginalFilename());
-            //return ResponseEntity.ok(""); // 이미지 업로드 날짜 반환
             resopnse.put("url", "http://10.125.121.183:8080/upload/image/" + name); 
             return ResponseEntity.ok(resopnse);
         }
