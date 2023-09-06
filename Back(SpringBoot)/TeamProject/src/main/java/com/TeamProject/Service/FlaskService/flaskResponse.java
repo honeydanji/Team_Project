@@ -2,7 +2,9 @@ package com.TeamProject.Service.FlaskService;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -89,6 +91,7 @@ public class flaskResponse {
             JSONArray xPoint = detectionObject.getJSONArray("x_point"); // 3pd
             JSONArray yPoint = detectionObject.getJSONArray("y_point"); // 3pd
             JSONArray zPoint = detectionObject.getJSONArray("z_point"); // 3pd
+            pointCloudCenter(xPoint.toString(), yPoint.toString(), zPoint.toString());
             JSONArray boxInfo = detectionObject.getJSONArray("box_info"); // 제이슨에 배열 파싱
 
             double xBox = boxInfo.optDouble(0); // 배열값 저장
@@ -97,6 +100,7 @@ public class flaskResponse {
             double height = boxInfo.optDouble(3);
             twoCoorDTO(accuracy, classNameString, xCoordinates.toString(), yCoordinates.toString(), xBox, yBox, width, height, twosegmentationimage); // Segmentation수치 저장.
             threeCoorDTO(classNameString, xPoint.toString(), yPoint.toString(), zPoint.toString(), threeoriginalpointcloud); // PointCloud 수치 저장
+
         }
         return imageName;
     }
@@ -152,9 +156,9 @@ public class flaskResponse {
 
     // 3D_coordinates
     public void threeCoorDTO(String classNameString, String xPoint, String yPoint, String zPoint, threeOriginalPointCloud threeoriginalpointcloud) {
-
         threePointCloudCoordinatesDTO threepointcloudcoordinatesdto = new threePointCloudCoordinatesDTO();
 
+        // DTO 통해서 전달
         threepointcloudcoordinatesdto.setThreeObjectId(classNameString);
         threepointcloudcoordinatesdto.setXList(xPoint);
         threepointcloudcoordinatesdto.setYList(yPoint);
@@ -162,4 +166,78 @@ public class flaskResponse {
         threepointcloudcoordinatesdto.setThreeOriginalId(threeoriginalpointcloud);
         threepointcloudcoordinatesservice.threeCoordinates(threepointcloudcoordinatesdto);
     }
+
+    //  3D 중점구하기
+    public void pointCloudCenter(String xPoint, String yPoint, String zPoint) {
+ 
+        Point(xPoint);
+        Point(yPoint);
+        Point(zPoint);
+
+        // 좌표생성
+        List<Point3D> coordinates = new ArrayList<>();
+        for(int i = 0; i < Point(xPoint).size(); i++) {
+            coordinates.add(new Point3D(Point(xPoint).get(i), Point(yPoint).get(i), Point(yPoint).get(i)));
+        }
+
+        // 좌표의 개수
+        int numCoordinates = coordinates.size();
+
+        double sumX = 0.0;
+        double sumY = 0.0;
+        double sumZ = 0.0;
+
+        // 모든 좌표의 X, Y, Z 좌표 합산
+        for (Point3D coord : coordinates) {
+            sumX += coord.getX();
+            sumY += coord.getY();
+            sumZ += coord.getZ();
+        }
+
+        // X, Y, Z 좌표의 평균을 계산하여 중심점 찾기
+        double centerX = sumX / numCoordinates;
+        double centerY = sumY / numCoordinates;
+        double centerZ = sumZ / numCoordinates;
+
+        // 중심점 출력
+        System.out.println("중심점 좌표: X=" + centerX + ", Y=" + centerY + ", Z=" + centerZ);
+    }
+
+    // 3D 좌표 전처리
+    public List<Double> Point(String point) {
+        point = point.replaceAll("\\[|\\]", ""); // "[", "]" 를  "" 대체한다. // 정규표현식
+        String[] List = point.split(","); // "," 기준으로 나누고 List에 저장
+        ArrayList<Double> dble = new ArrayList<>(); // 객체 선언
+        for(String p : List) {
+            dble.add(Double.parseDouble(p.trim()));
+        }
+        return dble;
+    }
 }
+
+class Point3D {
+    private double x;
+    private double y;
+    private double z;
+
+    public Point3D(double x, double y, double z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getZ() {
+        return z;
+    }
+}
+
+// list : 가변적 요소 추가/제거 가능(동적배열)
+// array : 불변
