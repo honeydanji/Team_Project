@@ -1,52 +1,41 @@
-import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import java.util.Arrays;
 
-public class SixDCoordinateExtractor {
+public class SixDValue {
+    private double[] translation; // 3D 변환
+    private double[] rotation;    // 3D 회전 (예: 오일러 각도 또는 쿼터니언)
+
+    public SixDValue(double[] translation, double[] rotation) {
+        if (translation.length != 3 || rotation.length != 3) {
+            throw new IllegalArgumentException("변환 및 회전 배열은 길이 3이어야 합니다.");
+        }
+        this.translation = translation;
+        this.rotation = rotation;
+    }
+
+    public double[] getTranslation() {
+        return translation;
+    }
+
+    public double[] getRotation() {
+        return rotation;
+    }
+
+    @Override
+    public String toString() {
+        return "변환: " + Arrays.toString(translation) + ", 회전: " + Arrays.toString(rotation);
+    }
+
     public static void main(String[] args) {
-        // 포인트 클라우드 좌표 추출 예시
-        Vector3D pointCloudCoordinate = extractPointCloudCoordinate();
-        
-        // 6D 좌표 계산
-        double x = pointCloudCoordinate.getX();
-        double y = pointCloudCoordinate.getY();
-        double z = pointCloudCoordinate.getZ();
-        double roll = calculateRoll(x, y, z);
-        double pitch = calculatePitch(x, y, z);
-        double yaw = calculateYaw(x, y);
-        
-        // 추출된 6D 좌표 출력
-        System.out.println("X: " + x);
-        System.out.println("Y: " + y);
-        System.out.println("Z: " + z);
-        System.out.println("Roll: " + roll);
-        System.out.println("Pitch: " + pitch);
-        System.out.println("Yaw: " + yaw);
-    }
+        // 예시 포인트 클라우드 중심 좌표
+        double[] pointCloudCenter = {1.0, 2.0, 3.0};
 
-    // 포인트 클라우드 좌표 추출
-    public static Vector3D extractPointCloudCoordinate() {
-        // 실제로는 포인트 클라우드 데이터를 어떻게 추출하는지에 따라 구현되어야 합니다.
-        // 이 함수는 예시일 뿐입니다.
-        double pointX = 0.5;
-        double pointY = -0.3;
-        double pointZ = 0.8;
-        return new Vector3D(pointX, pointY, pointZ);
-    }
+        // 예시 로봇 포즈 값 (임의의 값)
+        double[] robotPose = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6}; // 6D 포즈로 가정합니다 (3D 변환 + 3D 회전)
 
-    // 롤(Roll) 각도 계산
-    public static double calculateRoll(double x, double y, double z) {
-        // 실제론 x, y, z 좌표를 활용하여 롤(Roll) 각도를 계산하는 로직을 추가해야 합니다.
-        return 0.0;  // 예시로 0.0도로 설정
-    }
+        // SixDValue 객체 생성
+        SixDValue sixDValue = new SixDValue(pointCloudCenter, robotPose);
 
-    // 피치(Pitch) 각도 계산
-    public static double calculatePitch(double x, double y, double z) {
-        // 실제론 x, y, z 좌표를 활용하여 피치(Pitch) 각도를 계산하는 로직을 추가해야 합니다.
-        return 0.0;  // 예시로 0.0도로 설정
-    }
-
-    // 요(Yaw) 각도 계산
-    public static double calculateYaw(double x, double y) {
-        // 실제론 x, y 좌표를 활용하여 요(Yaw) 각도를 계산하는 로직을 추가해야 합니다.
-        return 0.0;  // 예시로 0.0도로 설정
+        // 6D 값을 출력
+        System.out.println("6D 값: " + sixDValue);
     }
 }
