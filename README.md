@@ -1,5 +1,16 @@
 # 다중 객체 이미지 판별 웹 서비스
 
+## 2023/09/06
+- History Page
+    - list에 넣을 데이터 서버에 요청 후 response 받음
+- DragDrop Page
+    - 이미지 확장자에 따라 다르게 저장후, 서버에 전송
+    - authorization을 header에 같이 보내지 않아 문제 발생 => header에 authorization 넣어서 문제 해결
+- Login Page
+    - Login 상태를 저장하기 위해서 상태 관리 라이브러리 중 Recoil 사용
+    - Recoil만 사용하면 useContext가 null이라는 오류 계속 발생
+    - react랑 recoil을 재다운로드를 함으로써 문제 해결
+
 ## 2023/09/05
 - Login Page
     - login 하면 token 안 받아와지는 문제 발생

@@ -1,25 +1,31 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import jwtDecode from "jwt-decode";
+import { useRecoilState} from "recoil";
+import { nameState, loginEmailState, passwordState, isLoggedInState } from "../Hook/LoginRecoil";
 
 export default function LogIn() {
-
+  
+  // 로그인 상태 여부 상태 관리, 인증 상태
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
+  // id/ pw 상태관리
   const navigate = useNavigate();
 
   // 로그인 필요 정보
-  const [loginEmail, setLoginEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [loginEmail, setLoginEmail] = useRecoilState(loginEmailState);
+  const [password, setPassword] = useRecoilState(passwordState);
 
-  // 로그인 상태 여부 상태 관리
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // token -> name
+  const [name, setName] = useRecoilState(nameState);
 
   useEffect(() => {
-    console.log("isLoggedIn: ", isLoggedIn)
     const token = localStorage.getItem('token');
     if (token) {
-      setIsLoggedIn(true);
+      setIsLoggedIn(token);
+      console.log("isLoggedIn: ", isLoggedIn)
     }
-  }, []);
+  }, [isLoggedIn, setIsLoggedIn]);
 
   const handelLoginButtonClick = async () => {
     const data = {
@@ -29,34 +35,54 @@ export default function LogIn() {
 
     axios.post('http://10.125.121.183:8080/login', data)
       .then((res) => {
-        const token = res.headers['authorization']; // 서버에서 받은 토큰        
-        console.log(token);
+        const token = res.headers['authorization']; // 서버에서 받은 토큰 가져오기  
+        console.log("token:", token);      
 
-        // 토큰을 로컬 스토리지에 저장
-        localStorage.setItem('token', token)
+        if (token != null) {
+          // 토큰을 로컬 스토리지에 저장
+          localStorage.setItem('token', token);
+          setIsLoggedIn(localStorage.getItem('token'));
+          console.log("isLoggedIn2222: ", isLoggedIn);
+          
+          // 요청 헤더에 토큰을 저장
+          // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-        // 요청 헤더에 토큰을 저장
-        // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+          // 토큰 추출 및 이름 저장
+          // token decoding
+          const splitToken = token.split(" ")[1];
+          const decodedToken = jwtDecode(splitToken);
+          const extractedName = decodedToken.name;
+          console.log("extractedName: ", extractedName);
 
-        setIsLoggedIn(true);
-        console.log(isLoggedIn);
-        alert('로그인 성공')
-        navigate("/dragdrop")
+          // name statement
+          setName(extractedName);
+          console.log("name: ", name);
+  
+          
+          alert(extractedName + '님, 환영합니다.');
+
+          // 회원가입이 완료되면 로그인 페이지로 이동
+          navigate("/dragdrop");
+        }
+
       })
       .catch((err) => {
         alert('잘못된 아이디 혹은 패스워드 입니다')
       });
   };
 
-  const handelLogoutButtonClick = () => {
+  console.log("name222222: ", name)
+
+  const handelLogoutButtonClick = () => {    
+    alert('로그아웃 완료');
     // 로컬 스토리지에서 토큰 삭제
     localStorage.removeItem('token');
-    setIsLoggedIn(false); // 로그아웃 상태로 변경
+    setIsLoggedIn(''); // 로그아웃 상태로 변경
     delete axios.defaults.headers.common['Authorization']; // 로그아웃 시 토큰 삭제
-    alert('로그아웃 성공');
+    // 시작페이지로 이동
     navigate('/')
   }
-
+  
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
