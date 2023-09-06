@@ -74,7 +74,7 @@ public class SecurityConfig {
 		//http.addFilter(new JWTAuthenticationFilter()); 
 		
 		//// 필터 2
-		http.addFilter(new JWTAuthenticationFilter(authConfig.getAuthenticationManager())); // 1. 로그인 시도 > 토큰 생성 및 반환
+		http.addFilter(new JWTAuthenticationFilter(authConfig.getAuthenticationManager(), memberrepository)); // 1. 로그인 시도 > 토큰 생성 및 반환
 		http.addFilter(new JWTAuthorizationFilter(authConfig.getAuthenticationManager(), memberrepository)); // 2. 토큰으로 로그인 시도 확인 및 인증 및 권한 부여
 		return http.build();
 	}

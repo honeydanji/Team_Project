@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.TeamProject.Domain.members;
+import com.TeamProject.Repository.membersRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,6 +28,14 @@ import lombok.extern.slf4j.Slf4j;
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 	
 	private final AuthenticationManager authenticationManager;
+
+	private final membersRepository memberrepository;
+	
+	// // 토큰이 있는 상태에서 로그인할 때
+	// public JWTAuthenticationFilter(AuthenticationManager authenticationManager, membersRepository memberrepository) {
+	// 	super(authenticationManager);
+	// 	this.memberrepository = memberrepository;
+	// }
 
 	// 1번 => 토큰이 없는 경우는 여기로 
 	@Override 
@@ -63,15 +72,18 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	}
 	
 	// 2번 => 위 코드에서 토큰 만들고 여기로
-	@Override 
+	@Override
 	protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse resp, FilterChain chain, Authentication authResult) throws IOException, ServletException {
 		
 		User user = (User)authResult.getPrincipal();
 		log.info("successfulAuthentication:" + user.toString());
+
+		String name = memberrepository.nameByLoginEmail(user.getUsername());
 		
 		// JWT 생성
 		String jwtToken = JWT.create()
 							.withClaim("userId", user.getUsername()) // 토큰에 저장되는 정보(선택사항)
+							.withClaim("name", name) // 유저 이름.
 							.withExpiresAt(new Date(System.currentTimeMillis()+1000*600*10)) // 토큰 유지시간
 							.sign(Algorithm.HMAC256("edu.pnu.jwtkey")); // 암호화
 		// 응답 Header에 "Authorization"이라는 키를 추가해서 JWT를 설정
@@ -83,6 +95,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	    String message = "good";
 		
 		resp.addHeader("Authorization", "Bearer " + jwtToken);
+		//resp.addHeader("name", "abcd");
 		
 		// 클라이언트로 메시지를 보내기 위해 응답 코드와 메시지 설정
 	    resp.setStatus(HttpServletResponse.SC_OK); // 200 OK

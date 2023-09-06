@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 	
-	private membersRepository memberrepository;
+	private final membersRepository memberrepository;
 	
 	// 토큰이 있는 상태에서 로그인할 때
 	public JWTAuthorizationFilter(AuthenticationManager authenticationManager, membersRepository memberrepository) {
