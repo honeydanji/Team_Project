@@ -48,7 +48,7 @@ public class imageUploadService {
 		}
 		imageuploadrepository.save(twooriginalimage);
         threeoriginalpointcloudrepository.save(threeoriginalpointcloud);
-        return null;
+        return ResponseEntity.ok("HiHiHihi");
     }
 
     // 이미지 저장 메서드

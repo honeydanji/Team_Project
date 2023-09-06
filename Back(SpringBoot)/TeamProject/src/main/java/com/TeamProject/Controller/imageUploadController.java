@@ -39,7 +39,7 @@ public class imageUploadController {
     public ResponseEntity<Object> uploadController(@RequestParam(name = "pngFile", required = false) MultipartFile pngFile,
                                                 @RequestParam(name = "plyFile", required = false) MultipartFile plyFile,
                                                 Authentication authentication) {
-
+                                                    
 
         if (authentication == null) {
             return ResponseEntity.ok("회원이 아닙니다");
@@ -77,7 +77,7 @@ public class imageUploadController {
             resopnse.put("url", "http://10.125.121.183:8080/upload/image/" + name); 
             return ResponseEntity.ok(resopnse);
         }
-    }
+    }   
 
     // 이미지 파일이 저장된 디렉토리 경로를 설정.
 	private final String twoDImageDirectory = "C:/Team_Project/Back(SpringBoot)/TeamProject/image/2D"; // 2d 원본이미지
