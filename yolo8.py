@@ -21,8 +21,8 @@ def home():
             return "No image part"
 
         ply = request.files["plyFile"]
-        if ply.filename == "":
-            return "No selected file"
+        # if ply.filename == "":
+        #     return "No selected file"
         
         
         print(image.filename)
