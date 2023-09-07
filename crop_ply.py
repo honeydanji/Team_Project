@@ -9,6 +9,7 @@ def cropPly(xy_list,temp_ply_path):
     # PLY 파일을 Open3D로 읽어오기
     ply_cloud = o3d.io.read_point_cloud(temp_ply_path)
     
+    
     yaw_angle = 0  # + : crop 영역 반시계 방향 회전(카메라 시점), - : crop 영역 시계 방향 회전(카메라 시점)
     pitch_angle = 0
     roll_angle = 0
@@ -91,7 +92,7 @@ def cropPly(xy_list,temp_ply_path):
         # o3d.visualization.draw_geometries([crop_pcd])
         # o3d.visualization.draw_geometries([crop_pcd, lineset])
         xyz_output.append(crop_pcd)
-    os.remove(temp_ply_path)
+    # os.remove(temp_ply_path)
     # points = np.asarray(xyz_output[0].points)
     # print(points)
     return xyz_output
