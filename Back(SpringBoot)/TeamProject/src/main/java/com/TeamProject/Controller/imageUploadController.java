@@ -37,10 +37,9 @@ public class imageUploadController {
     
     @PostMapping("/uploadSpring")
     public ResponseEntity<Object> uploadController(@RequestParam(name = "pngFile", required = false) MultipartFile pngFile,
-                                                @RequestParam(name = "plyFile", required = false) MultipartFile plyFile,
-                                                Authentication authentication) {
+                                                   @RequestParam(name = "plyFile", required = false) MultipartFile plyFile,
+                                                   Authentication authentication) {
                                                     
-
         if (authentication == null) {
             return ResponseEntity.ok("회원이 아닙니다");
         } else {
