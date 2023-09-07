@@ -12,4 +12,5 @@ public interface membersRepository extends JpaRepository<members, Integer>{
     @Query("SELECT m.name FROM members m WHERE loginEmail = ?1")
     String nameByLoginEmail(String logingEmail);
 
+    members findByLoginEmail(String loginEmail);
 }
