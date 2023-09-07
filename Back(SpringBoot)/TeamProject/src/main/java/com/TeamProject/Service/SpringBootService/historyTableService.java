@@ -3,22 +3,19 @@ package com.TeamProject.Service.SpringBootService;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.TeamProject.Domain.historyTable;
+import com.TeamProject.Domain.historyView;
 import com.TeamProject.Domain.members;
-import com.TeamProject.Repository.commentsRepository;
 import com.TeamProject.Repository.historyTableRepository;
-import com.TeamProject.Repository.imageUploadRepository;
+import com.TeamProject.Repository.historyViewRepository;
 import com.TeamProject.Repository.membersRepository;
-import com.TeamProject.Repository.twoSegmentationRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,11 +23,9 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class historyTableService {
 
-    private final historyTableRepository historytablerepositroy; // history(상세시간)
+    private final historyTableRepository historytablerepository; // history(상세시간)
     private final membersRepository membersrepository; // member(유저이메일)
-    private final imageUploadRepository imageuploadrepository; // 원본
-    private final twoSegmentationRepository twosegmentationrepository; // seg
-    private final commentsRepository commentsrepository; // 코멘트
+    private final historyViewRepository historyviewrepository;
 
     @Transactional
     public historyTable historyUpdate(Authentication authentication) {
@@ -44,7 +39,7 @@ public class historyTableService {
         historytable.setUploadTime(Time.valueOf(LocalTime.now()));
         historytable.setUploadDate(LocalDate.now());
 
-        historytablerepositroy.save(historytable);
+        historytablerepository.save(historytable);
 
         return historytable;
     }
@@ -57,36 +52,37 @@ public class historyTableService {
         if(userEmail == null){
             return null;
         }else {
-            historytablerepositroy.historyIdByUserEmail(userId); // 로그인 유저 historyId 가져오기
-            historytablerepositroy.uploadDateByUserEmail(userId); // 로그인 유저 파일 uploadDate 가져오기
+            historytablerepository.historyIdByUserEmail(userId); // 로그인 유저 historyId 가져오기
+            historytablerepository.uploadDateByUserEmail(userId); // 로그인 유저 파일 uploadDate 가져오기
 
             HashMap<Integer, LocalDate> map = new HashMap<>();
 
-            for(int i = 0; i < historytablerepositroy.historyIdByUserEmail(userId).size(); i++) {
-                map.put(historytablerepositroy.historyIdByUserEmail(userId).get(i), historytablerepositroy.uploadDateByUserEmail(userId).get(i));
+            for(int i = 0; i < historytablerepository.historyIdByUserEmail(userId).size(); i++) {
+                map.put(historytablerepository.historyIdByUserEmail(userId).get(i), historytablerepository.uploadDateByUserEmail(userId).get(i));
             }
             return map;
         }        
     }
 
     // 게시글 상세보기(게시글번호, 업로드날짜)
-    public ResponseEntity<List<Object>> detail(Integer historyId, Authentication authentication) {
-        // historyId에 해당하는 보여주고하 하는 모든 정보를 리스트에 저장
-        String userEmail = authentication.getName();
-        historyTable his = historytablerepositroy.findByHistoryId(historyId);
+    public HashMap<String, historyView> detail(LocalDate uploadDate, Authentication authentication) {
+        HashMap<String, historyView> map = new HashMap<String, historyView>();
 
-        if(userEmail == null){
-            return null;
-        }else {
-           List<Object> historyList = new ArrayList<Object>();
-           historyList.add(historytablerepositroy.timeByHistoryId(historyId)); // 상세시간
-           historyList.add(userEmail); // 유저이메일
-           historyList.add(membersrepository.nameByLoginEmail(userEmail));
-           historyList.add(imageuploadrepository.originalByHistoryId(his)); // 원본이미지
-           historyList.add(twosegmentationrepository.segmentationByHistoryId(his)); // Seg이미지
-           historyList.add(commentsrepository.contentsByHistoryId(his)); // comment
-           return ResponseEntity.ok(historyList);
+        // userId 출력
+        members userId = membersrepository.findByLoginEmail(authentication.getName());
+
+        // members userId = historytablerepositroy.find
+    
+        // 날짜, userId 출력
+        List<Integer> historyId = historytablerepository.findByUploadDateANDUserId(uploadDate, userId);
+
+        for(int i = 0; i < historytablerepository.findByUploadDateANDUserId(uploadDate, userId).size(); i++) {
+            historyView a = historyviewrepository.findByHistoryId(historyId.get(i));
+            System.out.println();
+            map.put(Integer.toString(i), a);
         }
+        return map;
+        
     }
 }
 

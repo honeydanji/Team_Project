@@ -22,4 +22,7 @@ public interface historyTableRepository extends JpaRepository<historyTable ,Inte
 
     @Query("SELECT h.uploadTime FROM historyTable h WHERE historyId = ?1")
     Time timeByHistoryId(Integer historyId);
+
+    @Query("SELECT h.historyId FROM historyTable h WHERE uploadDate = ?1 AND userId = ?2")
+    List<Integer> findByUploadDateANDUserId(LocalDate upLocalDate, members userId);
 }
