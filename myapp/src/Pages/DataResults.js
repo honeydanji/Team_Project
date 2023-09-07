@@ -1,13 +1,14 @@
 import ChartBar from '../Components/ChartBar';
 import ChartDonut from '../Components/ChartDonut';
 import ChartPie from '../Components/ChartPie';
+import Nav from '../Components/Nav';
 import SelectDate from '../Components/SelectDate';
 import '../Styles/DataResults.css'
 
 export default function DataResults() {
 
   return (
-    <main>
+    <main>      
       <div className="frame">
         {/* HEADER */}
         <div className="header">
@@ -46,6 +47,7 @@ export default function DataResults() {
           </div>
         </div>
       </div>
+      <Nav />
     </main>
   );
 }

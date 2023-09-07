@@ -2,10 +2,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import '../Styles/DragDrop.css'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { isLoggedInState } from "../Hook/LoginRecoil";
+import Nav from "../Components/Nav";
 
-export default function DragDrop() { 
+export default function DragDrop() {
     const navigate = useNavigate();
     const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
 
@@ -17,7 +16,7 @@ export default function DragDrop() {
 
     // 이미지 업로드 및 URL 가져오기
     const handleImageUploadClick = () => {
-        if(imageFile.length === 0) {
+        if (imageFile.length === 0) {
             alert('이미지를 첨부하세요.');
             const fileUploadInput = document.getElementById("fileUpload");
             fileUploadInput.value = ""; // 파일 선택 창 초기화
@@ -30,22 +29,22 @@ export default function DragDrop() {
         const formData = new FormData();
 
         // 이미지 확장자에 따라 분리하여 저장
-        for(const fileObj of imageFile) {
-           const file = fileObj.object;
-           const fileExtension = file.name.split(".").pop().toLowerCase(); // 파일 확장자 추출, pop(): 배열의 마지막 요소를 제거하고 반환
+        for (const fileObj of imageFile) {
+            const file = fileObj.object;
+            const fileExtension = file.name.split(".").pop().toLowerCase(); // 파일 확장자 추출, pop(): 배열의 마지막 요소를 제거하고 반환
 
-           if(fileExtension === 'png') {
-            formData.append("pngFile", file);
-           } else if(fileExtension === 'ply') {
-            formData.append("plyFile", file);
-           } else {
-            alert(`지원하지 않는 확장자입니다: ${file.name}`);
-            return; // 지원하지 않는 확장자의 파일이 포함되어 있으면 서버 요청을 보내지 않고 함수를 종료
-           }
+            if (fileExtension === 'png') {
+                formData.append("pngFile", file);
+            } else if (fileExtension === 'ply') {
+                formData.append("plyFile", file);
+            } else {
+                alert(`지원하지 않는 확장자입니다: ${file.name}`);
+                return; // 지원하지 않는 확장자의 파일이 포함되어 있으면 서버 요청을 보내지 않고 함수를 종료
+            }
 
-           console.log("file: ", file);
+            console.log("file: ", file);
         }
-       
+
         console.log("formData: ");
         for (var pair of formData.entries()) {
             console.log(pair[0] + ", " + pair[1]);
@@ -53,26 +52,26 @@ export default function DragDrop() {
 
         axios.post('http://10.125.121.183:8080/uploadSpring', formData, {
             headers: {
-                'authorization' : `${token}`,
-                'Content-Type' : 'multipart/form-data',
+                'authorization': `${token}`,
+                'Content-Type': 'multipart/form-data',
             }
         })
-        .then((res) => {
-            if (res.status === 200) {
-                const imageUrl = res.data.url; // 이미지 URL을 서버 응답에서 추출
-                setUploadedImageUrl(imageUrl); // 상태로 이미지 URL 저장              
-            } else {
-                console.error('Image upload failed.')
-            }
-        })
-        .catch((err) => {
-            console.error('Error uploading image:', err);
-            alert("오류 발생")
-        });
+            .then((res) => {
+                if (res.status === 200) {
+                    const imageUrl = res.data.url; // 이미지 URL을 서버 응답에서 추출
+                    setUploadedImageUrl(imageUrl); // 상태로 이미지 URL 저장              
+                } else {
+                    console.error('Image upload failed.')
+                }
+            })
+            .catch((err) => {
+                console.error('Error uploading image:', err);
+                alert("오류 발생")
+            });
     };
 
     useEffect(() => {
-        if(uploadedImageUrl !== null) {
+        if (uploadedImageUrl !== null) {
             console.log("uploadedImageUrl: ", uploadedImageUrl); // 이미지 URL이 업데이트될 때마다 로그 출력
             alert("이미지 전송 완료");
             navigate("/service", { state: { uploadedImageUrl } }); //Service 페이지로 이동
@@ -96,7 +95,7 @@ export default function DragDrop() {
         }
 
         for (const file of selectFiles) {
-            tempFiles = [...tempFiles, {id: fileId.current++, object: file}];
+            tempFiles = [...tempFiles, { id: fileId.current++, object: file }];
         }
 
         setImageFile(tempFiles);
@@ -121,7 +120,7 @@ export default function DragDrop() {
         e.preventDefault();
         e.stopPropagation();
 
-        if(e.dataTransfer.files) {
+        if (e.dataTransfer.files) {
             setIsDragging(true);
         }
     }, []);
@@ -135,7 +134,7 @@ export default function DragDrop() {
     }, [onChangeFiles]);
 
     const initDragEvents = useCallback(() => {
-        if(dragRef.current !== null) {
+        if (dragRef.current !== null) {
             dragRef.current.addEventListener("dragenter", handleDragIn);
             dragRef.current.addEventListener("dragleave", handleDragOut);
             dragRef.current.addEventListener("dragover", handleDragOver);
@@ -144,7 +143,7 @@ export default function DragDrop() {
     }, [handleDragIn, handleDragOut, handleDragOver, handleDrop]);
 
     const resetDragEvents = useCallback(() => {
-        if(dragRef.current !== null) {
+        if (dragRef.current !== null) {
             dragRef.current.removeEventListener("dragenter", handleDragIn);
             dragRef.current.removeEventListener("dragleave", handleDragOut);
             dragRef.current.removeEventListener("dragover", handleDragOver);
@@ -154,32 +153,35 @@ export default function DragDrop() {
 
     useEffect(() => {
         initDragEvents();
-        
+
         return () => resetDragEvents();
     }, [initDragEvents, resetDragEvents])
 
     return (
-        <div className="DragDrop">
-            <input type="file" id="fileUpload" style={{ display: "none"}} multiple={true} onChange={onChangeFiles} />
-            <label className={isDragging ? "DrageDrop-File-Dragging" : "DragDrop-File"} htmlFor="fileUpload" ref={dragRef}>
-                <div>Drag and Drop<br/>the images here</div>
-            </label>
+        <div>
+            {/* <Nav/> */}
+            <div className="DragDrop">
+                <input type="file" id="fileUpload" style={{ display: "none" }} multiple={true} onChange={onChangeFiles} />
+                <label className={isDragging ? "DrageDrop-File-Dragging" : "DragDrop-File"} htmlFor="fileUpload" ref={dragRef}>
+                    <div>Drag and Drop<br />the images here</div>
+                </label>
 
-            <div className="DragDrop-Files">
-                {imageFile.length > 0 && imageFile.map((file) => {
-                    const { id, object } = file;
+                <div className="DragDrop-Files">
+                    {imageFile.length > 0 && imageFile.map((file) => {
+                        const { id, object } = file;
 
-                    return (
-                        <div key={id}>
-                            <div>{object.name}</div>
-                            <div className="DragDrop-Files-Filter" onClick={() => handleFilterFile(id)}>X</div>
-                        </div>
-                    );
-                })}
+                        return (
+                            <div key={id}>
+                                <div>{object.name}</div>
+                                <div className="DragDrop-Files-Filter" onClick={() => handleFilterFile(id)}>X</div>
+                            </div>
+                        );
+                    })}
+                </div>
+                <div className="Upload-Button">
+                    <button onClick={handleImageUploadClick}>Upload</button>
+                </div>
             </div>
-        <div className="Upload-Button">
-            <button onClick={handleImageUploadClick}>Upload</button>           
-        </div>
         </div>
     )
 }

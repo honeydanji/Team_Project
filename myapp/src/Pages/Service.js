@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Breadcrumb from '../Components/Breadcrumb';
 import '../Styles/Service.css'
+import Nav from '../Components/Nav';
 
 export default function Service() {
 
@@ -17,6 +18,7 @@ export default function Service() {
 
     return (
         <main>
+            <Nav />
             <div className='breadcrumbBox'>
                 <Breadcrumb />
             </div>

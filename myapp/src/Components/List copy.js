@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function List({ dateData }) {
-
-  console.log("dateDataList: ", dateData);
 
   const [uniqueDates, setUniqueDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -10,13 +8,9 @@ export default function List({ dateData }) {
 
   // 서버에서 받은 데이터에서 중복된 날짜를 제거한 목록을 만듦
   const extractUniqueDates = () => {
-    // const uniqueDates = [...new Set(Object.values(dateData))];
-    // console.log("uniqueDates: ", uniqueDates);
     const allDates = dateData ? dateData.map((item) => item.date) : []; // dateData에서 날짜만 추출, dateData가 유효한 경우에만 map
     const uniqueDates = Array.from(new Set(allDates)); // 중복 제거
-    console.log("uniqueDates**List**: ",uniqueDates)
     return uniqueDates;
-
   };
 
   // 클릭한 날짜에 해당하는 데이터를 서버에 요청
@@ -36,7 +30,6 @@ export default function List({ dateData }) {
   useState(() => {
     const dates = extractUniqueDates();
     setUniqueDates(dates);
-    console.log("dates:", dates);
   }, []);
 
   return (
@@ -44,13 +37,13 @@ export default function List({ dateData }) {
       <div className="date-list">
         <h2>Select a Date: </h2>
         <ul>
-          {uniqueDates.map((item, index) => (
+          {uniqueDates.map((date, index) => (
             <li
               key={index}
-              className={item === selectedDate ? 'selected' : ''}
-              onClick={() => handleDateClick(item)}
+              className={date === selectedDate ? 'selected' : ''}
+              onClick={() => handleDateClick(date)}
             >
-              {item}
+              {date}
             </li>
           ))}
         </ul>
