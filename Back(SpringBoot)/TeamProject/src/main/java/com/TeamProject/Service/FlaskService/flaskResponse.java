@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -201,6 +203,7 @@ public class flaskResponse {
 
         // 중심점 출력
         System.out.println("중심점 좌표: X=" + centerX + ", Y=" + centerY + ", Z=" + centerZ);
+        rotation(centerX, centerY, centerZ);
     }
 
     // 3D 좌표 전처리
@@ -213,6 +216,38 @@ public class flaskResponse {
         }
         return dble;
     }
+    public void rotation(double centerX, double centerY, double centerZ) {
+        // 객체의 초기 위치 좌표
+        // double x = centerX;
+        // double y = centerY;
+        // double z = centerZ;
+
+        // 초기 객체의 위치 좌표
+        double initialX = 0.0;
+        double initialY = 0.0;
+        double initialZ = 0.0;
+
+        // 초기 객체의 방향 벡터 (예: 초기 방향이 (1, 0, 0)인 경우)
+        //Vector3D initialDirection = new Vector3D(1.0, 0.0, 0.0);
+
+        // 포인트 클라우드의 중심 좌표를 사용하여 위치 변화 계산
+        double deltaX = centerX - initialX;
+        double deltaY = centerY - initialY;
+        double deltaZ = centerZ - initialZ;
+
+        // 위치 변화를 반영하여 새로운 객체의 위치 계산
+        double newX = initialX + deltaX;
+        double newY = initialY + deltaY;
+        double newZ = initialZ + deltaZ;
+
+        // 새로운 위치와 초기 방향을 사용하여 6D 포즈 계산
+        Vector3D newDirection = new Vector3D(newX - initialX, newY - initialY, newZ - initialZ);
+
+        // 결과 출력
+        System.out.println("새로운 위치 (X, Y, Z): (" + newX + ", " + newY + ", " + newZ + ")");
+        System.out.println("새로운 방향 (X, Y, Z): (" + newDirection.getX() + ", " + newDirection.getY() + ", " + newDirection.getZ() + ")");
+    }
+
 }
 
 class Point3D {
@@ -239,5 +274,5 @@ class Point3D {
     }
 }
 
-// list : 가변적 요소 추가/제거 가능(동적배열)
-// array : 불변
+
+
