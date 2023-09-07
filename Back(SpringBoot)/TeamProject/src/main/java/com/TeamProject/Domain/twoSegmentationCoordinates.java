@@ -7,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,18 +17,14 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="2d_segmentation_coordinates")
 public class twoSegmentationCoordinates {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="2d_coordinate_id")
     private Integer twoCoordinateId;
 
-    @Column(name="2d_object_id")
     private String twoObjectId;
 
-    @Column(name="2d_object_acc")
     private double twoObjectAcc;
 
     @Column(columnDefinition = "MEDIUMTEXT")
@@ -44,7 +39,7 @@ public class twoSegmentationCoordinates {
     private double height;
     
     @ManyToOne
-    @JoinColumn(name="2d_segmentation_id", nullable = false)
+    @JoinColumn(name="two_segmentation_id", nullable = false)
     private twoSegmentationImage twoSegmentationId;
     
 }
