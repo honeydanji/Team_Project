@@ -12,7 +12,7 @@
     - port 5000
    
 ## DatabaseModel
-<img src = "https://github.com/honeydanji/Team_Project/assets/129818881/57b5864a-29a8-443c-9c59-09f5f08b0e6d">
+<img src = "https://github.com/honeydanji/Team_Project/assets/129818881/bc9a2438-cecf-497e-8e57-855483f777ce">
 
 ## 2023/09/04
 - JWT 로그인 구현
