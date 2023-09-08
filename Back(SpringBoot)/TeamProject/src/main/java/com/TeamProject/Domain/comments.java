@@ -18,7 +18,7 @@ public class comments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer commentId;
     
-    private String contents;
+    private String comment;
 
     @OneToOne
     @JoinColumn(name="history_id")

@@ -43,7 +43,7 @@ public class commentsService {
 
             comments com = new comments();
 
-            com.setContents(contents);
+            com.setComment(contents);
             com.setHistoryId(his);
 
             commentsrepository.save(com);
@@ -68,7 +68,7 @@ public class commentsService {
         }else if(hisId.equals(memId)) {
             comments com = commentsrepository.findByHistoryId(historytablerepository.findByHistoryId(historyId));
 
-            com.setContents(contents);
+            com.setComment(contents);
 
             commentsrepository.save(com);
 

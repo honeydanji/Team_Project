@@ -84,7 +84,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		String jwtToken = JWT.create()
 							.withClaim("userId", user.getUsername()) // 토큰에 저장되는 정보(선택사항)
 							.withClaim("name", name) // 유저 이름.
-							.withExpiresAt(new Date(System.currentTimeMillis()+1000*600*10)) // 토큰 유지시간
+							.withExpiresAt(new Date(System.currentTimeMillis()+10000*6000*10)) // 토큰 유지시간
 							.sign(Algorithm.HMAC256("edu.pnu.jwtkey")); // 암호화
 		// 응답 Header에 "Authorization"이라는 키를 추가해서 JWT를 설정
 		// Bearer : JWT토큰임을 나타내는 용어; Basic : "Basic "+Base64(username:password)

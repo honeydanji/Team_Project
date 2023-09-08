@@ -20,6 +20,6 @@ public class historyView {
 
     private Time uploadTime;
     private String twoOriginalPath;
-    private String twoProcessPath;
-    private String contents;
+    private String twoSegmentationPath;
+    private String comment;
 }
