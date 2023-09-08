@@ -22,6 +22,7 @@ import com.TeamProject.Domain.historyTable;
 import com.TeamProject.Service.FlaskService.imageSendService;
 import com.TeamProject.Service.SpringBootService.historyTableService;
 import com.TeamProject.Service.SpringBootService.imageUploadService;
+import com.TeamProject.Service.SpringBootService.poseDataService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,6 +35,8 @@ public class imageUploadController {
     private final imageSendService imagesendservice; // 외부 API 
 
     private final historyTableService historytableservice; 
+
+    private final poseDataService posedataservice;
     
     @PostMapping("/uploadSpring")
     public ResponseEntity<Object> uploadController(@RequestParam(name = "pngFile", required = false) MultipartFile pngFile,
@@ -43,7 +46,7 @@ public class imageUploadController {
         if (authentication == null) {
             return ResponseEntity.ok("회원이 아닙니다");
         } else {
-            Map<String, String> resopnse = new HashMap<>();
+            Map<String, Object> resopnse = new HashMap<>();
             String pngFileCount = pngFile.getOriginalFilename();
             String plyFileCount = plyFile.getOriginalFilename();
 
@@ -71,9 +74,12 @@ public class imageUploadController {
             // history Service
             historyTable history = historytableservice.historyUpdate(authentication);
 
+
+
             imageuploadservice.uploadService(pngFile, plyFile, history); // StringBoot 
             String name = imagesendservice.sendImage(pngFile, plyFile, history); // Flask
-            resopnse.put("url", "http://10.125.121.183:8080/upload/image/" + name); 
+            resopnse.put("url", "http://10.125.121.183:8080/upload/image/" + name);
+            resopnse.put("pose", posedataservice.poseDataDispaly(history));
             return ResponseEntity.ok(resopnse);
         }
     }   
