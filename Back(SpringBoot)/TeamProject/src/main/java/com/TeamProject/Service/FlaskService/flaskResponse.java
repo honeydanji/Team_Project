@@ -2,12 +2,8 @@ package com.TeamProject.Service.FlaskService;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.List;
 
-import org.apache.commons.math3.geometry.euclidean.threed.Rotation;
-import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -15,10 +11,12 @@ import org.springframework.stereotype.Service;
 import com.TeamProject.Domain.historyTable;
 import com.TeamProject.Domain.threeOriginalPointCloud;
 import com.TeamProject.Domain.twoSegmentationImage;
+import com.TeamProject.Dto.poseDataDTO;
 import com.TeamProject.Dto.threePointCloudCoordinatesDTO;
 import com.TeamProject.Dto.twoSegmentationCoordinatesDTO;
 import com.TeamProject.Dto.twoSegmentationImageDTO;
 import com.TeamProject.Repository.threeOriginalPointCloudRepository;
+import com.TeamProject.Service.SpringBootService.poseDataService;
 import com.TeamProject.Service.SpringBootService.threePointCloudCoordinatesService;
 import com.TeamProject.Service.SpringBootService.twoSegmentationCoordinatesService;
 import com.TeamProject.Service.SpringBootService.twoSegmentationImageService;
@@ -41,6 +39,9 @@ public class flaskResponse {
 
     // 3D_coordinates
     private final threePointCloudCoordinatesService threepointcloudcoordinatesservice;
+
+    // 6D_pose
+    private final poseDataService posedataservice ;
     
 
     // 이미지 파일의 기본 URL
@@ -93,8 +94,8 @@ public class flaskResponse {
             JSONArray xPoint = detectionObject.getJSONArray("x_point"); // 3pd
             JSONArray yPoint = detectionObject.getJSONArray("y_point"); // 3pd
             JSONArray zPoint = detectionObject.getJSONArray("z_point"); // 3pd
-            pointCloudCenter(xPoint.toString(), yPoint.toString(), zPoint.toString());
-            JSONArray boxInfo = detectionObject.getJSONArray("box_info"); // 제이슨에 배열 파싱
+            JSONArray boxInfo = detectionObject.getJSONArray("box_info"); // segData
+            JSONArray sixPose = detectionObject.getJSONArray("6dpose"); // poseData
 
             double xBox = boxInfo.optDouble(0); // 배열값 저장
             double yBox = boxInfo.optDouble(1);
@@ -103,6 +104,13 @@ public class flaskResponse {
             twoCoorDTO(accuracy, classNameString, xCoordinates.toString(), yCoordinates.toString(), xBox, yBox, width, height, twosegmentationimage); // Segmentation수치 저장.
             threeCoorDTO(classNameString, xPoint.toString(), yPoint.toString(), zPoint.toString(), threeoriginalpointcloud); // PointCloud 수치 저장
 
+            double centerX = sixPose.optDouble(0);
+            double centerY = sixPose.optDouble(1);
+            double centerZ = sixPose.optDouble(2);
+            double rx = sixPose.optDouble(3);
+            double ry = sixPose.optDouble(4);
+            double rz = sixPose.optDouble(5);
+            sixPoseDTO(classNameString, centerX, centerY, centerZ, rx, ry, rz, history);
         }
         return imageName;
     }
@@ -169,110 +177,47 @@ public class flaskResponse {
         threepointcloudcoordinatesservice.threeCoordinates(threepointcloudcoordinatesdto);
     }
 
-    //  3D 중점구하기
-    public void pointCloudCenter(String xPoint, String yPoint, String zPoint) {
- 
-        Point(xPoint);
-        Point(yPoint);
-        Point(zPoint);
+    // // 6D
+    public void sixPoseDTO(String classNameString, double centerX, double centerY, double centerZ, double rx, double ry, double rz, historyTable history) {
+        poseDataDTO posedatadto = new poseDataDTO();
 
-        // 좌표생성
-        List<Point3D> coordinates = new ArrayList<>();
-        for(int i = 0; i < Point(xPoint).size(); i++) {
-            coordinates.add(new Point3D(Point(xPoint).get(i), Point(yPoint).get(i), Point(yPoint).get(i)));
-        }
-
-        // 좌표의 개수
-        int numCoordinates = coordinates.size();
-
-        double sumX = 0.0;
-        double sumY = 0.0;
-        double sumZ = 0.0;
-
-        // 모든 좌표의 X, Y, Z 좌표 합산
-        for (Point3D coord : coordinates) {
-            sumX += coord.getX();
-            sumY += coord.getY();
-            sumZ += coord.getZ();
-        }
-
-        // X, Y, Z 좌표의 평균을 계산하여 중심점 찾기
-        double centerX = sumX / numCoordinates;
-        double centerY = sumY / numCoordinates;
-        double centerZ = sumZ / numCoordinates;
-
-        // 중심점 출력
-        System.out.println("중심점 좌표: X=" + centerX + ", Y=" + centerY + ", Z=" + centerZ);
-        rotation(centerX, centerY, centerZ);
+        // DTO 통해서 전달
+        posedatadto.setObjectId(classNameString);
+        posedatadto.setX(centerX);
+        posedatadto.setY(centerY);
+        posedatadto.setZ(centerZ);
+        posedatadto.setRx(rx);
+        posedatadto.setRy(ry);
+        posedatadto.setRz(rz);
+        posedataservice.poseDataUpload(posedatadto, history);
     }
+}   
 
-    // 3D 좌표 전처리
-    public List<Double> Point(String point) {
-        point = point.replaceAll("\\[|\\]", ""); // "[", "]" 를  "" 대체한다. // 정규표현식
-        String[] List = point.split(","); // "," 기준으로 나누고 List에 저장
-        ArrayList<Double> dble = new ArrayList<>(); // 객체 선언
-        for(String p : List) {
-            dble.add(Double.parseDouble(p.trim()));
-        }
-        return dble;
-    }
-    public void rotation(double centerX, double centerY, double centerZ) {
-        // 객체의 초기 위치 좌표
-        // double x = centerX;
-        // double y = centerY;
-        // double z = centerZ;
 
-        // 초기 객체의 위치 좌표
-        double initialX = 0.0;
-        double initialY = 0.0;
-        double initialZ = 0.0;
 
-        // 초기 객체의 방향 벡터 (예: 초기 방향이 (1, 0, 0)인 경우)
-        //Vector3D initialDirection = new Vector3D(1.0, 0.0, 0.0);
 
-        // 포인트 클라우드의 중심 좌표를 사용하여 위치 변화 계산
-        double deltaX = centerX - initialX;
-        double deltaY = centerY - initialY;
-        double deltaZ = centerZ - initialZ;
 
-        // 위치 변화를 반영하여 새로운 객체의 위치 계산
-        double newX = initialX + deltaX;
-        double newY = initialY + deltaY;
-        double newZ = initialZ + deltaZ;
 
-        // 새로운 위치와 초기 방향을 사용하여 6D 포즈 계산
-        Vector3D newDirection = new Vector3D(newX - initialX, newY - initialY, newZ - initialZ);
 
-        // 결과 출력
-        System.out.println("새로운 위치 (X, Y, Z): (" + newX + ", " + newY + ", " + newZ + ")");
-        System.out.println("새로운 방향 (X, Y, Z): (" + newDirection.getX() + ", " + newDirection.getY() + ", " + newDirection.getZ() + ")");
-    }
 
-}
 
-class Point3D {
-    private double x;
-    private double y;
-    private double z;
 
-    public Point3D(double x, double y, double z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
 
-    public double getX() {
-        return x;
-    }
 
-    public double getY() {
-        return y;
-    }
 
-    public double getZ() {
-        return z;
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
