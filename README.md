@@ -1,5 +1,28 @@
 # 다중 객체 이미지 판별 웹 서비스
 
+## 2023/09/08
+- Service
+    - 이미지 송부 시, 벡에서 이미지에 해당하는 6D 좌표값도 전송해줌
+    - 전송된 데이터를 받아서 화면에 출력하는 중
+- LoginRecoil Hook
+    - nameState가 Recoil로 상태관리가 안되는 중, 이유를 찾지 못함
+    - 일단 localStorage에 저장해둔 token을 사용해서 user의 name을 decoding하여 사용 중
+    - login시 Email을 recoil로 저장해서 전역으로 관리하고 싶음
+- Modal Component
+    - 모달창에서 날짜에 따른 데이터를 송부받아 팝업창에 뿌리는 코드 작성
+- History Page
+    - list Component에서 서버로부터 날짜 리스트를 전달 받아 중복 날짜 제거 후, 날짜 리스트 생성
+    - 만들어진 날짜 리스트를 클릭하면 서버에 해당 날짜에 해당하는 데이터를 전달 받음 -> 모달창에서 보여줄 데이터
+## 2023/09/07
+- List Component
+    - 서버로부터 데이터를 전달 받아 props로 List Component로 전달 후 날짜를 추출하고 리스트로 만드는 작업 중
+    - 잘 안되고 있음...  
+- Nav Component
+    - Nav dropdown bar 만들고 페이지에 넣음
+    - 크기가 안 맞는 문제가 있어서 수작업으로 크기 조절 해둠
+    - Nav의 팝업창이 페이지의 Components들의 아래에 위치하는 문제 발생 => Component들의 하위에 위치시키면 되긴 한데 그러면 다른 Component들 이용 불가
+    - Nav를 상위에 위치시키고 방해 받지 않는 위치로 이동
+
 ## 2023/09/06
 - History Page
     - list에 넣을 데이터 서버에 요청 후 response 받음

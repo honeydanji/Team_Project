@@ -59,7 +59,6 @@ export default function LogIn() {
           setName(extractedName);
           console.log("name: ", name);
 
-
           alert(extractedName + '님, 환영합니다.');
 
           // 회원가입이 완료되면 로그인 페이지로 이동
@@ -71,9 +70,6 @@ export default function LogIn() {
         alert('잘못된 아이디 혹은 패스워드 입니다')
       });
   };
-
-  console.log("name222222: ", name)
-
   const handelLogoutButtonClick = () => {
     alert('로그아웃 완료');
     // 로컬 스토리지에서 토큰 삭제

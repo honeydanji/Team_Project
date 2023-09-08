@@ -7,6 +7,7 @@ import Nav from "../Components/Nav";
 export default function DragDrop() {
     const navigate = useNavigate();
     const [uploadedImageUrl, setUploadedImageUrl] = useState(null);
+    const [uploadedPoseResults, setUploadedPoseResults] = useState([]);
 
     const token = localStorage.getItem('token');
     console.log("token", token);
@@ -59,7 +60,9 @@ export default function DragDrop() {
             .then((res) => {
                 if (res.status === 200) {
                     const imageUrl = res.data.url; // 이미지 URL을 서버 응답에서 추출
-                    setUploadedImageUrl(imageUrl); // 상태로 이미지 URL 저장              
+                    const poseResults = res.data.pose;
+                    setUploadedImageUrl(imageUrl); // 상태로 이미지 URL 저장
+                    setUploadedPoseResults(poseResults); // 상태로 pose값 배열로 저장              
                 } else {
                     console.error('Image upload failed.')
                 }
@@ -73,10 +76,11 @@ export default function DragDrop() {
     useEffect(() => {
         if (uploadedImageUrl !== null) {
             console.log("uploadedImageUrl: ", uploadedImageUrl); // 이미지 URL이 업데이트될 때마다 로그 출력
+            console.log("uploadedPoseResults: ", uploadedPoseResults);
             alert("이미지 전송 완료");
-            navigate("/service", { state: { uploadedImageUrl } }); //Service 페이지로 이동
+            navigate("/service", { state: { uploadedImageUrl, uploadedPoseResults } }); //Service 페이지로 이동
         }
-    }, [uploadedImageUrl, navigate]);
+    }, [uploadedImageUrl, uploadedPoseResults, navigate]);
 
 
     const [isDragging, setIsDragging] = useState(false);

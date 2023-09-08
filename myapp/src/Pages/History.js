@@ -28,15 +28,14 @@ export default function History() {
                 'Content-Type': 'application/json',
             },
         })
-        .then((res) => res.json())
-        .then((data) => {
-            console.log("raw Data: ", data);
-            setDateData(data); // 서버에서 받은 데이터를 상태 변수에 저장
-        })
-        .catch((error) => console.error('데이터 불러오기 오류: ', error));
+            .then((res) => res.json())
+            .then((data) => {
+                console.log("raw Data: ", data);
+                setDateData(data); // 서버에서 받은 데이터를 상태 변수에 저장
+            })
+            .catch((error) => console.error('데이터 불러오기 오류: ', error));
     }, []);
-    
-    console.log("dateData:", dateData);
+
     return (
         <main>
             <Nav />
@@ -64,6 +63,5 @@ export default function History() {
                 </div>
             </div>
         </main>
-
     );
 }

@@ -8,7 +8,8 @@ import '../Styles/DataResults.css'
 export default function DataResults() {
 
   return (
-    <main>      
+    <main>
+       <Nav />      
       <div className="frame">
         {/* HEADER */}
         <div className="header">
@@ -47,7 +48,7 @@ export default function DataResults() {
           </div>
         </div>
       </div>
-      <Nav />
+     
     </main>
   );
 }

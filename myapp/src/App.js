@@ -18,7 +18,6 @@ import SelectDate from './Components/SelectDate';
 import ChartPie from './Components/ChartPie';
 import History from './Pages/History';
 import Modals from './Components/Modals';
-import { RecoilRoot } from 'recoil';
 import Nav from './Components/Nav';
 
 const CAROUSEL_IMAGES = [
@@ -29,8 +28,7 @@ const CAROUSEL_IMAGES = [
 
 export default function App() {
 
-  return (
-    <RecoilRoot>
+  return (    
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Frontpage />} />
@@ -51,7 +49,6 @@ export default function App() {
           <Route path='/modals' element={<Modals />} />
           <Route path='/nav' element = {<Nav />}/>
         </Routes>
-      </BrowserRouter>
-    </RecoilRoot>
+      </BrowserRouter> 
   );
 }
