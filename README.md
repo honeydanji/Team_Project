@@ -62,16 +62,4 @@
 - REST API 설계
         
 ## 2023/08/24
-<details>
-    <summary> DB 설계도  </summary>
-    <img src="https://github.com/honeydanji/Team_Project/assets/129818881/4b86ac13-a64f-40b4-a4da-5226c2ef80fa"/>
-</details>
-
-
-## ALL Programing
-### Flask와 MySQL 연동(2023/08/25)
->>
-### 회원가입 및 로그인 구현 (2023/08/25)
->>
-
-
+- DB 설계
