@@ -14,6 +14,12 @@
 ## DatabaseModel
 <img src = "https://github.com/honeydanji/Team_Project/assets/129818881/bc9a2438-cecf-497e-8e57-855483f777ce">
 
+## 2023/09/08
+- JPQL과 DTO 맵핑 ......
+
+## 2023/09/05
+
+
 ## 2023/09/04
 - JWT 로그인 구현
 - RESTAPI 권한 부여
