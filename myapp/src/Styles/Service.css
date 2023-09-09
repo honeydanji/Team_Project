@@ -23,12 +23,31 @@
 
 /* INFORMATIONBOX */
 .information_coordinates {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 700px;
     height: 300px;
-    border: 2px solid black;        
+    border: 2px solid black;
+    position: relative;        
+}
+
+.coordinates_left {
+    position: absolute;
+    left: 20px;
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.coordinates_right {
+    position: absolute;
+    right: 20px;
+    font-size: 27px;
+    font-weight: bold;
 }
 
 .information_lists {
+    position: relative;
     width: 700px;
     height: 500px;
     border: 2px solid black;
