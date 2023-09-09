@@ -7,6 +7,7 @@ from io import BytesIO
 from ultralytics import YOLO
 from crop_ply import *
 import open3d as o3d
+from output6d import output6d
 
 # 모델 초기화
 model = YOLO("models/model_v3.pt")
@@ -47,6 +48,9 @@ def predict_objects(image, ply_file):
             boxing = result.boxes.xywh.tolist()
             xy_list = result.masks.xyn
 
+          
+            
+
             for index, (coords, class_val, acc_val, box_info) in enumerate(zip(xy_list, class_name, accuracy, boxing)):
                 x_coords = [coord[0].item() for coord in coords]
                 y_coords = [coord[1].item() for coord in coords]
@@ -75,6 +79,19 @@ def predict_objects(image, ply_file):
         
                # point_cloud를 사용하여 원하는 작업 수행
                 xyz_output = cropPly(xy_list, "temp.ply")
+                
+                # output6d함수를 이용해 6d좌표 구하기
+                list6d = output6d(xyz_output) 
+                print(list6d)
+                for index,list6d_info in enumerate(list6d):
+                    object_data["detections"][index]["6dpose"] = list6d_info
+                    # object_data["detections"][index]["y_center"] = list6d_info[1]
+                    # object_data["detections"][index]["z_center"] = list6d_info[2]
+                    # object_data["detections"][index]["rx"] = list6d_info[3]
+                    # object_data["detections"][index]["ry"] = list6d_info[4]
+                    # object_data["detections"][index]["rz"] = list6d_info[5]
+                
+                
                 xyz_data_list = [point_cloud_to_dict(pc) for pc in xyz_output]
 
                 for index, points in enumerate(xyz_data_list):
