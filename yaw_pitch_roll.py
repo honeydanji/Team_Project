@@ -34,7 +34,7 @@ def yaw_pitch_roll_to_rotation_matrix(yaw, pitch, roll):
 # yaw_angle = 30
 # pitch_angle = 45
 # roll_angle = 60
-yaw_angle = 180
+yaw_angle = 0
 pitch_angle = 0
 roll_angle = 0
 

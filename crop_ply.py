@@ -40,7 +40,7 @@ def cropPly(xy_list,temp_ply_path):
 
     scaled_x = (points[:, 0] - x_min) / x_range
     scaled_y = (points[:, 1] - y_min) / y_range
-
+    
     # 변환된 좌표로 업데이트
     points[:, 0] = scaled_x
     points[:, 1] = scaled_y
@@ -87,10 +87,17 @@ def cropPly(xy_list,temp_ply_path):
 
         # Vector3dVector를 사용하여 포인트 클라우드를 자릅니다.
         crop_pcd = vol.crop_point_cloud(crop_pcd0)
+       # 자른 포인트 클라우드를 다시 원본 스케일로 역변환
+        modified_points = np.asarray(crop_pcd.points)
+        modified_points[:, 0] = (modified_points[:, 0] * x_range) + x_min
+        modified_points[:, 1] = (modified_points[:, 1] * y_range) + y_min
+    
+        crop_pcd.points = o3d.utility.Vector3dVector(modified_points)
 
         # 시각화
         # o3d.visualization.draw_geometries([crop_pcd])
         # o3d.visualization.draw_geometries([crop_pcd, lineset])
+       
         xyz_output.append(crop_pcd)
     # os.remove(temp_ply_path)
     # points = np.asarray(xyz_output[0].points)
