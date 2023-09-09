@@ -15,10 +15,25 @@
 <img src = "https://github.com/honeydanji/Team_Project/assets/129818881/bc9a2438-cecf-497e-8e57-855483f777ce">
 
 ## 2023/09/08
-- JPQL과 DTO 맵핑 ......
+- git 명령어 정리
+- DTO를 통한 JPQL 사용
+- FlaskResponse 데이터 전처리 및 DB 저장
+
+## 2023/09/07
+- DB 컬럼 이름 수정
+- comments엔티티 put, delete 추가 및 트랜잭션 설정
+- view 생성
+  - 기존 : jpql 5개 사용해서 테이블마다 컬럼 1개씩 리턴후 리스트형태로 반환
+  - 수정 : DB 에서 view 생성후 쿼리메소드 단독 사용 (코드최적화)
+- 6D 데이터 전처리 (org.apache.commons 사용)
+
+## 2023/09/06
+- FlaskResponse 데이터 전처리 및 DB 저장
+- jwt/Filter 코드 수정
 
 ## 2023/09/05
-
+- FlaskResponse 데이터 전처리 및 DB 저장
+- JPQL 코드 추가 
 
 ## 2023/09/04
 - JWT 로그인 구현
