@@ -16,9 +16,9 @@ public class memberController {
 
     private final memberService memberservice;
 
+    // 회원가입
     @PostMapping("/register")
     public ResponseEntity<String> registerController(@RequestBody membersDTO memberdto) {
         return memberservice.registerService(memberdto);
     }
-    
 }

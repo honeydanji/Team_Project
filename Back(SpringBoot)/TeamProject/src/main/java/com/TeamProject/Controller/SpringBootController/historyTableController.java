@@ -2,6 +2,7 @@ package com.TeamProject.Controller.SpringBootController;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,24 +20,17 @@ public class historyTableController {
 
     private final historyTableService historytableservice;
     
+    // historyDate
     @GetMapping("/history")
-    public HashMap<Integer, LocalDate> historyController(Authentication authentication) {
+    public Map<Object, Map<Object, Object>> historyDate(Authentication authentication) {
         return historytableservice.historyUpdateDate(authentication);
     }
 
+    // historyData
     @GetMapping("/history/{uploadDate}")
     public HashMap<String, historyView> historyList(@PathVariable LocalDate uploadDate,
-                                    //@PathVariable LocalDate uploadDate,
-                                    Authentication authentication) {
+                                                    Authentication authentication) {
                                                 
         return historytableservice.detail(uploadDate, authentication);
     }
-
-    // @GetMapping("/history/{historyId}")
-    // public ResponseEntity<List<Object>> historyList(@PathVariable Integer historyId,
-    //                                 //@PathVariable LocalDate uploadDate,
-    //                                 Authentication authentication) {
-                                                
-    //     return historytableservice.detail(historyId, authentication);
-    // }
 }
