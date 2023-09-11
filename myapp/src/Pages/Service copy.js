@@ -6,17 +6,14 @@ import Nav from '../Components/Nav';
 
 export default function Service() {
 
-    const location = useLocation();
-    const uploadedImageUrl = location.state?.uploadedImageUrl;
-    const uploadedPoseResults = location.state?.uploadedPoseResults;
-    const uploadedBoxInfo = location.state?.uploadedBoxInfo;
+    const locaiton = useLocation();
+    const uploadedImageUrl = locaiton.state?.uploadedImageUrl;
+    const uploadedPoseResults = locaiton.state?.uploadedPoseResults;
+    const uploadedBoxInfo = locaiton.state?.uploadedBoxInfo;
 
     const objectId = uploadedPoseResults.map(item => item.objectId);
 
     const [selectedIndex, setSelectedIndex] = useState(null);
-
-    const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
-    const imageRef = useRef(null);
 
     const handleDateClick = (index) => {
         setSelectedIndex(index === selectedIndex ? null : index);
@@ -28,29 +25,9 @@ export default function Service() {
         if (uploadedImageUrl) {
             console.log("Uploaded Image URL: ", uploadedImageUrl);
             console.log("Uploaded pose Results: ", uploadedPoseResults);
-            console.log("Uploaded Box Info: ", uploadedBoxInfo);
-            console.log("boxInfo: ", uploadedBoxInfo[0].xbox);
-
-            // 이미지 로딩이 완료된 후 이미지 크기를 측정
-            if (imageRef.current.complete) {
-                setImageSize({
-                    width: imageRef.current.width,
-                    height: imageRef.current.height,
-                });
-            } else {
-                // 이미지 로딩 완료 이벤트 핸들러 설정
-                imageRef.current.onload = () => {
-                    setImageSize({
-                        width: imageRef.current.width,
-                        height: imageRef.current.height,
-                    });
-                };
-            }
+            console.log("Uploaded Box Info: ", uploadedBoxInfo);                        
         }
     }, [uploadedImageUrl, uploadedPoseResults, uploadedBoxInfo]);
-
-    // 선택한 박스 정보 가져오기
-    const selectedBox = uploadedBoxInfo && selectedIndex !== null ? uploadedBoxInfo[selectedIndex] : null;
 
     return (
         <main>
@@ -60,22 +37,7 @@ export default function Service() {
             </div>
             <div className='boxes'>
                 <div className='imageBox'>
-                    <img src={uploadedImageUrl ? `${uploadedImageUrl}` : ''} alt='' ref={imageRef} /> {/* 이미지 참조 설정 */}
-                    {selectedBox && selectedIndex !== null && (
-                        // 여기에서 빨간 사각형을 표시하고 애니메이션을 추가합니다.
-                        <div className='outer_selectedBox'>
-                            <div
-                                className='selectedBox'
-                                style={{
-                                    position: 'absolute',
-                                    left: (selectedBox.xbox / imageRef.current.naturalWidth) * imageSize.width - 55,
-                                    top: (selectedBox.ybox / imageRef.current.naturalHeight) * imageSize.height + 150,
-                                    width: (selectedBox.width / imageRef.current.naturalWidth) * imageSize.width,
-                                    height: (selectedBox.height / imageRef.current.naturalHeight) * imageSize.height,
-                                }}
-                            ></div>
-                        </div>
-                    )}
+                    <img src={uploadedImageUrl ? `${uploadedImageUrl}` : ''} alt='' /> {/* 이미지 참조 설정 */}                    
                 </div>
                 <div className='informationBox'>
                     <div className='information_coordinates'>
