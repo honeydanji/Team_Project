@@ -3,8 +3,10 @@ package com.TeamProject.Service.SpringBootService;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -45,7 +47,7 @@ public class historyTableService {
     }
 
     // 로그인 유저 게시글번호 및 업로드날짜 반환
-    public HashMap<Integer, LocalDate> historyUpdateDate(Authentication authentication) {
+    public Map<Object, Map<Object, Object>> historyUpdateDate(Authentication authentication) {
         String userEmail = authentication.getName();
         members userId = membersrepository.findByloginEmail(userEmail);
 
@@ -55,10 +57,12 @@ public class historyTableService {
             historytablerepository.historyIdByUserEmail(userId); // 로그인 유저 historyId 가져오기
             historytablerepository.uploadDateByUserEmail(userId); // 로그인 유저 파일 uploadDate 가져오기
 
-            HashMap<Integer, LocalDate> map = new HashMap<>();
+            Map<Object, Map<Object, Object>> map = new HashMap<>();
+            Map<Object, Object> miniMap = new HashMap<>();
 
             for(int i = 0; i < historytablerepository.historyIdByUserEmail(userId).size(); i++) {
-                map.put(historytablerepository.historyIdByUserEmail(userId).get(i), historytablerepository.uploadDateByUserEmail(userId).get(i));
+                miniMap.put(historytablerepository.uploadDateByUserEmail(userId).get(i), historyviewrepository.findByHistoryId(historytablerepository.historyIdByUserEmail(userId).get(i)));
+                map.put(historytablerepository.historyIdByUserEmail(userId).get(i), miniMap);
             }
             return map;
         }        
@@ -70,19 +74,29 @@ public class historyTableService {
 
         // userId 출력
         members userId = membersrepository.findByLoginEmail(authentication.getName());
-
-        // members userId = historytablerepositroy.find
     
         // 날짜, userId 출력
         List<Integer> historyId = historytablerepository.findByUploadDateANDUserId(uploadDate, userId);
 
         for(int i = 0; i < historytablerepository.findByUploadDateANDUserId(uploadDate, userId).size(); i++) {
             historyView a = historyviewrepository.findByHistoryId(historyId.get(i));
-            System.out.println();
             map.put(Integer.toString(i), a);
         }
         return map;
         
     }
+
+    // //  member All 히스토리
+    // public List<historyTable> allData(Authentication authentication) {
+    //     String userEmail = authentication.getName();
+    //     members userId = membersrepository.findByloginEmail(userEmail);
+
+    //     if(userEmail == null){
+    //         return null;
+    //     }else {
+    //         return historytablerepository.findByUserId(userId);
+    //     }        
+    // }
+     
 }
 

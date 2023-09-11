@@ -10,4 +10,6 @@ public interface twoSegmentationRepository extends JpaRepository<twoSegmentation
 
     @Query("SELECT t.twoSegmentationPath FROM twoSegmentationImage t WHERE historyId = ?1")
     String segmentationByHistoryId(historyTable his);
+
+    twoSegmentationImage findByHistoryId(historyTable his);
 }

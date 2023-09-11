@@ -4,9 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.TeamProject.Domain.historyTable;
 import com.TeamProject.Domain.twoSegmentationCoordinates;
+import com.TeamProject.Domain.twoSegmentationImage;
+import com.TeamProject.Dto.boxInfoDTO;
 import com.TeamProject.Dto.twoSegmentationCoordinatesDTO;
 import com.TeamProject.Repository.twoSegmentationCoordinatesRepository;
+import com.TeamProject.Repository.twoSegmentationRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +20,8 @@ import lombok.RequiredArgsConstructor;
 public class twoSegmentationCoordinatesService {
     
     private final twoSegmentationCoordinatesRepository twosegmentationcoordinatesrepository;
+
+    private final twoSegmentationRepository twosegmentationrepository;
 
     @Transactional
     public void twoCoordinates(twoSegmentationCoordinatesDTO twosegmentationcorrdinatesdto) {
@@ -37,6 +43,16 @@ public class twoSegmentationCoordinatesService {
     public List<Object[]> segResponseAll() {
         return twosegmentationcoordinatesrepository.findBy();
     }
+
+    // boxInfo 반환
+    public List<boxInfoDTO> boxInfo(historyTable history) {
+        // 히스토리 아이디에 해당하는 세그멘테이션 아이디 추출
+        twoSegmentationImage twosegmentationid =  twosegmentationrepository.findByHistoryId(history);
+
+        return twosegmentationcoordinatesrepository.boxInfo(twosegmentationid);
+    }
+
+
 
 
 }
