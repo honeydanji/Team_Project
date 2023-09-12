@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import '../Styles/ChartDonut.css';
 
 export default function ChartDonut() {
-    const correctness = 70.5; // 예시 값. 실제 값을 할당해야 합니다.
+    const correctness = 56; // 예시 값. 실제 값을 할당해야 합니다.
 
     useEffect(() => {
         const donut = document.querySelector(".donut");

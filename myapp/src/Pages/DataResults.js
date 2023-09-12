@@ -1,11 +1,41 @@
+import { useEffect, useState } from 'react';
 import ChartBar from '../Components/ChartBar';
 import ChartDonut from '../Components/ChartDonut';
 import ChartPie from '../Components/ChartPie';
 import Nav from '../Components/Nav';
 import SelectDate from '../Components/SelectDate';
 import '../Styles/DataResults.css'
+import { useLocation } from 'react-router-dom';
 
 export default function DataResults() {
+
+  const [dateList, setDateList] = useState([]);
+  const location = useLocation();
+  const requestedData = location.state?.requestedData;
+  
+  console.log("requestedDataDATA: ", requestedData);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    fetch('http://10.125.121.183:8080/history', {
+      method: 'GET',
+      headers: {
+        'authorization': `${token}`,
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("raw Data: ", data)
+
+      const keys = Object.keys(data);      
+      setDateList(keys);
+      console.log("dateList: ", keys);
+
+    })
+    .catch((error) => console.error('데이터 불러오기 오류: ', error));   
+  }, [])
 
   return (
     <main>
@@ -22,7 +52,7 @@ export default function DataResults() {
             </p>
           </div>
           <div className='header_selectDate'>
-            <SelectDate />
+            <SelectDate dateList={dateList} />
           </div>
         </div>
 

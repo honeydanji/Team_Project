@@ -62,8 +62,7 @@ export default function Service() {
                 <div className='imageBox'>
                     <img src={uploadedImageUrl ? `${uploadedImageUrl}` : ''} alt='' ref={imageRef} /> {/* 이미지 참조 설정 */}
                     {selectedBox && selectedIndex !== null && (
-                        // 여기에서 빨간 사각형을 표시하고 애니메이션을 추가합니다.
-                        <div className='outer_selectedBox'>
+                        // 여기에서 빨간 사각형을 표시하고 애니메이션을 추가합니다.                        
                             <div
                                 className='selectedBox'
                                 style={{
@@ -73,8 +72,7 @@ export default function Service() {
                                     width: (selectedBox.width / imageRef.current.naturalWidth) * imageSize.width,
                                     height: (selectedBox.height / imageRef.current.naturalHeight) * imageSize.height,
                                 }}
-                            ></div>
-                        </div>
+                            ></div>                        
                     )}
                 </div>
                 <div className='informationBox'>

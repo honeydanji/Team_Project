@@ -1,9 +1,15 @@
+.frame {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
 /* HEADER */
 .header {
     width: 100%;
     height: 300px;
     background-color: #304386;
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
