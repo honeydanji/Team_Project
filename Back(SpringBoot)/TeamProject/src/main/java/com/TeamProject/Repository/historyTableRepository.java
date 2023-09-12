@@ -26,5 +26,6 @@ public interface historyTableRepository extends JpaRepository<historyTable ,Inte
     @Query("SELECT h.historyId FROM historyTable h WHERE uploadDate = ?1 AND userId = ?2")
     List<Integer> findByUploadDateANDUserId(LocalDate upLocalDate, members userId);
 
-    // List<historyTable> findByUserId(members userId);
+    @Query("SELECT count(h.userId) FROM historyTable h WHERE userId = ?1")
+    int countByUserId(members userId);
 }

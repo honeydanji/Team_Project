@@ -22,7 +22,8 @@ public class historyTableController {
     
     // historyDate
     @GetMapping("/history")
-    public Map<Object, Map<Object, Object>> historyDate(Authentication authentication) {
+    // public Map<Object, Map<Object, Object>> historyDate(Authentication authentication) {
+        public Map<Object, Object> historyUpdateDate(Authentication authentication) {
         return historytableservice.historyUpdateDate(authentication);
     }
 
@@ -32,5 +33,12 @@ public class historyTableController {
                                                     Authentication authentication) {
                                                 
         return historytableservice.detail(uploadDate, authentication);
+    }
+
+    // results
+    @GetMapping("/results/{uploadDate}")
+    public Map<String, Object> historyResults(@PathVariable LocalDate uploadDate,
+                                                    Authentication authentication) {
+        return historytableservice.results(uploadDate, authentication);
     }
 }

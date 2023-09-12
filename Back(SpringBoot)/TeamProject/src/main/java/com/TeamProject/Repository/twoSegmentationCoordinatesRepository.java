@@ -19,4 +19,14 @@ public interface twoSegmentationCoordinatesRepository extends JpaRepository<twoS
             "FROM twoSegmentationCoordinates c " + 
             "WHERE twoSegmentationId = ?1")
     List<boxInfoDTO> boxInfo(twoSegmentationImage twosegmentationid);
+
+    @Query("SELECT count(c.twoObjectId) FROM twoSegmentationCoordinates c WHERE twoSegmentationId = ?1")
+    int countBySegmentationId(twoSegmentationImage twosegmentationid);
+
+    @Query("SELECT c.twoObjectId FROM twoSegmentationCoordinates c WHERE twoSegmentationId = ?1")
+    List<String> twoObjecIdByTwoSegmentationId(twoSegmentationImage twosegmentationid);
+
+    @Query("SELECT c.twoObjectAcc FROM twoSegmentationCoordinates c WHERE twoSegmentationId = ?1")
+    List<Double> twoObjectAccBySegmentationId(twoSegmentationImage twosegmentationid);
+
 }
