@@ -19,7 +19,7 @@ def predict_objects(image, ply_file):
         temp_image_path = f"{image.filename.split('.')[0]}.jpg"
         img.save(temp_image_path, format="JPEG")
         # 모델로 이미지 예측 수행
-        results = model(temp_image_path, conf=0.6, device="cpu", project="results", name="output")
+        results = model(temp_image_path, conf=0.5, device="cpu", project="results", name="output")
         # 임시 이미지 파일을 삭제합니다.
         os.remove(temp_image_path)
 
