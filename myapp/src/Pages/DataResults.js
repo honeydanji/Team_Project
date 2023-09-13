@@ -6,14 +6,20 @@ import Nav from '../Components/Nav';
 import SelectDate from '../Components/SelectDate';
 import '../Styles/DataResults.css'
 import { useLocation } from 'react-router-dom';
+import jwtDecode from "jwt-decode";
 
 export default function DataResults() {
 
   const [dateList, setDateList] = useState([]);
   const location = useLocation();
-  const requestedData = location.state?.requestedData;
-  
-  console.log("requestedDataDATA: ", requestedData);
+  const requestedData = location.state?.requestedData; 
+
+  const token = localStorage.getItem('token');
+  // 토큰 추출 및 이름 저장
+  // token decoding
+  const splitToken = token.split(" ")[1];
+  const decodedToken = jwtDecode(splitToken);
+  const extractedName = decodedToken.name;
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -48,7 +54,7 @@ export default function DataResults() {
             <p className='header_mainTitle'> Data Results </p>
             <p className='header_subTitle'>
               <span>Welcome!</span>
-              <span style={{ textDecoration: 'underline', textDecorationThickness: '1.5px' }}>Joe Wonjun</span>
+              <span style={{ textDecoration: 'underline', textDecorationThickness: '1.5px' }}>{extractedName}</span>
             </p>
           </div>
           <div className='header_selectDate'>
@@ -61,19 +67,19 @@ export default function DataResults() {
           <div className='classesBox'>
             <h1>Classes</h1>            
             <div className='chartPie'>
-              <ChartPie />
+              <ChartPie requestedData={requestedData}/>
             </div>
           </div>
           <div className='totalItemsBox'>
             <h1>Total Items</h1>
             <div className='chartBar'>
-              <ChartBar />
+              <ChartBar requestedData={requestedData} />
             </div>
           </div>
           <div className='correctnessBox'>
             <h1>Correctness</h1>
             <div className='chartDonut'>
-              <ChartDonut />
+              <ChartDonut requestedData={requestedData} />
             </div>
           </div>
         </div>
