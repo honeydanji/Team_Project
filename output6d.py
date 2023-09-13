@@ -35,9 +35,9 @@ def output6d(xyz_list):
         # print(f"요피치 롤(x 축 기준): {angle_x_deg}도")
         # print(f"요피치 롤(y 축 기준): {angle_y_deg}도")
         # print(f"요피치 롤(z 축 기준): {angle_z_deg}도")
-        list6ds.append(angle_x_deg)
-        list6ds.append(angle_y_deg)
-        list6ds.append(angle_z_deg)
+        list6ds.append(angle_x_rad)
+        list6ds.append(angle_y_rad)
+        list6ds.append(angle_z_rad)
         list6d.append(list6ds)
     # print(list6d)    
     return list6d    

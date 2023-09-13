@@ -10,7 +10,7 @@ import open3d as o3d
 from output6d import output6d
 
 # 모델 초기화
-model = YOLO("models/model_v3.pt")
+model = YOLO("modelFolder/model_v7.pt")
 
 def predict_objects(image, ply_file):
     try:
