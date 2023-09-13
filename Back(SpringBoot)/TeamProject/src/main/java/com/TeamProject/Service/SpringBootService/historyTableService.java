@@ -109,11 +109,11 @@ public class historyTableService {
         double totalAcc = 0; // 총 정확도
         int bestItem = 0;   // 0.7 이상
         int worstItem = 0; // 0.7 미만
-        int box = 0;
-        int bongji = 0;
-        int milk = 0;
-        int energdrink = 0;
-        int cansnack = 0;
+        float box = 0;
+        float bongji = 0;
+        float milk = 0;
+        float energdrink = 0;
+        float cansnack = 0;
     
         // 날짜, userId 출력
         List<Integer> historyId = historytablerepository.findByUploadDateANDUserId(uploadDate, userId);
@@ -140,11 +140,11 @@ public class historyTableService {
             }
         }
         map.put("classCount", classCount);
-        map.put("box", (box / classCount) * 100);
-        map.put("bongji", (bongji / classCount) * 100);
-        map.put("milk", (milk / classCount) * 100);
-        map.put("energdrink", (energdrink / classCount) * 100);
-        map.put("cansnack", (cansnack / classCount) * 100);
+        map.put("box", Float.parseFloat(String.format("%.3f", (box / classCount) * 100)));
+        map.put("bongji", Float.parseFloat(String.format("%.3f", (bongji / classCount) * 100)));
+        map.put("milk", Float.parseFloat(String.format("%.3f", (milk / classCount) * 100)));
+        map.put("energdrink", Float.parseFloat(String.format("%.3f", (energdrink / classCount) * 100)));
+        map.put("cansnack", Float.parseFloat(String.format("%.3f", (cansnack / classCount) * 100)));
         map.put("totalAcc", Double.parseDouble(String.format("%.2f", totalAcc/classCount)));
         map.put("bestItem", bestItem);
         map.put("worstItem", worstItem);
