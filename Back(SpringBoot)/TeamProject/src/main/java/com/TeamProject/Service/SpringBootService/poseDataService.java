@@ -26,7 +26,7 @@ public class poseDataService {
         posedata.setZ(posedatadto.getZ());
         posedata.setRx(posedatadto.getRx());
         posedata.setRy(posedatadto.getRy());
-        posedata.setRz(posedatadto.getZ());
+        posedata.setRz(posedatadto.getRz());
         posedata.setHistoryId(history);
 
         posedatarepository.save(posedata);
