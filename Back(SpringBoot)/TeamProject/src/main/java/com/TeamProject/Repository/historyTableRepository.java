@@ -14,6 +14,9 @@ public interface historyTableRepository extends JpaRepository<historyTable ,Inte
 
     historyTable findByHistoryId(Integer historyId);
 
+    List<historyTable> findByUserIdAndUploadDate(members userId, LocalDate date); // 수정
+
+
     @Query("SELECT h.uploadDate FROM historyTable h WHERE userId = ?1")
     List<LocalDate> uploadDateByUserEmail(members userId);
 

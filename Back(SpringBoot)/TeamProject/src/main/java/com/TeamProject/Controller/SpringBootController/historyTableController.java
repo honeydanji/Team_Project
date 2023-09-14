@@ -30,8 +30,7 @@ public class historyTableController {
     // historyData
     @GetMapping("/history/{uploadDate}")
     public HashMap<String, historyView> historyList(@PathVariable LocalDate uploadDate,
-                                                    Authentication authentication) {
-                                                
+                                                    Authentication authentication) {                           
         return historytableservice.detail(uploadDate, authentication);
     }
 

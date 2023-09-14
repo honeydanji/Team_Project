@@ -3,7 +3,6 @@ package com.TeamProject.Service.SpringBootService;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +51,6 @@ public class historyTableService {
     }
 
     // 로그인 유저 게시글번호 및 업로드날짜 반환
-    // public Map<Object, Map<Object, Object>> historyUpdateDate(Authentication authentication) {
     public Map<Object, Object> historyUpdateDate(Authentication authentication) {
         String userEmail = authentication.getName();
         members userId = membersrepository.findByloginEmail(userEmail);
@@ -61,22 +59,23 @@ public class historyTableService {
             return null;
         }else {
             List<Integer> his = historytablerepository.historyIdByUserEmail(userId); // 로그인 유저 historyId 가져오기(Integer)
-            // historytablerepository.uploadDateByUserEmail(userId); // 로그인 유저 파일 uploadDate 가져오기
-
-            // Map<Object, Map<Object, Object>> map = new HashMap<>();
             Map<Object, Object> miniMap = new HashMap<>();
 
+            // for(int i = 0; i < historytablerepository.historyIdByUserEmail(userId).size(); i++) {
+            //     for(int j = 0; j < his.size(); j++){
+            //         miniMap.put(historytablerepository.uploadDateByUserEmail(userId).get(i), twosegmentationrepository.segmentationByHistoryId(historytablerepository.findByHistoryId(his.get(j)))); // null > list
+            //     }
+            // }
+            // return miniMap;
             for(int i = 0; i < historytablerepository.historyIdByUserEmail(userId).size(); i++) {
-                // List<String> list = new ArrayList<String>();
-                for(int j = 0; j < his.size(); j++){
-                    // list.add(twosegmentationrepository.segmentationByHistoryId(historytablerepository.findByHistoryId(his.get(j)))); // 필요 없어짐....
-                    miniMap.put(historytablerepository.uploadDateByUserEmail(userId).get(i), twosegmentationrepository.segmentationByHistoryId(historytablerepository.findByHistoryId(his.get(j)))); // null > list
-                }
-                // miniMap.put("twoSegmentationPath", list);
-                // map.put(historytablerepository.uploadDateByUserEmail(userId).get(i), miniMap);
+                miniMap.put(historytablerepository.uploadDateByUserEmail(userId).get(i), 
+                            twosegmentationrepository.segmentationByHistoryId(historytablerepository.findByUserIdAndUploadDate(userId, historytablerepository.uploadDateByUserEmail(userId).get(i)).get(historytablerepository.findByUserIdAndUploadDate(userId, historytablerepository.uploadDateByUserEmail(userId).get(i)).size()-1))); // null > list
             }
-            // miniMap.put("count", historytablerepository.countByUserId(userId));
-            // map.put("count", historytablerepository.countByUserId(userId));
+
+
+            for(int i : his) {
+                System.out.println(i);
+            }
             return miniMap;
         }        
     }
@@ -103,17 +102,22 @@ public class historyTableService {
         // 1. 전체 클래스 중에서 각각의 클래스 비율
         //// 클래스 전부 리스트에 저장.
         //// 클래스 갯수 / 전체 갯수
+         // 2. 정확도 출력하기
+        // 0.5 ~ 0.6 잘 안된거
+        // 0.7 ~ 잘 된거 >>>>>>> WHERE사용해서 리스트로 들고오고 for문을 통해서 리스트(가변) 저장하기.
+        // 3. 전체 정확도 평균
+
         // userId 출력
         members userId = membersrepository.findByLoginEmail(authentication.getName());
         int classCount = 0; // 총 클래스수
         double totalAcc = 0; // 총 정확도
         int bestItem = 0;   // 0.7 이상
         int worstItem = 0; // 0.7 미만
-        float box = 0;
-        float bongji = 0;
-        float milk = 0;
-        float energdrink = 0;
-        float cansnack = 0;
+        int box = 0;
+        int bongji = 0;
+        int milk = 0;
+        int energdrink = 0;
+        int cansnack = 0;
     
         // 날짜, userId 출력
         List<Integer> historyId = historytablerepository.findByUploadDateANDUserId(uploadDate, userId);
@@ -139,22 +143,16 @@ public class historyTableService {
                 }
             }
         }
+
         map.put("classCount", classCount);
-        map.put("box", Float.parseFloat(String.format("%.3f", (box / classCount) * 100)));
-        map.put("bongji", Float.parseFloat(String.format("%.3f", (bongji / classCount) * 100)));
-        map.put("milk", Float.parseFloat(String.format("%.3f", (milk / classCount) * 100)));
-        map.put("energdrink", Float.parseFloat(String.format("%.3f", (energdrink / classCount) * 100)));
-        map.put("cansnack", Float.parseFloat(String.format("%.3f", (cansnack / classCount) * 100)));
+        map.put("box", box);
+        map.put("bongji", bongji);
+        map.put("milk", milk);
+        map.put("energydrink", energdrink);
+        map.put("cansnack", cansnack);
         map.put("totalAcc", Double.parseDouble(String.format("%.2f", totalAcc/classCount)));
         map.put("bestItem", bestItem);
         map.put("worstItem", worstItem);
-
-        // 2. 정확도 출력하기
-        // 0.5 ~ 0.6 잘 안된거
-        // 0.7 ~ 잘 된거 >>>>>>> WHERE사용해서 리스트로 들고오고 for문을 통해서 리스트(가변) 저장하기.
-        
-        
-        // 3. 전체 정확도 평균
         return map;
     }
 }
