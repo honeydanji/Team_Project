@@ -19,6 +19,7 @@ import ChartPie from './Components/ChartPie';
 import History from './Pages/History';
 import Modals from './Components/Modals';
 import Nav from './Components/Nav';
+import NavBar from './Components/NavBar';
 
 const CAROUSEL_IMAGES = [
   'https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2545.jpg',
@@ -48,6 +49,7 @@ export default function App() {
           <Route path='/history' element={<History />} />
           <Route path='/modals' element={<Modals />} />
           <Route path='/nav' element = {<Nav />}/>
+          <Route path='/navbar' element = {<NavBar />}/>
         </Routes>
       </BrowserRouter> 
   );

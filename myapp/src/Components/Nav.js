@@ -36,7 +36,7 @@ export default function Nav() {
         leaveFrom="opacity-100 translate-y-0"
         leaveTo="opacity-0 translate-y-1"
       >
-        <Popover.Panel className="fixed right-5 top-20 transform  z-10 mt-1 ...">
+        <Popover.Panel className="fixed right-5 top-20 transform z-10 mt-1...">
           <div className="w-screen max-w-sm flex-auto overflow-hidden rounded-3xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5">
             <div className="p-4 h-auto">
               {solutions.map((item) => (

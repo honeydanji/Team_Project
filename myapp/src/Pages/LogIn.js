@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { useRecoilState } from "recoil";
 import { nameState, loginEmailState, passwordState, isLoggedInState } from "../Hook/LoginRecoil";
-import Nav from "../Components/Nav";
+import NavBar from "../Components/NavBar";
 
 export default function LogIn() {
 
@@ -82,11 +82,11 @@ export default function LogIn() {
 
   return (
     <main>
-      <Nav />
+      <NavBar />
       <section className="bg-white dark:bg-gray-900">
         <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
           <div className="w-full max-w-md">
-            <img className="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="" />
+            <img className="w-auto h-7 sm:h-8" src="/images/darelogo.jpg" alt="" />
 
             <h1 className="mt-3 text-2xl font-semibold text-gray-800 capitalize sm:text-3xl dark:text-white">sign In</h1>
 
@@ -111,17 +111,10 @@ export default function LogIn() {
             </div>
 
             <div className="mt-6">
-              {isLoggedIn ? (<button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50" onClick={handelLogoutButtonClick}>Log out</button>)
-                : (<button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50" onClick={handelLoginButtonClick}>
+              {isLoggedIn ? (<button className="w-full px-6 py-3 text-lg font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-[#304386] rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50" onClick={handelLogoutButtonClick}>Log out</button>)
+                : (<button className="w-full px-6 py-3 text-lg font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-[#304386] rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50" onClick={handelLoginButtonClick}>
                   Sign in
                 </button>)}
-              {/* 
-            <p className="mt-4 text-center text-gray-600 dark:text-gray-400">or sign in with</p>
-            
-            <a href="#" className="flex items-center justify-center px-6 py-3 mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <button className="mx-2" onClick={handelLogoutButtonClick}>Log out</button>
-          </a> */}
-
               <div className="mt-6 text-center ">
                 <a href="signup" className="text-sm text-blue-500 hover:underline dark:text-blue-400">
                   Don’t have an account yet? Sign up

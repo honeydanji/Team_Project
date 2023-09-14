@@ -1,9 +1,8 @@
 import '../Styles/History.css'
-import Stats from '../Components/Stats'
 import Carousel from '../Components/Carousel'
 import List from '../Components/List';
 import { useEffect, useState } from 'react';
-import Nav from '../Components/Nav';
+import NavBar from '../Components/NavBar';
 import jwtDecode from "jwt-decode";
 
 export default function History() {
@@ -41,10 +40,10 @@ export default function History() {
                 setDateData(keys); // 서버에서 받은 데이터를 상태 변수에 저장
 
                 const twoSegmentationPaths = Object.values(data)
-                    .map(item => item)                                   
+                    .map(item => item)
                     .filter(path => path); // 이미지가 null or undefined인 경우 제거                
-                setImagesData(twoSegmentationPaths);        
-                
+                setImagesData(twoSegmentationPaths);
+
                 console.log("twoSegmentation: ", twoSegmentationPaths);
             })
             .catch((error) => console.error('데이터 불러오기 오류: ', error));
@@ -52,10 +51,9 @@ export default function History() {
 
     return (
         <main>
-            <Nav />
             <div className="frame">
+                <NavBar />
                 <div className="header">
-                    <img className="header_logo" src="/images/darelogo.jpg" alt="" />
                     <div className='header_title'>
                         <p className='header_mainTitle'> Your History </p>
                         <p className='header_subTitle'>
@@ -64,9 +62,6 @@ export default function History() {
                         </p>
                     </div>
                 </div>
-                {/* <div className='header_stats'>
-                    <Stats />
-                </div> */}
                 <div className='content'>
                     <div className='content_carousel'>
                         <Carousel carouselList={imagesData} />

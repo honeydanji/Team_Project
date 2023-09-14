@@ -3,6 +3,7 @@ import '../Styles/DragDrop.css'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Nav from "../Components/Nav";
+import NavBar from "../Components/NavBar";
 
 export default function DragDrop() {
     const navigate = useNavigate();
@@ -167,7 +168,7 @@ export default function DragDrop() {
 
     return (
         <div>
-            {/* <Nav/> */}
+            <NavBar />
             <div className="DragDrop">
                 <input type="file" id="fileUpload" style={{ display: "none" }} multiple={true} onChange={onChangeFiles} />
                 <label className={isDragging ? "DrageDrop-File-Dragging" : "DragDrop-File"} htmlFor="fileUpload" ref={dragRef}>

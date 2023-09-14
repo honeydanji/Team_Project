@@ -46,37 +46,6 @@ export default function SelectDate({ dateList }) {
     }
   }
   
-  // useEffect(() => {
-
-  //   if(selectedDate && requestedData.length === 0) {
-  //     const serverURL = `http://10.125.121.183:8080/results/${selectedDate}`;
-  //     const token = localStorage.getItem('token');
-
-  //     fetch(serverURL, {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type' : 'application/json',
-  //         'authorization' : `${token}`,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       if(!response.ok) {
-  //         throw new Error('Network response was not ok');
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       console.log("서버응답데이터: ", data);
-  //       setRequestedDate(data);
-  //       navigate("/dataresults", { state: { requestedData } });
-  //     })
-  //     .catch((error) => {
-  //       console.error('오류발생: ', error);
-  //     });
-  //   }
-  
-  // }, [navigate, requestedData, selectedDate])
-
   return (
     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (

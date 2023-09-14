@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import ChartBar from '../Components/ChartBar';
 import ChartDonut from '../Components/ChartDonut';
 import ChartPie from '../Components/ChartPie';
-import Nav from '../Components/Nav';
+import NavBar from '../Components/NavBar';
 import SelectDate from '../Components/SelectDate';
 import '../Styles/DataResults.css'
 import { useLocation } from 'react-router-dom';
@@ -12,7 +12,7 @@ export default function DataResults() {
 
   const [dateList, setDateList] = useState([]);
   const location = useLocation();
-  const requestedData = location.state?.requestedData; 
+  const requestedData = location.state?.requestedData;
 
   const token = localStorage.getItem('token');
   // 토큰 추출 및 이름 저장
@@ -31,25 +31,24 @@ export default function DataResults() {
         'Content-Type': 'application/json',
       },
     })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("raw Data: ", data)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("raw Data: ", data)
 
-      const keys = Object.keys(data);      
-      setDateList(keys);
-      console.log("dateList: ", keys);
+        const keys = Object.keys(data);
+        setDateList(keys);
+        console.log("dateList: ", keys);
 
-    })
-    .catch((error) => console.error('데이터 불러오기 오류: ', error));   
+      })
+      .catch((error) => console.error('데이터 불러오기 오류: ', error));
   }, [])
 
   return (
     <main>
-       <Nav />      
       <div className="frame">
         {/* HEADER */}
+        <NavBar />
         <div className="header">
-          <img className="header_logo" src="/images/darelogo.jpg" alt="" />
           <div className='header_title'>
             <p className='header_mainTitle'> Data Results </p>
             <p className='header_subTitle'>
@@ -65,9 +64,9 @@ export default function DataResults() {
         {/* CONTENT */}
         <div className='content'>
           <div className='classesBox'>
-            <h1>Classes</h1>            
+            <h1>Classes</h1>
             <div className='chartPie'>
-              <ChartPie requestedData={requestedData}/>
+              <ChartPie requestedData={requestedData} />
             </div>
           </div>
           <div className='totalItemsBox'>
@@ -84,7 +83,7 @@ export default function DataResults() {
           </div>
         </div>
       </div>
-     
+
     </main>
   );
 }

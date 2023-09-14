@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import Breadcrumb from '../Components/Breadcrumb';
 import '../Styles/Service.css'
-import Nav from '../Components/Nav';
+import NavBar from '../Components/NavBar';
 
 export default function Service() {
 
@@ -11,7 +10,7 @@ export default function Service() {
     const uploadedPoseResults = location.state?.uploadedPoseResults;
     const uploadedBoxInfo = location.state?.uploadedBoxInfo;
 
-    const objectId = uploadedPoseResults.map(item => item.objectId);
+    const objectId = uploadedPoseResults ? uploadedPoseResults.map(item => item.objectId) : [];
 
     const [selectedIndex, setSelectedIndex] = useState(null);
 
@@ -54,25 +53,22 @@ export default function Service() {
 
     return (
         <main>
-            <Nav />
-            <div className='breadcrumbBox'>
-                <Breadcrumb />
-            </div>
+            <NavBar />
             <div className='boxes'>
                 <div className='imageBox'>
                     <img src={uploadedImageUrl ? `${uploadedImageUrl}` : ''} alt='' ref={imageRef} /> {/* 이미지 참조 설정 */}
                     {selectedBox && selectedIndex !== null && (
                         // 여기에서 빨간 사각형을 표시하고 애니메이션을 추가합니다.                        
-                            <div
-                                className='selectedBox'
-                                style={{
-                                    position: 'absolute',
-                                    left: (selectedBox.xbox / imageRef.current.naturalWidth) * imageSize.width - 55,
-                                    top: (selectedBox.ybox / imageRef.current.naturalHeight) * imageSize.height + 150,
-                                    width: (selectedBox.width / imageRef.current.naturalWidth) * imageSize.width,
-                                    height: (selectedBox.height / imageRef.current.naturalHeight) * imageSize.height,
-                                }}
-                            ></div>                        
+                        <div
+                            className='selectedBox'
+                            style={{
+                                position: 'absolute',
+                                left: (selectedBox.xbox / imageRef.current.naturalWidth) * imageSize.width - 55,
+                                top: (selectedBox.ybox / imageRef.current.naturalHeight) * imageSize.height + 150,
+                                width: (selectedBox.width / imageRef.current.naturalWidth) * imageSize.width,
+                                height: (selectedBox.height / imageRef.current.naturalHeight) * imageSize.height,
+                            }}
+                        ></div>
                     )}
                 </div>
                 <div className='informationBox'>

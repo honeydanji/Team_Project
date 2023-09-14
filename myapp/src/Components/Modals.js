@@ -41,7 +41,7 @@ export default function Modals({ selectedItemData, selectedItem }) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all" style={{ height: '30vw', width: '80vw', left: '50%',  transform: 'translateX(-50%)', }}>
+              <Dialog.Panel className="relative transform rounded-lg bg-white text-left shadow-xl transition-all" style={{ height: '30vw', width: '80vw', left: '50%',  transform: 'translateX(-50%)', }}>
                 <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                   <button
                     type="button"
@@ -61,8 +61,8 @@ export default function Modals({ selectedItemData, selectedItem }) {
                     </div>
                   </div>
                 </div>
-                <div className="bg-gray-50 px-5 py-3 sm:flex sm:flex-row sm:px-6">
-                  <table>
+                <div className="bg-gray-50 px-5 py-3 w-full h-3/5 sm:flex sm:flex-row sm:px-6 overflow-y-scroll">
+                  <table style={{ minWidth: '100%' }}>
                     <thead>
                       <tr>
                         <th className="px-11 py-2">Timestamp</th>
