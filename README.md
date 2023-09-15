@@ -7,7 +7,13 @@
 - Framework
   - SpringBoot 3.1.3
 - DB
-  - MySQL
+  - MySQL 8.0
+
+## 핵심기술
+- Spring MVC 아키텍처 기반 구현
+- RestAPI 아키텍처 기반 설계
+- JWT 토큰을 사용하여 인증 처리
+- 웹서버(SpringBoot)와 서버 API(Flask) 통신을 위해 RestTemplate 사용
    
 ## DatabaseModel
 <img src = "https://github.com/honeydanji/Team_Project/assets/129818881/bc9a2438-cecf-497e-8e57-855483f777ce">
