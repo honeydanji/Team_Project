@@ -1,15 +1,13 @@
 # 다중 객체 이미지 판별 웹 서비스
 
 ## Development environment
-- IDE : vscode
-- Server
-  - SprinBoot 3.1.3
-    - jdk 17
-    - port 8080
-  - 외부 API
-    - Python 3.9.13
-    - Flask 2.3.2
-    - port 5000
+- IDE : VScode
+- Language 
+  - Java - jdk 17
+- Framework
+  - SpringBoot 3.1.3
+- DB
+  - MySQL
    
 ## DatabaseModel
 <img src = "https://github.com/honeydanji/Team_Project/assets/129818881/bc9a2438-cecf-497e-8e57-855483f777ce">
