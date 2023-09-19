@@ -1,7 +1,7 @@
 # 다중 객체 이미지 판별 웹 서비스
 
 ## 프로젝트 구성도
-<img src='https://github.com/honeydanji/Team_Project/assets/129818881/29e59f96-04a8-4aeb-9802-529b8ec92b0d'>
+<img src='https://github.com/honeydanji/Team_Project/assets/129818881/4c5f021e-4c82-488e-9113-6eaf403fa349'>
 
 ## 2023/08/19
 - 프로젝트 회의 및 계획서작성
