@@ -21,7 +21,7 @@
 ## 프로젝트 구성도
 <img src='https://github.com/honeydanji/Team_Project/assets/129818881/4c5f021e-4c82-488e-9113-6eaf403fa349'>
 
-### InputData
+### InputData(2D.png, 3D.ply)
 <div>
     <img src="https://github.com/honeydanji/Team_Project/assets/129818881/ccde556e-c520-45a9-8275-8747bfe23864" alt="이미지 1", width="60%">
     <img src="https://github.com/honeydanji/Team_Project/assets/129818881/fcac7fae-f14b-45ad-956b-f5899c50979c" alt="이미지 2", width="39%">
@@ -32,6 +32,12 @@
     <img src="https://github.com/honeydanji/Team_Project/assets/129818881/7b4f0cdf-a2d0-41fc-adfb-c118d8382a17" alt="이미지 1", width="60%">
     <img src="https://github.com/honeydanji/Team_Project/assets/129818881/d55c8939-a22d-4e36-bfa0-e2ef0ecafcfc" alt="이미지 2", width="39%">
 </div>
+
+<div>
+    <img src="https://github.com/honeydanji/Team_Project/assets/129818881/89fa9820-ebac-410a-a6b5-288e7d4d346f" alt="이미지 1", width="60%">
+    <img src="https://github.com/honeydanji/Team_Project/assets/129818881/15a58db0-2861-458c-879e-0a133a020b68" alt="이미지 2", width="39%">
+</div>
+- Open3D 라이브러리를 사용해서 출력값 시각화
 
 ## 2023/08/19
 - 프로젝트 회의 및 계획서작성
