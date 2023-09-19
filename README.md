@@ -1,5 +1,21 @@
 # 다중 객체 이미지 판별 웹 서비스
 
+<details>
+<summary><b>목표</b></summary>
+- 다중 객체 이미지를 활용하여 객체의 포즈를 추정하는 솔루션 개발
+</details>
+
+<details>
+<summary><b>필요성</b></summary>
+- 이미지 처리와 컴퓨터 비전 분야 응용 가능
+- 빈피킹 작업에 사용될 정확한 객체 6D 포즈를 추정할 수 있다면 자동화된 로봇이나 시스템을 통해 효율적으로 작업을 처리할 수 있음
+</details>
+
+<details>
+<summary><b>목적</b></summary>
+- 시현용 홈페이지를 제작하여 사용자가 객체 포즈 추정 과정을 시각적으로 확인할 수 있도록 함
+</details>
+
 ## 프로젝트 구성도
 <img src='https://github.com/honeydanji/Team_Project/assets/129818881/4c5f021e-4c82-488e-9113-6eaf403fa349'>
 
