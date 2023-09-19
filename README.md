@@ -16,12 +16,31 @@
 <summary><b>목적</b></summary>
   - 시현용 홈페이지를 제작하여 사용자가 객체 포즈 추정 과정을 시각적으로 확인할 수 있도록 함
 </details>
-
 <img src="https://github.com/honeydanji/Team_Project/assets/129818881/f98f0ae1-0b64-4407-aa93-cde92a6e030f">
-
 
 ## 프로젝트 구성도
 <img src='https://github.com/honeydanji/Team_Project/assets/129818881/4c5f021e-4c82-488e-9113-6eaf403fa349'>
+
+## Test
+<html>
+<head>
+    <style>
+        .image-container {
+            display: flex;
+            justify-content: center;
+        }
+        .image-container img {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="https://github.com/honeydanji/Team_Project/assets/129818881/ccde556e-c520-45a9-8275-8747bfe23864" alt="이미지 1">
+        <img src="https://github.com/honeydanji/Team_Project/assets/129818881/fcac7fae-f14b-45ad-956b-f5899c50979c" alt="이미지 2">
+    </div>
+</body>
+</html>
 
 ## 2023/08/19
 - 프로젝트 회의 및 계획서작성
