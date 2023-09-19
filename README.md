@@ -14,6 +14,7 @@
 <details>
 <summary><b>목적</b></summary>
 - 시현용 홈페이지를 제작하여 사용자가 객체 포즈 추정 과정을 시각적으로 확인할 수 있도록 함
+<img src="https://github.com/honeydanji/Team_Project/assets/129818881/f98f0ae1-0b64-4407-aa93-cde92a6e030f">
 </details>
 
 ## 프로젝트 구성도
