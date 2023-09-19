@@ -22,12 +22,10 @@
 <img src='https://github.com/honeydanji/Team_Project/assets/129818881/4c5f021e-4c82-488e-9113-6eaf403fa349'>
 
 ## Test
-<body>
-    <div class="image-container">
-        <img src="https://github.com/honeydanji/Team_Project/assets/129818881/ccde556e-c520-45a9-8275-8747bfe23864" alt="이미지 1", width="49%">
-        <img src="https://github.com/honeydanji/Team_Project/assets/129818881/fcac7fae-f14b-45ad-956b-f5899c50979c" alt="이미지 2", width="49%">
-    </div>
-</body>
+<div>
+    <img src="https://github.com/honeydanji/Team_Project/assets/129818881/ccde556e-c520-45a9-8275-8747bfe23864" alt="이미지 1", width="49%">
+    <img src="https://github.com/honeydanji/Team_Project/assets/129818881/fcac7fae-f14b-45ad-956b-f5899c50979c" alt="이미지 2", width="49%">
+</div>
 
 
 ## 2023/08/19
