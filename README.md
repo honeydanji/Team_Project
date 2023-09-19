@@ -23,8 +23,8 @@
 
 ## Test
 <div>
-    <img src="https://github.com/honeydanji/Team_Project/assets/129818881/ccde556e-c520-45a9-8275-8747bfe23864" alt="이미지 1", width="49%">
-    <img src="https://github.com/honeydanji/Team_Project/assets/129818881/fcac7fae-f14b-45ad-956b-f5899c50979c" alt="이미지 2", width="49%">
+    <img src="https://github.com/honeydanji/Team_Project/assets/129818881/ccde556e-c520-45a9-8275-8747bfe23864" alt="이미지 1", width="60%">
+    <img src="https://github.com/honeydanji/Team_Project/assets/129818881/fcac7fae-f14b-45ad-956b-f5899c50979c" alt="이미지 2", width="39%">
 </div>
 
 
