@@ -21,13 +21,16 @@
 ## 프로젝트 구성도
 <img src='https://github.com/honeydanji/Team_Project/assets/129818881/4c5f021e-4c82-488e-9113-6eaf403fa349'>
 
-## InputData
-- 2D : png, 3D : ply
+### InputData
 <div>
     <img src="https://github.com/honeydanji/Team_Project/assets/129818881/ccde556e-c520-45a9-8275-8747bfe23864" alt="이미지 1", width="60%">
     <img src="https://github.com/honeydanji/Team_Project/assets/129818881/fcac7fae-f14b-45ad-956b-f5899c50979c" alt="이미지 2", width="39%">
 </div>
-
+### OutputData
+<div>
+    <img src="https://github.com/honeydanji/Team_Project/assets/129818881/7b4f0cdf-a2d0-41fc-adfb-c118d8382a17" alt="이미지 1", width="60%">
+    <img src="https://github.com/honeydanji/Team_Project/assets/129818881/d55c8939-a22d-4e36-bfa0-e2ef0ecafcfc" alt="이미지 2", width="39%">
+</div>
 
 ## 2023/08/19
 - 프로젝트 회의 및 계획서작성
