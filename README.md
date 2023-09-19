@@ -2,13 +2,12 @@
 
 ## Development environment
 - IDE : VScode
-- Language 
-  - Java - jdk 17
-- Framework
-  - SpringBoot 3.1.3
-<img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=green">
-- DB
-  - MySQL 8.0
+<div>
+  <img src="https://img.shields.io/badge/java 17-007396?style=for-the-badge&logo=java&logoColor=white"> 
+  <img src="https://img.shields.io/badge/springboot 3.1.2-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> 
+  <img src="https://img.shields.io/badge/springsecurity 6.1.1-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white"> 
+  <img src="https://img.shields.io/badge/mysql 8.0.32-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
+</div>
 
 ## 핵심기술
 - Spring MVC 아키텍처 기반 구현
