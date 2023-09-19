@@ -7,7 +7,7 @@ from io import BytesIO
 from ultralytics import YOLO
 from crop_ply import *
 import open3d as o3d
-from output6d import output6d
+from output6d import *
 
 # 모델 초기화
 model = YOLO("modelFolder/model_v7.pt")
@@ -81,7 +81,7 @@ def predict_objects(image, ply_file):
                 xyz_output = cropPly(xy_list, "temp.ply")
                 
                 # output6d함수를 이용해 6d좌표 구하기
-                list6d = output6d(xyz_output) 
+                list6d = outputreal6d(xyz_output) 
                 print(list6d)
                 for index,list6d_info in enumerate(list6d):
                     object_data["detections"][index]["6dpose"] = list6d_info
