@@ -46,6 +46,11 @@
     <img src="https://github.com/honeydanji/Team_Project/assets/129818881/15a58db0-2861-458c-879e-0a133a020b68" alt="이미지 2", width="39%">
 </div>
 
+#### 실시간 객체 탐지 영상
+<div>
+  <img src = "https://github.com/honeydanji/Team_Project/assets/129818881/67c5d337-85d1-4096-824f-90ba2f7155a2">
+</div>
+
 ## 2023/08/19
 - 프로젝트 회의 및 계획서작성
 
