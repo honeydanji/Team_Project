@@ -11,22 +11,22 @@ import com.TeamProject.Dto.BoxInfoDTO;
 
 public interface TwoSegmentationCoordinatesRepository extends JpaRepository<TwoSegmentationCoordinates, Integer> {
     
-    @Query("SELECT c.twoObjectId, c.twoObjectAcc FROM twoSegmentationCoordinates c")
+    @Query("SELECT c.twoObjectId, c.twoObjectAcc FROM TwoSegmentationCoordinates c")
     List<Object[]> findBy();
 
     @Query("SELECT " + 
-            "NEW com.TeamProject.Dto.boxInfoDTO(c.twoObjectId, c.xBox, c.yBox, c.width, c.height) " + 
-            "FROM twoSegmentationCoordinates c " + 
+            "NEW com.TeamProject.Dto.BoxInfoDTO(c.twoObjectId, c.xBox, c.yBox, c.width, c.height) " + 
+            "FROM TwoSegmentationCoordinates c " + 
             "WHERE twoSegmentationId = ?1")
     List<BoxInfoDTO> boxInfo(TwoSegmentationImage twosegmentationid);
 
-    @Query("SELECT count(c.twoObjectId) FROM twoSegmentationCoordinates c WHERE twoSegmentationId = ?1")
+    @Query("SELECT count(c.twoObjectId) FROM TwoSegmentationCoordinates c WHERE twoSegmentationId = ?1")
     int countBySegmentationId(TwoSegmentationImage twosegmentationid);
 
-    @Query("SELECT c.twoObjectId FROM twoSegmentationCoordinates c WHERE twoSegmentationId = ?1")
+    @Query("SELECT c.twoObjectId FROM TwoSegmentationCoordinates c WHERE twoSegmentationId = ?1")
     List<String> twoObjecIdByTwoSegmentationId(TwoSegmentationImage twosegmentationid);
 
-    @Query("SELECT c.twoObjectAcc FROM twoSegmentationCoordinates c WHERE twoSegmentationId = ?1")
+    @Query("SELECT c.twoObjectAcc FROM TwoSegmentationCoordinates c WHERE twoSegmentationId = ?1")
     List<Double> twoObjectAccBySegmentationId(TwoSegmentationImage twosegmentationid);
 
 }

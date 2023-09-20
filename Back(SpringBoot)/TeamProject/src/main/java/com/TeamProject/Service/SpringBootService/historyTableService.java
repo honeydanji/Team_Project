@@ -15,7 +15,6 @@ import com.TeamProject.Domain.HistoryTable;
 import com.TeamProject.Domain.HistoryView;
 import com.TeamProject.Domain.Members;
 import com.TeamProject.Domain.TwoSegmentationImage;
-import com.TeamProject.Domain.historyTable;
 import com.TeamProject.Repository.HistoryTableRepository;
 import com.TeamProject.Repository.HistoryViewRepository;
 import com.TeamProject.Repository.MembersRepository;
@@ -117,7 +116,7 @@ public class HistoryTableService {
         // 날짜, userId 출력
         List<Integer> historyId = historytablerepository.findByUploadDateANDUserId(uploadDate, userId);
         for(int i = 0; i < historytablerepository.findByUploadDateANDUserId(uploadDate, userId).size(); i++) {
-            historyTable his = historytablerepository.findByHistoryId(historyId.get(i));
+            HistoryTable his = historytablerepository.findByHistoryId(historyId.get(i));
             TwoSegmentationImage segmentationId = twosegmentationrepository.findByHistoryId(his);
             classCount += twosegmentationcoordinatesrepository.countBySegmentationId(segmentationId);
             List<String> inputClass = twosegmentationcoordinatesrepository.twoObjecIdByTwoSegmentationId(segmentationId);

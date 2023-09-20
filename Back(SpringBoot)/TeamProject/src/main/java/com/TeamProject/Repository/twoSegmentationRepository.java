@@ -8,7 +8,7 @@ import com.TeamProject.Domain.TwoSegmentationImage;
 
 public interface TwoSegmentationRepository extends JpaRepository<TwoSegmentationImage, Integer> {
 
-    @Query("SELECT t.twoSegmentationPath FROM twoSegmentationImage t WHERE historyId = ?1")
+    @Query("SELECT t.twoSegmentationPath FROM TwoSegmentationImage t WHERE historyId = ?1")
     String segmentationByHistoryId(HistoryTable his);
 
     TwoSegmentationImage findByHistoryId(HistoryTable his);

@@ -8,7 +8,7 @@ import com.TeamProject.Domain.HistoryTable;
 
 public interface CommentsRepository extends JpaRepository<Comments, Integer> {
 
-    @Query("SELECT c.comment FROM comments c WHERE historyId = ?1")
+    @Query("SELECT c.comment FROM Comments c WHERE historyId = ?1")
     String commentByHistoryId(HistoryTable historyId);
 
     Comments findByHistoryId(HistoryTable historyId);

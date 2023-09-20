@@ -12,8 +12,8 @@ import com.TeamProject.Dto.PoseDataDTO;
 public interface PoseDataRepository extends JpaRepository<PoseData, Integer>{
     
     @Query("SELECT " + 
-            "NEW com.TeamProject.Dto.poseDataDTO(p.objectId, p.x, p.y, p.z, p.rx, p.ry, p.rz) " + 
-            "FROM poseData p " + 
+            "NEW com.TeamProject.Dto.PoseDataDTO(p.objectId, p.x, p.y, p.z, p.rx, p.ry, p.rz) " + 
+            "FROM PoseData p " + 
             "WHERE p.historyId = ?1")
     List<PoseDataDTO> sixPoseData(HistoryTable historyId);
 }

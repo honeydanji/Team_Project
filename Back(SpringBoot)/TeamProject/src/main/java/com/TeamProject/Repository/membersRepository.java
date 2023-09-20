@@ -9,7 +9,7 @@ public interface MembersRepository extends JpaRepository<Members, Integer>{
 
     Members findByloginEmail(String logingEmail);
 
-    @Query("SELECT m.name FROM members m WHERE loginEmail = ?1")
+    @Query("SELECT m.name FROM Members m WHERE loginEmail = ?1")
     String nameByLoginEmail(String logingEmail);
 
     Members findByLoginEmail(String loginEmail);
