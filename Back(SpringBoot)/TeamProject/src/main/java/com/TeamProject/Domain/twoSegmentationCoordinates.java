@@ -17,7 +17,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class twoSegmentationCoordinates {
+public class TwoSegmentationCoordinates {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +40,6 @@ public class twoSegmentationCoordinates {
     
     @ManyToOne
     @JoinColumn(name="two_segmentation_id", nullable = false)
-    private twoSegmentationImage twoSegmentationId;
+    private TwoSegmentationImage twoSegmentationId;
     
 }

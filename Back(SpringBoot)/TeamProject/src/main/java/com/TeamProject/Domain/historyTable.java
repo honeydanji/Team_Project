@@ -23,7 +23,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @Builder
-public class historyTable {
+public class HistoryTable {
     
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,5 +35,5 @@ public class historyTable {
     
     @ManyToOne
     @JoinColumn(name="user_id")
-    private members userId;
+    private Members userId;
 }

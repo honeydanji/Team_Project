@@ -16,21 +16,6 @@ public class configuration implements WebMvcConfigurer {
                 .allowCredentials(true) // 자격 증명 허용 (쿠키, 인증 헤더 등)
         		.exposedHeaders("Authorization"); //헤더에 (Authorization) 포함
     }
-   
-//   @Bean //0807 추가. 프론트에서 로그인.
-//   public CorsConfigurationSource corsConfigurationSource() {
-//       CorsConfiguration configuration = new CorsConfiguration();
-//       configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));  // 허용 도메인 설정
-//       configuration.setAllowedMethods(Arrays.asList("OPTIONS", "GET", "POST", "PUT", "DELETE"));
-//       configuration.setAllowedHeaders(Arrays.asList("*"));
-//       configuration.setAllowCredentials(true);
-//       
-//       configuration.addExposedHeader("Authorization"); //이거~
-//       
-//       UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//       source.registerCorsConfiguration("/**", configuration);
-//       return source;
-//   }
 }
 
 

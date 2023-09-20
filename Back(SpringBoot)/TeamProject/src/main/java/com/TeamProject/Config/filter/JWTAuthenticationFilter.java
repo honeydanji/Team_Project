@@ -10,8 +10,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.TeamProject.Domain.members;
-import com.TeamProject.Repository.membersRepository;
+import com.TeamProject.Domain.Members;
+import com.TeamProject.Repository.MembersRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,7 +29,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	
 	private final AuthenticationManager authenticationManager;
 
-	private final membersRepository memberrepository;
+	private final MembersRepository memberrepository;
 	
 	// // 토큰이 있는 상태에서 로그인할 때
 	// public JWTAuthenticationFilter(AuthenticationManager authenticationManager, membersRepository memberrepository) {
@@ -45,7 +45,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		
 		try {
 			ObjectMapper om = new ObjectMapper(); // JSON 데이터를 역질렬화 즉 데이터구조를 바꿔준다.
-			members members = om.readValue(req.getInputStream(), members.class);
+			Members members = om.readValue(req.getInputStream(), Members.class);
 			// req.getInputStream() : JSON형태를 읽는다.
 			// Pet_member.class : 읽은 데이터를 Pet_member개체로 역직렬화한다.(역직렬화 : JSON데이터의 구조를 변환시킨다. 왜? 그래야 자바에서 알아먹는다.)
 

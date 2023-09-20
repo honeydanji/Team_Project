@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.TeamProject.Domain.members;
-import com.TeamProject.Repository.membersRepository;
+import com.TeamProject.Domain.Members;
+import com.TeamProject.Repository.MembersRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,11 +15,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityUserDetailsService implements UserDetailsService {
 
-	private final membersRepository memberrepository; // JPA상속받은 클래스를 통해 요청한 데이터를 DB에서 불러올 수 있다. 
+	private final MembersRepository memberrepository; // JPA상속받은 클래스를 통해 요청한 데이터를 DB에서 불러올 수 있다. 
 	
 	@Override
 	public UserDetails loadUserByUsername(String loginEmail) throws UsernameNotFoundException {
-		members member = memberrepository.findByloginEmail(loginEmail);
+		Members member = memberrepository.findByloginEmail(loginEmail);
 //				.orElseThrow(() -> 
 //				new UsernameNotFoundException("Not Found!"));
 		// username이 존재하지 않으면 "NOT Found" 를 리턴한다. (아이디가 없을 경우)

@@ -3,16 +3,13 @@ package com.TeamProject.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.TeamProject.Domain.historyTable;
-import com.TeamProject.Domain.twoSegmentationImage;
+import com.TeamProject.Domain.HistoryTable;
+import com.TeamProject.Domain.TwoSegmentationImage;
 
-public interface twoSegmentationRepository extends JpaRepository<twoSegmentationImage, Integer> {
+public interface TwoSegmentationRepository extends JpaRepository<TwoSegmentationImage, Integer> {
 
     @Query("SELECT t.twoSegmentationPath FROM twoSegmentationImage t WHERE historyId = ?1")
-    String segmentationByHistoryId(historyTable his);
+    String segmentationByHistoryId(HistoryTable his);
 
-    twoSegmentationImage findByHistoryId(historyTable his);
-
-    // @Query("SELECT t.twoSegmentationPath FROM twoSegmentationImage t WHERE historyId = ?1")
-    // List<String> segPathByHistoryId(historyTable his);
+    TwoSegmentationImage findByHistoryId(HistoryTable his);
 }

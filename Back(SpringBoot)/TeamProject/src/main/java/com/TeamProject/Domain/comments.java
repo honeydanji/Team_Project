@@ -12,7 +12,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class comments {
+public class Comments {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +22,6 @@ public class comments {
 
     @OneToOne
     @JoinColumn(name="history_id")
-    private historyTable historyId;
+    private HistoryTable historyId;
     
 }

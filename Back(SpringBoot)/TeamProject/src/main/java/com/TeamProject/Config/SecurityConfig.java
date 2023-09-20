@@ -15,7 +15,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.TeamProject.Config.auth.JWTAuthorizationFilter;
 import com.TeamProject.Config.filter.JWTAuthenticationFilter;
-import com.TeamProject.Repository.membersRepository;
+import com.TeamProject.Repository.MembersRepository;
 
 
 @Configuration
@@ -23,7 +23,7 @@ import com.TeamProject.Repository.membersRepository;
 public class SecurityConfig {
 
 	@Autowired
-	private membersRepository memberrepository;
+	private MembersRepository memberrepository;
 
 	@Autowired
 	private AuthenticationConfiguration authConfig;

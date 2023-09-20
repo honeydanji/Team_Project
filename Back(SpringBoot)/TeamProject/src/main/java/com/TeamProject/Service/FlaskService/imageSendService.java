@@ -14,20 +14,20 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.TeamProject.Domain.historyTable;
+import com.TeamProject.Domain.HistoryTable;
 
 import lombok.RequiredArgsConstructor;
 
 
 @Service
 @RequiredArgsConstructor
-public class imageSendService {
+public class ImageSendService {
 
     // base64 디코딩
-    private final flaskResponse flaskresponse;
+    private final FlaskResponse flaskresponse;
     
     // 로컬 이미지 파일을 Flask 서버로 전송하는 로직 구현
-    public String sendImage(MultipartFile pngFile, MultipartFile plyFile, historyTable history) {
+    public String sendImage(MultipartFile pngFile, MultipartFile plyFile, HistoryTable history) {
 
         // Flask 서버의 엔드포인트 URL
         String flaskServerUrl = "http://10.125.121.180:80/uploadFlask";

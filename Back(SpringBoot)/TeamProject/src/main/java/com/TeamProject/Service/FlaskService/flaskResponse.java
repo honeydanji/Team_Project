@@ -8,47 +8,47 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-import com.TeamProject.Domain.historyTable;
-import com.TeamProject.Domain.threeOriginalPointCloud;
-import com.TeamProject.Domain.twoSegmentationImage;
-import com.TeamProject.Dto.poseDataDTO;
-import com.TeamProject.Dto.threePointCloudCoordinatesDTO;
-import com.TeamProject.Dto.twoSegmentationCoordinatesDTO;
-import com.TeamProject.Dto.twoSegmentationImageDTO;
-import com.TeamProject.Repository.threeOriginalPointCloudRepository;
-import com.TeamProject.Service.SpringBootService.poseDataService;
-import com.TeamProject.Service.SpringBootService.threePointCloudCoordinatesService;
-import com.TeamProject.Service.SpringBootService.twoSegmentationCoordinatesService;
-import com.TeamProject.Service.SpringBootService.twoSegmentationImageService;
+import com.TeamProject.Domain.HistoryTable;
+import com.TeamProject.Domain.ThreeOriginalPointCloud;
+import com.TeamProject.Domain.TwoSegmentationImage;
+import com.TeamProject.Dto.PoseDataDTO;
+import com.TeamProject.Dto.ThreePointCloudCoordinatesDTO;
+import com.TeamProject.Dto.TwoSegmentationCoordinatesDTO;
+import com.TeamProject.Dto.TwoSegmentationImageDTO;
+import com.TeamProject.Repository.ThreeOriginalPointCloudRepository;
+import com.TeamProject.Service.SpringBootService.PoseDataService;
+import com.TeamProject.Service.SpringBootService.ThreePointCloudCoordinatesService;
+import com.TeamProject.Service.SpringBootService.TwoSegmentationCoordinatesService;
+import com.TeamProject.Service.SpringBootService.TwoSegmentationImageService;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class flaskResponse {
+public class FlaskResponse {
 
     
     // 2D_Segmentation
-    private final twoSegmentationImageService twosegmentationimageservice;
+    private final TwoSegmentationImageService twosegmentationimageservice;
 
     // 2D_coordinates
-    private final twoSegmentationCoordinatesService twosegmentationcoordinatesservice;
+    private final TwoSegmentationCoordinatesService twosegmentationcoordinatesservice;
 
     // 3D_PointCloud
-    private final threeOriginalPointCloudRepository threeoriginalpointcloudrepository;
+    private final ThreeOriginalPointCloudRepository threeoriginalpointcloudrepository;
 
     // 3D_coordinates
-    private final threePointCloudCoordinatesService threepointcloudcoordinatesservice;
+    private final ThreePointCloudCoordinatesService threepointcloudcoordinatesservice;
 
     // 6D_pose
-    private final poseDataService posedataservice ;
+    private final PoseDataService posedataservice ;
     
 
     // 이미지 파일의 기본 URL
 	private final String imageBaseURL = "http://10.125.121.183:8080/upload/image/";
 
     // Json 데이터 파싱
-    public String parsing(String json, historyTable history) {
+    public String parsing(String json, HistoryTable history) {
         // json을 array로 변환
         JSONArray jsonArray = new JSONArray(json);
 
@@ -62,8 +62,8 @@ public class flaskResponse {
 
         // 추출된 이미지 값 
         decoding(imageValue, imageName); // base64 Decoding
-        twoSegmentationImage twosegmentationimage = SegDTO(imageName, history); // Segmentation 원본 저장
-        threeOriginalPointCloud threeoriginalpointcloud = PointDTO(history);
+        TwoSegmentationImage twosegmentationimage = SegDTO(imageName, history); // Segmentation 원본 저장
+        ThreeOriginalPointCloud threeoriginalpointcloud = PointDTO(history);
         
         JSONArray detectionArray = jsonObject.getJSONArray("detections");
 
@@ -133,8 +133,8 @@ public class flaskResponse {
     }
 
     // 2D_Segmentation
-    public twoSegmentationImage SegDTO(String imageName, historyTable history) {
-        twoSegmentationImageDTO twosegmentationimagedto = new twoSegmentationImageDTO();
+    public TwoSegmentationImage SegDTO(String imageName, HistoryTable history) {
+        TwoSegmentationImageDTO twosegmentationimagedto = new TwoSegmentationImageDTO();
 
         // DTO 통해서 전달.
         twosegmentationimagedto.setTwoSegmentationPath(imageBaseURL + imageName);
@@ -143,8 +143,8 @@ public class flaskResponse {
     }
 
     // 2D_coordinates
-    public void twoCoorDTO(double accuracy, String classNameString, String xCoordinates, String yCorrdinates, double xBox, double yBox, double width, double height, twoSegmentationImage twosegmentationimage) {
-        twoSegmentationCoordinatesDTO twosegmentationcorrdinatesdto = new twoSegmentationCoordinatesDTO();
+    public void twoCoorDTO(double accuracy, String classNameString, String xCoordinates, String yCorrdinates, double xBox, double yBox, double width, double height, TwoSegmentationImage twosegmentationimage) {
+        TwoSegmentationCoordinatesDTO twosegmentationcorrdinatesdto = new TwoSegmentationCoordinatesDTO();
 
         // DTO 통해서 전달
         twosegmentationcorrdinatesdto.setTwoObjectAcc(accuracy);
@@ -160,13 +160,13 @@ public class flaskResponse {
     }
 
     // 3D_PointCloud
-    public threeOriginalPointCloud PointDTO(historyTable history) {
+    public ThreeOriginalPointCloud PointDTO(HistoryTable history) {
         return threeoriginalpointcloudrepository.findByHistoryId(history);
     }
 
     // 3D_coordinates
-    public void threeCoorDTO(String classNameString, String xPoint, String yPoint, String zPoint, threeOriginalPointCloud threeoriginalpointcloud) {
-        threePointCloudCoordinatesDTO threepointcloudcoordinatesdto = new threePointCloudCoordinatesDTO();
+    public void threeCoorDTO(String classNameString, String xPoint, String yPoint, String zPoint, ThreeOriginalPointCloud threeoriginalpointcloud) {
+        ThreePointCloudCoordinatesDTO threepointcloudcoordinatesdto = new ThreePointCloudCoordinatesDTO();
 
         // DTO 통해서 전달
         threepointcloudcoordinatesdto.setThreeObjectId(classNameString);
@@ -178,8 +178,8 @@ public class flaskResponse {
     }
 
     // // 6D
-    public void sixPoseDTO(String classNameString, double centerX, double centerY, double centerZ, double rx, double ry, double rz, historyTable history) {
-        poseDataDTO posedatadto = new poseDataDTO();
+    public void sixPoseDTO(String classNameString, double centerX, double centerY, double centerZ, double rx, double ry, double rz, HistoryTable history) {
+        PoseDataDTO posedatadto = new PoseDataDTO();
 
         // DTO 통해서 전달
         posedatadto.setObjectId(classNameString);

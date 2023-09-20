@@ -2,23 +2,23 @@ package com.TeamProject.Service.SpringBootService;
 
 import org.springframework.stereotype.Service;
 
-import com.TeamProject.Domain.twoSegmentationImage;
-import com.TeamProject.Dto.twoSegmentationImageDTO;
-import com.TeamProject.Repository.twoSegmentationRepository;
+import com.TeamProject.Domain.TwoSegmentationImage;
+import com.TeamProject.Dto.TwoSegmentationImageDTO;
+import com.TeamProject.Repository.TwoSegmentationRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class twoSegmentationImageService {
+public class TwoSegmentationImageService {
 
-    private final twoSegmentationRepository twosegmentationrepository;
+    private final TwoSegmentationRepository twosegmentationrepository;
 
     @Transactional
-    public twoSegmentationImage segmentationImage(twoSegmentationImageDTO twosegmentationimagedto) {
+    public TwoSegmentationImage segmentationImage(TwoSegmentationImageDTO twosegmentationimagedto) {
 
-        twoSegmentationImage twosegmentationimage = new twoSegmentationImage();
+        TwoSegmentationImage twosegmentationimage = new TwoSegmentationImage();
 
         twosegmentationimage.setTwoSegmentationPath(twosegmentationimagedto.getTwoSegmentationPath());
         twosegmentationimage.setHistoryId(twosegmentationimagedto.getHistoryId());

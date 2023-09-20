@@ -1,13 +1,13 @@
 package com.TeamProject.Dto;
 
-import com.TeamProject.Domain.twoSegmentationImage;
+import com.TeamProject.Domain.TwoSegmentationImage;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-public class twoSegmentationCoordinatesDTO {
+public class TwoSegmentationCoordinatesDTO {
 
     private Integer twoCoordinateId;
     private String twoObjectId;
@@ -18,6 +18,6 @@ public class twoSegmentationCoordinatesDTO {
     private double yBox;
     private double width;
     private double height;
-    private twoSegmentationImage twoSegmentationId;
+    private TwoSegmentationImage twoSegmentationId;
     
 }

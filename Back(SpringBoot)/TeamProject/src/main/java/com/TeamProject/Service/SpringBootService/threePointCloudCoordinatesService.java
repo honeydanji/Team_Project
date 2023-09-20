@@ -2,21 +2,21 @@ package com.TeamProject.Service.SpringBootService;
 
 import org.springframework.stereotype.Service;
 
-import com.TeamProject.Domain.threePointCloudCoordinates;
-import com.TeamProject.Dto.threePointCloudCoordinatesDTO;
-import com.TeamProject.Repository.threePointCloudCoordinatesRepository;
+import com.TeamProject.Domain.ThreePointCloudCoordinates;
+import com.TeamProject.Dto.ThreePointCloudCoordinatesDTO;
+import com.TeamProject.Repository.ThreePointCloudCoordinatesRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class threePointCloudCoordinatesService {
+public class ThreePointCloudCoordinatesService {
 
-    private final threePointCloudCoordinatesRepository threepointcloudcoordinatesrepository;    
+    private final ThreePointCloudCoordinatesRepository threepointcloudcoordinatesrepository;    
 
-    public void threeCoordinates(threePointCloudCoordinatesDTO threepointcloudcoordinatesdto) {
+    public void threeCoordinates(ThreePointCloudCoordinatesDTO threepointcloudcoordinatesdto) {
 
-        threePointCloudCoordinates threepointcloudcoordinates = new threePointCloudCoordinates();
+        ThreePointCloudCoordinates threepointcloudcoordinates = new ThreePointCloudCoordinates();
 
         threepointcloudcoordinates.setThreeObjectId(threepointcloudcoordinatesdto.getThreeObjectId());
         threepointcloudcoordinates.setXList(threepointcloudcoordinatesdto.getXList());

@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class twoSegmentationImage {
+public class TwoSegmentationImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +26,5 @@ public class twoSegmentationImage {
 
     @OneToOne
     @JoinColumn(name="history_id", nullable = false)
-    private historyTable historyId;
+    private HistoryTable historyId;
 }

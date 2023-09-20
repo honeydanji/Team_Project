@@ -4,21 +4,21 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.TeamProject.Domain.historyTable;
-import com.TeamProject.Domain.poseData;
-import com.TeamProject.Dto.poseDataDTO;
-import com.TeamProject.Repository.poseDataRepository;
+import com.TeamProject.Domain.HistoryTable;
+import com.TeamProject.Domain.PoseData;
+import com.TeamProject.Dto.PoseDataDTO;
+import com.TeamProject.Repository.PoseDataRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class poseDataService {
+public class PoseDataService {
 
-    private final poseDataRepository posedatarepository;
+    private final PoseDataRepository posedatarepository;
 
-    public void poseDataUpload(poseDataDTO posedatadto, historyTable history) {
-        poseData posedata = new poseData();
+    public void poseDataUpload(PoseDataDTO posedatadto, HistoryTable history) {
+        PoseData posedata = new PoseData();
 
         posedata.setObjectId(posedatadto.getObjectId());
         posedata.setX(posedatadto.getX());
@@ -32,7 +32,7 @@ public class poseDataService {
         posedatarepository.save(posedata);
     }
 
-    public List<poseDataDTO> poseDataDispaly(historyTable historyId) {
+    public List<PoseDataDTO> poseDataDispaly(HistoryTable historyId) {
         return posedatarepository.sixPoseData(historyId);
     }
     

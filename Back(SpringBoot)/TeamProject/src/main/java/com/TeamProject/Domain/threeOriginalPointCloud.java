@@ -12,7 +12,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class threeOriginalPointCloud {
+public class ThreeOriginalPointCloud {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +22,6 @@ public class threeOriginalPointCloud {
 
     @OneToOne
     @JoinColumn(name="history_id")
-    private historyTable historyId;
+    private HistoryTable historyId;
     
 }

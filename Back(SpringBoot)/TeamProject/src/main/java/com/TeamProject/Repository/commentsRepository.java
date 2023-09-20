@@ -3,15 +3,15 @@ package com.TeamProject.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.TeamProject.Domain.comments;
-import com.TeamProject.Domain.historyTable;
+import com.TeamProject.Domain.Comments;
+import com.TeamProject.Domain.HistoryTable;
 
-public interface commentsRepository extends JpaRepository<comments, Integer> {
+public interface CommentsRepository extends JpaRepository<Comments, Integer> {
 
     @Query("SELECT c.comment FROM comments c WHERE historyId = ?1")
-    String commentByHistoryId(historyTable historyId);
+    String commentByHistoryId(HistoryTable historyId);
 
-    comments findByHistoryId(historyTable historyId);
+    Comments findByHistoryId(HistoryTable historyId);
 
-    void deleteByHistoryId(historyTable historyId);
+    void deleteByHistoryId(HistoryTable historyId);
 }

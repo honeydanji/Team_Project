@@ -6,27 +6,27 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.TeamProject.Domain.members;
-import com.TeamProject.Dto.membersDTO;
-import com.TeamProject.Repository.membersRepository;
+import com.TeamProject.Domain.Members;
+import com.TeamProject.Dto.MembersDTO;
+import com.TeamProject.Repository.MembersRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class memberService {
+public class MemberService {
 
-    private final membersRepository memberrepository;
+    private final MembersRepository memberrepository;
     private final BCryptPasswordEncoder secret;
 
-    public ResponseEntity<String> registerService(membersDTO memberdto) {
+    public ResponseEntity<String> registerService(MembersDTO memberdto) {
 
         
 
         if (!memberdto.getPassword().equals(memberdto.getConfirmPassword())) {
             return ResponseEntity.ok("비밀번호를 확인해주세요.");
         } else {
-            members member = new members();
+            Members member = new Members();
 
             member.setName(memberdto.getName());
             member.setLoginEmail(memberdto.getLoginEmail());

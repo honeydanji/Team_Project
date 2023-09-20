@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class boxInfoDTO {
+public class BoxInfoDTO {
 
     private String twoObjectId;
     private double xBox;

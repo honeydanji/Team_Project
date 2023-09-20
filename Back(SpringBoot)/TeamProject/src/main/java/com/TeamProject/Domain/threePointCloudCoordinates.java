@@ -13,7 +13,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class threePointCloudCoordinates {
+public class ThreePointCloudCoordinates {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +32,6 @@ public class threePointCloudCoordinates {
 
     @OneToOne
     @JoinColumn(name="three_original_id")
-    private threeOriginalPointCloud threeOriginalId;
+    private ThreeOriginalPointCloud threeOriginalId;
 
 }

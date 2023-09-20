@@ -7,28 +7,28 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.TeamProject.Domain.historyTable;
-import com.TeamProject.Domain.members;
+import com.TeamProject.Domain.HistoryTable;
+import com.TeamProject.Domain.Members;
 
-public interface historyTableRepository extends JpaRepository<historyTable ,Integer> {
+public interface HistoryTableRepository extends JpaRepository<HistoryTable ,Integer> {
 
-    historyTable findByHistoryId(Integer historyId);
+    HistoryTable findByHistoryId(Integer historyId);
 
-    List<historyTable> findByUserIdAndUploadDate(members userId, LocalDate date); // 수정
+    List<HistoryTable> findByUserIdAndUploadDate(Members userId, LocalDate date); // 수정
 
 
     @Query("SELECT h.uploadDate FROM historyTable h WHERE userId = ?1")
-    List<LocalDate> uploadDateByUserEmail(members userId);
+    List<LocalDate> uploadDateByUserEmail(Members userId);
 
     @Query("SELECT h.historyId FROM historyTable h WHERE userId = ?1")
-    List<Integer> historyIdByUserEmail(members userId);
+    List<Integer> historyIdByUserEmail(Members userId);
 
     @Query("SELECT h.uploadTime FROM historyTable h WHERE historyId = ?1")
     Time timeByHistoryId(Integer historyId);
 
     @Query("SELECT h.historyId FROM historyTable h WHERE uploadDate = ?1 AND userId = ?2")
-    List<Integer> findByUploadDateANDUserId(LocalDate upLocalDate, members userId);
+    List<Integer> findByUploadDateANDUserId(LocalDate upLocalDate, Members userId);
 
     @Query("SELECT count(h.userId) FROM historyTable h WHERE userId = ?1")
-    int countByUserId(members userId);
+    int countByUserId(Members userId);
 }

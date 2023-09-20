@@ -4,29 +4,29 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.TeamProject.Domain.historyTable;
-import com.TeamProject.Domain.twoSegmentationCoordinates;
-import com.TeamProject.Domain.twoSegmentationImage;
-import com.TeamProject.Dto.boxInfoDTO;
-import com.TeamProject.Dto.twoSegmentationCoordinatesDTO;
-import com.TeamProject.Repository.twoSegmentationCoordinatesRepository;
-import com.TeamProject.Repository.twoSegmentationRepository;
+import com.TeamProject.Domain.HistoryTable;
+import com.TeamProject.Domain.TwoSegmentationCoordinates;
+import com.TeamProject.Domain.TwoSegmentationImage;
+import com.TeamProject.Dto.BoxInfoDTO;
+import com.TeamProject.Dto.TwoSegmentationCoordinatesDTO;
+import com.TeamProject.Repository.TwoSegmentationCoordinatesRepository;
+import com.TeamProject.Repository.TwoSegmentationRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class twoSegmentationCoordinatesService {
+public class TwoSegmentationCoordinatesService {
     
-    private final twoSegmentationCoordinatesRepository twosegmentationcoordinatesrepository;
+    private final TwoSegmentationCoordinatesRepository twosegmentationcoordinatesrepository;
 
-    private final twoSegmentationRepository twosegmentationrepository;
+    private final TwoSegmentationRepository twosegmentationrepository;
 
     @Transactional
-    public void twoCoordinates(twoSegmentationCoordinatesDTO twosegmentationcorrdinatesdto) {
+    public void twoCoordinates(TwoSegmentationCoordinatesDTO twosegmentationcorrdinatesdto) {
 
-        twoSegmentationCoordinates twosegmentationcoordinates = new twoSegmentationCoordinates();
+        TwoSegmentationCoordinates twosegmentationcoordinates = new TwoSegmentationCoordinates();
 
         twosegmentationcoordinates.setTwoObjectAcc(twosegmentationcorrdinatesdto.getTwoObjectAcc());
         twosegmentationcoordinates.setTwoObjectId(twosegmentationcorrdinatesdto.getTwoObjectId());
@@ -45,9 +45,9 @@ public class twoSegmentationCoordinatesService {
     }
 
     // boxInfo 반환
-    public List<boxInfoDTO> boxInfo(historyTable history) {
+    public List<BoxInfoDTO> boxInfo(HistoryTable history) {
         // 히스토리 아이디에 해당하는 세그멘테이션 아이디 추출
-        twoSegmentationImage twosegmentationid =  twosegmentationrepository.findByHistoryId(history);
+        TwoSegmentationImage twosegmentationid =  twosegmentationrepository.findByHistoryId(history);
 
         return twosegmentationcoordinatesrepository.boxInfo(twosegmentationid);
     }

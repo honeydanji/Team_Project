@@ -7,31 +7,31 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.TeamProject.Domain.historyTable;
-import com.TeamProject.Domain.threeOriginalPointCloud;
-import com.TeamProject.Domain.twoOriginalImage;
-import com.TeamProject.Repository.imageUploadRepository;
-import com.TeamProject.Repository.threeOriginalPointCloudRepository;
+import com.TeamProject.Domain.HistoryTable;
+import com.TeamProject.Domain.ThreeOriginalPointCloud;
+import com.TeamProject.Domain.TwoOriginalImage;
+import com.TeamProject.Repository.ImageUploadRepository;
+import com.TeamProject.Repository.ThreeOriginalPointCloudRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor //초기화 되지 않은 모든 final 필드 & @NonNull 마크가 있는 필드를 초기화하는 생성자 생성
 @Service
-public class imageUploadService {
+public class ImageUploadService {
 
-    private final imageUploadRepository imageuploadrepository; // 2D 원본 이미지 
-    private final threeOriginalPointCloudRepository threeoriginalpointcloudrepository; // 3D 포인트클라우드
+    private final ImageUploadRepository imageuploadrepository; // 2D 원본 이미지 
+    private final ThreeOriginalPointCloudRepository threeoriginalpointcloudrepository; // 3D 포인트클라우드
 
     // 이미지 파일의 기본 URL
 	private final String imageBaseURL = "http://10.125.121.183:8080/upload/image/"; // 클라이언트 실행
     //private final String imageBaseURL = "http://localhost:8080/upload/image/"; // 로컬 실행
 
     @Transactional
-    public ResponseEntity<String> uploadService(MultipartFile pngFile, MultipartFile plyFile, historyTable history) {
+    public ResponseEntity<String> uploadService(MultipartFile pngFile, MultipartFile plyFile, HistoryTable history) {
 
-        twoOriginalImage twooriginalimage = new twoOriginalImage();
-        threeOriginalPointCloud threeoriginalpointcloud = new threeOriginalPointCloud();
+        TwoOriginalImage twooriginalimage = new TwoOriginalImage();
+        ThreeOriginalPointCloud threeoriginalpointcloud = new ThreeOriginalPointCloud();
 
         // 2d, 3d
         if (pngFile != null && !pngFile.isEmpty()) {

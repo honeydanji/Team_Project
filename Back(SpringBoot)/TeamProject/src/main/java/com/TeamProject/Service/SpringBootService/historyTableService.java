@@ -11,35 +11,36 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.TeamProject.Domain.HistoryTable;
+import com.TeamProject.Domain.HistoryView;
+import com.TeamProject.Domain.Members;
+import com.TeamProject.Domain.TwoSegmentationImage;
 import com.TeamProject.Domain.historyTable;
-import com.TeamProject.Domain.historyView;
-import com.TeamProject.Domain.members;
-import com.TeamProject.Domain.twoSegmentationImage;
-import com.TeamProject.Repository.historyTableRepository;
-import com.TeamProject.Repository.historyViewRepository;
-import com.TeamProject.Repository.membersRepository;
-import com.TeamProject.Repository.twoSegmentationCoordinatesRepository;
-import com.TeamProject.Repository.twoSegmentationRepository;
+import com.TeamProject.Repository.HistoryTableRepository;
+import com.TeamProject.Repository.HistoryViewRepository;
+import com.TeamProject.Repository.MembersRepository;
+import com.TeamProject.Repository.TwoSegmentationCoordinatesRepository;
+import com.TeamProject.Repository.TwoSegmentationRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class historyTableService {
+public class HistoryTableService {
 
-    private final historyTableRepository historytablerepository; // history(상세시간)
-    private final membersRepository membersrepository; // member(유저이메일)
-    private final historyViewRepository historyviewrepository;
-    private final twoSegmentationRepository twosegmentationrepository; // segPath 불러오기
-    private final twoSegmentationCoordinatesRepository twosegmentationcoordinatesrepository;
+    private final HistoryTableRepository historytablerepository; // history(상세시간)
+    private final MembersRepository membersrepository; // member(유저이메일)
+    private final HistoryViewRepository historyviewrepository;
+    private final TwoSegmentationRepository twosegmentationrepository; // segPath 불러오기
+    private final TwoSegmentationCoordinatesRepository twosegmentationcoordinatesrepository;
 
     @Transactional
-    public historyTable historyUpdate(Authentication authentication) {
+    public HistoryTable historyUpdate(Authentication authentication) {
 
         // 유저번호
-        members m = membersrepository.findByloginEmail(authentication.getName());
+        Members m = membersrepository.findByloginEmail(authentication.getName());
         
-        historyTable historytable = new historyTable();
+        HistoryTable historytable = new HistoryTable();
         
         historytable.setUserId(m);
         historytable.setUploadTime(Time.valueOf(LocalTime.now()));
@@ -53,20 +54,14 @@ public class historyTableService {
     // 로그인 유저 게시글번호 및 업로드날짜 반환
     public Map<Object, Object> historyUpdateDate(Authentication authentication) {
         String userEmail = authentication.getName();
-        members userId = membersrepository.findByloginEmail(userEmail);
+        Members userId = membersrepository.findByloginEmail(userEmail);
 
         if(userEmail == null){
             return null;
         }else {
             List<Integer> his = historytablerepository.historyIdByUserEmail(userId); // 로그인 유저 historyId 가져오기(Integer)
             Map<Object, Object> miniMap = new HashMap<>();
-
-            // for(int i = 0; i < historytablerepository.historyIdByUserEmail(userId).size(); i++) {
-            //     for(int j = 0; j < his.size(); j++){
-            //         miniMap.put(historytablerepository.uploadDateByUserEmail(userId).get(i), twosegmentationrepository.segmentationByHistoryId(historytablerepository.findByHistoryId(his.get(j)))); // null > list
-            //     }
-            // }
-            // return miniMap;
+            
             for(int i = 0; i < historytablerepository.historyIdByUserEmail(userId).size(); i++) {
                 miniMap.put(historytablerepository.uploadDateByUserEmail(userId).get(i), 
                             twosegmentationrepository.segmentationByHistoryId(historytablerepository.findByUserIdAndUploadDate(userId, historytablerepository.uploadDateByUserEmail(userId).get(i)).get(historytablerepository.findByUserIdAndUploadDate(userId, historytablerepository.uploadDateByUserEmail(userId).get(i)).size()-1))); // null > list
@@ -81,17 +76,17 @@ public class historyTableService {
     }
 
     // 게시글 상세보기(게시글번호, 업로드날짜)
-    public HashMap<String, historyView> detail(LocalDate uploadDate, Authentication authentication) {
-        HashMap<String, historyView> map = new HashMap<String, historyView>();
+    public HashMap<String, HistoryView> detail(LocalDate uploadDate, Authentication authentication) {
+        HashMap<String, HistoryView> map = new HashMap<String, HistoryView>();
 
         // userId 출력
-        members userId = membersrepository.findByLoginEmail(authentication.getName());
+        Members userId = membersrepository.findByLoginEmail(authentication.getName());
     
         // 날짜, userId 출력
         List<Integer> historyId = historytablerepository.findByUploadDateANDUserId(uploadDate, userId);
 
         for(int i = 0; i < historytablerepository.findByUploadDateANDUserId(uploadDate, userId).size(); i++) {
-            historyView a = historyviewrepository.findByHistoryId(historyId.get(i));
+            HistoryView a = historyviewrepository.findByHistoryId(historyId.get(i));
             map.put(Integer.toString(i), a);
         }
         return map;
@@ -108,7 +103,7 @@ public class historyTableService {
         // 3. 전체 정확도 평균
 
         // userId 출력
-        members userId = membersrepository.findByLoginEmail(authentication.getName());
+        Members userId = membersrepository.findByLoginEmail(authentication.getName());
         int classCount = 0; // 총 클래스수
         double totalAcc = 0; // 총 정확도
         int bestItem = 0;   // 0.7 이상
@@ -123,7 +118,7 @@ public class historyTableService {
         List<Integer> historyId = historytablerepository.findByUploadDateANDUserId(uploadDate, userId);
         for(int i = 0; i < historytablerepository.findByUploadDateANDUserId(uploadDate, userId).size(); i++) {
             historyTable his = historytablerepository.findByHistoryId(historyId.get(i));
-            twoSegmentationImage segmentationId = twosegmentationrepository.findByHistoryId(his);
+            TwoSegmentationImage segmentationId = twosegmentationrepository.findByHistoryId(his);
             classCount += twosegmentationcoordinatesrepository.countBySegmentationId(segmentationId);
             List<String> inputClass = twosegmentationcoordinatesrepository.twoObjecIdByTwoSegmentationId(segmentationId);
             List<Double> inputAcc = twosegmentationcoordinatesrepository.twoObjectAccBySegmentationId(segmentationId);

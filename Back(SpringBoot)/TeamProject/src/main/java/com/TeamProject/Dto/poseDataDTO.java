@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class poseDataDTO {
+public class PoseDataDTO {
 
     private String objectId;
     private double x;

@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Immutable
-public class historyView {
+public class HistoryView {
     
     @Id
     private Integer historyId;

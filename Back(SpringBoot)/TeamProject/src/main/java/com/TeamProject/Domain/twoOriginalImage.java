@@ -20,7 +20,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @Builder
-public class twoOriginalImage {
+public class TwoOriginalImage {
     
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,5 +30,5 @@ public class twoOriginalImage {
 
     @OneToOne
     @JoinColumn(name="history_id", nullable=false)
-    private historyTable historyId;
+    private HistoryTable historyId;
 }

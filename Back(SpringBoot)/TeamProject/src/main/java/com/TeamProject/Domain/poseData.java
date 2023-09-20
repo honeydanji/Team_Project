@@ -12,7 +12,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class poseData {
+public class PoseData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,5 +28,5 @@ public class poseData {
     
     @ManyToOne
     @JoinColumn(name="history_id")
-    private historyTable historyId;
+    private HistoryTable historyId;
 }

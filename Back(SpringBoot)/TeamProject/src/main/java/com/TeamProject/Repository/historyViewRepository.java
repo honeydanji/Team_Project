@@ -2,11 +2,11 @@ package com.TeamProject.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.TeamProject.Domain.historyView;
+import com.TeamProject.Domain.HistoryView;
 
-public interface historyViewRepository extends JpaRepository<historyView, Integer> {
+public interface HistoryViewRepository extends JpaRepository<HistoryView, Integer> {
     // historyView findByHistoryId(Integer hitoryId);
 
-    historyView findByHistoryId(Integer hitoryId);
+    HistoryView findByHistoryId(Integer hitoryId);
 
 }
