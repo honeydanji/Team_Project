@@ -19,7 +19,7 @@
 <img src="https://github.com/honeydanji/Team_Project/assets/129818881/f98f0ae1-0b64-4407-aa93-cde92a6e030f">
 
 ## 프로젝트 구성도
-<img src='https://github.com/honeydanji/Team_Project/assets/129818881/4c5f021e-4c82-488e-9113-6eaf403fa349'>
+<img src='https://github.com/honeydanji/Team_Project/assets/129818881/5fdabe9c-758b-40e3-a030-f389a123205a'>
 
 ## 서비스화면
 <div>
