@@ -1,5 +1,18 @@
 # 다중 객체 이미지 판별 웹 서비스
 
+[![Java](https://img.shields.io/badge/Language-Java-orange)](https://www.java.com/)
+[![JavaScript](https://img.shields.io/badge/Language-JavaScript-yellow)](https://www.javascript.com/)
+[![Python](https://img.shields.io/badge/Language-Python-blue)](https://www.python.org/)
+
+[![PyTorch](https://img.shields.io/badge/Library-PyTorch-brightgreen)](https://pytorch.org/)
+[![OpenCV](https://img.shields.io/badge/Library-OpenCV-lightgrey)](https://opencv.org/)
+[![Open3D](https://img.shields.io/badge/Library-Open3D-blueviolet)](http://www.open3d.org/)
+
+[![Spring Boot](https://img.shields.io/badge/Framework-Spring%20Boot-green)](https://spring.io/projects/spring-boot)
+[![React](https://img.shields.io/badge/Framework-React-blue)](https://reactjs.org/)
+[![Flask](https://img.shields.io/badge/Framework-Flask-yellowgreen)](https://flask.palletsprojects.com/)
+
+
 ## 프로젝트 개요
 <details open>
 <summary><b>목표</b></summary>
