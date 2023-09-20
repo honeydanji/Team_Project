@@ -21,7 +21,7 @@
 <img src = "https://github.com/honeydanji/Team_Project/assets/129818881/bc9a2438-cecf-497e-8e57-855483f777ce">
 
 ## Restful API 명세
-<img src = "https://github.com/honeydanji/Team_Project/assets/129818881/ac3c652b-1615-489f-81e8-ac3d2763323a">
+<img src = "https://github.com/honeydanji/Team_Project/assets/129818881/c5166b73-9073-4634-ba7c-c2c0bd252068">
 
 ## 2023/09/08
 - git 명령어 정리
