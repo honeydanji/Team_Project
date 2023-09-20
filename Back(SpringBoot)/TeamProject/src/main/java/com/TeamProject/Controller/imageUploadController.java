@@ -18,29 +18,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.TeamProject.Domain.historyTable;
-import com.TeamProject.Service.FlaskService.imageSendService;
-import com.TeamProject.Service.SpringBootService.historyTableService;
-import com.TeamProject.Service.SpringBootService.imageUploadService;
-import com.TeamProject.Service.SpringBootService.poseDataService;
-import com.TeamProject.Service.SpringBootService.twoSegmentationCoordinatesService;
+import com.TeamProject.Controller.Interface.ImageUploadInterface;
+import com.TeamProject.Domain.HistoryTable;
+import com.TeamProject.Service.FlaskService.ImageSendService;
+import com.TeamProject.Service.SpringBootService.HistoryTableService;
+import com.TeamProject.Service.SpringBootService.ImageUploadService;
+import com.TeamProject.Service.SpringBootService.PoseDataService;
+import com.TeamProject.Service.SpringBootService.TwoSegmentationCoordinatesService;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-public class imageUploadController {
+public class ImageUploadController implements ImageUploadInterface{
 
-    private final imageUploadService imageuploadservice; // SpringBoot 
+    private final ImageUploadService imageuploadservice; // SpringBoot 
 
-    private final imageSendService imagesendservice; // 외부 API 
+    private final ImageSendService imagesendservice; // 외부 API 
 
-    private final historyTableService historytableservice; // historyTable
+    private final HistoryTableService historytableservice; // historyTable
 
-    private final poseDataService posedataservice; // poseData
+    private final PoseDataService posedataservice; // poseData
 
-    private final twoSegmentationCoordinatesService twosegmentationcoordinatesservice; // segData
+    private final TwoSegmentationCoordinatesService twosegmentationcoordinatesservice; // segData
     
+    @Override
     @PostMapping("/uploadSpring")
     public ResponseEntity<Object> uploadController(@RequestParam(name = "pngFile", required = false) MultipartFile pngFile,
                                                    @RequestParam(name = "plyFile", required = false) MultipartFile plyFile,
@@ -75,7 +77,7 @@ public class imageUploadController {
             }
         
             // history Service
-            historyTable history = historytableservice.historyUpdate(authentication);
+            HistoryTable history = historytableservice.historyUpdate(authentication);
 
 
 
@@ -94,6 +96,7 @@ public class imageUploadController {
     private final String threeDImageDirectory = "C:/Team_Project/Back(SpringBoot)/TeamProject/image/3D"; // 3d 포인트클라우드
 
 	// 이미지 조회
+    @Override
 	@GetMapping("/upload/image/{imageName:.+}")
 	public ResponseEntity<Resource> getImage(@PathVariable String imageName) throws MalformedURLException {
 
