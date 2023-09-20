@@ -56,6 +56,7 @@
 <div>
   <img src="https://github.com/honeydanji/Team_Project/assets/129818881/e7158d82-5a58-4d7d-b935-f37a2e42fe06">
 </div>
+
 ## 팀원 
 |<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/129818881?v=4">|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/129818936?v=4">|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/129819084?v=4">|
 | :---------------------------------: | :-----------------------------------:|:-----------------------------------:|
