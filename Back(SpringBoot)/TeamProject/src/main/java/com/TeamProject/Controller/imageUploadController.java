@@ -31,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RestController
 public class ImageUploadController implements ImageUploadInterface{
+    
 
     private final ImageUploadService imageuploadservice; // SpringBoot 
 
