@@ -25,6 +25,7 @@ public class CommentsController implements CommentsInterface {
     public ResponseEntity<String> commentUpload(@PathVariable int historyId, // 히스토리 몇번?
                                                 @RequestParam String contents,// 기록할 내용
                                                 Authentication authentication) {// 권한
+                                                    
         return commentsservice.commentUpload(historyId, contents, authentication);
     }
     
