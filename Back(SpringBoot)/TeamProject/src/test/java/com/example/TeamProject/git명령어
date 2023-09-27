@@ -1,6 +1,0 @@
-// pull, push 충돌 일어 났을 때
-git reset HEAD~1 : 가장 최근 커밋 취소
-git stash : 스택에 stash 생성
-git stash list : 스택에 존재하는 stash 목록확인
-git stash apply : 스택에 있는 stash 적용하기(했던 작업 다시 가져오기)
-git stash drop : 스택에 남아 있는 stash 삭제하기
