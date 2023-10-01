@@ -14,3 +14,4 @@ public class MembersDTO {
     private String phoneNumber;
     private String companyName;    
 }
+ 

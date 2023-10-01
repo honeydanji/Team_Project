@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 public class MemberController implements MemberInterface{
-
+    
     private final MemberService memberservice;
 
     // 회원가입
