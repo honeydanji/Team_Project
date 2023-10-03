@@ -82,4 +82,20 @@ public class HistoryTableControllerTest {
      * 1. Mockito.any(LocalDate.class) >> 구체적인 값을 전달 하는 건 아니다.
      * 2. LocalDate date = LocalDate.of(2023, 7, 6) >> 구체적인 값 전달 가능.
      */
+
+    @Test
+    @DisplayName("결과 히스토리")
+    @WithMockUser(roles = "User")
+    public void testResult() throws Exception {
+
+        Map<String, Object> fakeHistoryData = new HashMap<>();
+        fakeHistoryData.put("test1", "test11");
+        fakeHistoryData.put("test2", "test22");
+
+        Mockito.when(historyTableService.results(Mockito.any(LocalDate.class), Mockito.any(Authentication.class))).thenReturn(fakeHistoryData);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/history/{uploadDate}","2023-08-10"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+    }
 }
