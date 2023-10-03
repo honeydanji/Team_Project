@@ -21,9 +21,8 @@ public class MemberService {
 
     public ResponseEntity<String> registerService(MembersDTO memberdto) {
 
-        
-
-        if (!memberdto.getPassword().equals(memberdto.getConfirmPassword())) {
+        if(memberrepository.findByLoginEmail(memberdto.getLoginEmail()).equals(null)) {
+            if (!memberdto.getPassword().equals(memberdto.getConfirmPassword())) {
             return ResponseEntity.ok("비밀번호를 확인해주세요.");
         } else {
             Members member = new Members();
@@ -41,5 +40,9 @@ public class MemberService {
 
             return ResponseEntity.ok("회원가입 성공.");
         }
-    }  
+    }
+    return ResponseEntity.ok("이미 존재하는 이메일입니다.");
+
+    }
 }
+
