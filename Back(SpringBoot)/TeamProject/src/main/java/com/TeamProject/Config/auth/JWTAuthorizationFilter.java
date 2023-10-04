@@ -56,7 +56,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 																		.asString();
 		
 		// 5. 추출한 "userId" 정보를 사용하여 사용자를 데이터베이스에서 조회.
-		Members opt = memberrepository.findByloginEmail(userId);
+		Members opt = memberrepository.findByLoginEmail(userId);
 		
 		// 6. 조회된 사용자가 없는 경우, 다음 필터로 전달한다.  >> Optional : 컨테이너가 비어있을 경우 때문에 사용.
 		if(opt == null) { // 존재하지 않는 아이디를 넣어서 디버깅을 해보자 >> 어떻게 넘어오냐? 
