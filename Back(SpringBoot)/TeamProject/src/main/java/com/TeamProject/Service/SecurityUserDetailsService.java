@@ -19,7 +19,7 @@ public class SecurityUserDetailsService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String loginEmail) throws UsernameNotFoundException {
-		Members member = memberrepository.findByloginEmail(loginEmail);
+		Members member = memberrepository.findByLoginEmail(loginEmail);
 //				.orElseThrow(() -> 
 //				new UsernameNotFoundException("Not Found!"));
 		// username이 존재하지 않으면 "NOT Found" 를 리턴한다. (아이디가 없을 경우)

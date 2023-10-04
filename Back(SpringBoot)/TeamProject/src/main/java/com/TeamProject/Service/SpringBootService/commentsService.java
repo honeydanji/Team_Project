@@ -29,7 +29,7 @@ public class CommentsService {
 
         // 히스토리아이디로 가져온 userId와 실제 userId가 일치하는 지 확인
         Members hisId = historytablerepository.findByHistoryId(historyId).getUserId();
-        Members memId = membersrepository.findByloginEmail(userEmail); 
+        Members memId = membersrepository.findByLoginEmail(userEmail); 
 
         if (userEmail == null) {
             return ResponseEntity.ok("권한이 없습니다.");
@@ -61,7 +61,7 @@ public class CommentsService {
 
         // 히스토리아이디로 가져온 userId와 실제 userId가 일치하는 지 확인
         Members hisId = historytablerepository.findByHistoryId(historyId).getUserId();
-        Members memId = membersrepository.findByloginEmail(userEmail); 
+        Members memId = membersrepository.findByLoginEmail(userEmail); 
 
         if (userEmail == null) {
             return ResponseEntity.ok("권한이 없습니다.");
@@ -85,7 +85,7 @@ public class CommentsService {
 
         // 히스토리아이디로 가져온 userId와 실제 userId가 일치하는 지 확인
         Members hisId = historytablerepository.findByHistoryId(historyId).getUserId();
-        Members memId = membersrepository.findByloginEmail(userEmail); 
+        Members memId = membersrepository.findByLoginEmail(userEmail); 
 
         if (userEmail == null) {
             return ResponseEntity.ok("권한이 없습니다.");

@@ -37,7 +37,7 @@ public class HistoryTableService {
     public HistoryTable historyUpdate(Authentication authentication) {
 
         // 유저번호
-        Members m = membersrepository.findByloginEmail(authentication.getName());
+        Members m = membersrepository.findByLoginEmail(authentication.getName());
         
         HistoryTable historytable = new HistoryTable();
         
@@ -53,7 +53,7 @@ public class HistoryTableService {
     // 로그인 유저 게시글번호 및 업로드날짜 반환
     public Map<Object, Object> historyUpdateDate(Authentication authentication) {
         String userEmail = authentication.getName();
-        Members userId = membersrepository.findByloginEmail(userEmail);
+        Members userId = membersrepository.findByLoginEmail(userEmail);
 
         if(userEmail == null){
             return null;
