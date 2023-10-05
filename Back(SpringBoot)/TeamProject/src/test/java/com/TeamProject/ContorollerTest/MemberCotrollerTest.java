@@ -14,6 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.TeamProject.Controller.MemberController;
 import com.TeamProject.Dto.MembersDTO;
@@ -35,7 +37,7 @@ public class MemberCotrollerTest {
     void memberTest() throws Exception {
         // 요청 본문에 사용할 MembersDTO 객체 생성
         MembersDTO memberDTO = new MembersDTO();
-        memberDTO.setName("Test");
+        memberDTO.setName("test");
         memberDTO.setLoginEmail("Test3680@test.com");
         memberDTO.setPassword("1234");
         memberDTO.setConfirmPassword("1234");
@@ -63,4 +65,33 @@ public class MemberCotrollerTest {
             throw new RuntimeException(e);
         }
     }
+ 
+    @Test
+    @DisplayName("MemberDTO 유효성 검사하기")
+    @WithMockUser()
+    public void testInvalidMembersDTO() throws Exception {
+        // 가짜 MemberDTO 객체 생성
+        MembersDTO membersDTO = new MembersDTO();
+        membersDTO.setName(null); // 이름 필드가 null이므로 유효성 검사 실패
+        membersDTO.setLoginEmail("invalid-email"); // 이메일 형식이 유효하지 않으므로 유효성 검사 실패
+        membersDTO.setPassword("short"); // 패스워드 길이가 짧아서 유효성 검사 실패
+        membersDTO.setConfirmPassword("short");
+        membersDTO.setPhoneNumber(null); // 전화번호 필드가 null이므로 유효성 검사 실패
+        
+        mockMvc.perform(MockMvcRequestBuilders.post("/register")
+            .with(csrf()) // 403 에러 방지해결
+            .flashAttr("memberDTO", membersDTO)) // 위에서 만든 가짜 객체를 전달해준다.
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(MockMvcResultMatchers.view().name("유효성 검사에 실패했습니다."))
+            .andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("membersDTO", "name", "loginEmail", "password", "phoneNumber"));
+    }
+
+    // 403 에러(권한문제) > with(csrf()) 추가 > 401 발생
+    // 401 에러 > withMockUser() 추가 > 400 발생
+    // 400 에러(잘못된 요청) > 실제 컨트롤러 클래스에 유효성 검사 로직을 추가 > 해결 x
+    //                      > 
 }
+
+/*
+ * 1. Controller에서 API테스트를 위해 @WebMvcTest를 사용한다.(Spring에서 제공하는 test 어노테이션)   
+ */
