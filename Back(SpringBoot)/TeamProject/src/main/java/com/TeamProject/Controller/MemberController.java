@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,8 +28,8 @@ public class MemberController implements MemberInterface{
     public ResponseEntity<String> registerController(@Valid @RequestBody MembersDTO memberdto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             //유효성 검사 오류가 발생한 경우
-            List<ObjectError> errors = bindingResult.getAllErrors();
-            return ResponseEntity.badRequest().body("유효성 검사 오류 발생: " + errors.get(0).getDefaultMessage());
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+            return ResponseEntity.badRequest().body("유효성 검사 오류 발생: " + fieldErrors.get(0).getDefaultMessage());
         }
         
         return memberservice.registerService(memberdto);

@@ -56,6 +56,35 @@ public class MemberCotrollerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    @DisplayName("이름 유효성 검사하기")
+    @WithMockUser()
+    public void testInvalidMembersDTO() throws Exception {
+        // 가짜 MemberDTO 객체 생성
+        MembersDTO membersDTO = new MembersDTO();
+        membersDTO.setName(null); // 이름 필드가 null이므로 유효성 검사 실패
+        
+        mockMvc.perform(MockMvcRequestBuilders.post("/register")
+            .with(csrf()) // 403 에러 방지해결
+            .contentType(MediaType.APPLICATION_JSON) // JSON 형식으로 요청
+            .content(asJsonString(membersDTO))) // 객체를 JSON 문자열로 변환하여 전달
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andExpect(MockMvcResultMatchers.content().string("이름을 입력해 주세요"));
+    }
+
+    // 403 에러(권한문제) > with(csrf()) 추가 > 401 발생
+    // 401 에러 > withMockUser() 추가 > 400 발생
+    // 400 에러(잘못된 요청) > 실제 컨트롤러 클래스에 유효성 검사 로직을 추가 > 해결 x
+    // 에러 해결 : 유효성 검사에 실패하면 BadRequest로 처리해야하는데 ok로 처리 했기 때문이었음. 
+    
+    // 오류 : 오류메시지가 계속 비어 있음.
+    // 원인 : 실제 Controller에서 요청본문을 Json형태로 받아야 하는데 그러지 않았음. 
+    //        (@RequestBody 는 요청 분문을 Json형태로 받아야함.)
+    // 해결 : MemberDTO객체를 Json 문자열로 변환후에 전송함. 
+
+    
+    
+    
     // 객체를 JSON 문자열로 변환하기 위한 도우미 메서드
     private String asJsonString(Object obj) {
         try {
@@ -65,33 +94,5 @@ public class MemberCotrollerTest {
             throw new RuntimeException(e);
         }
     }
- 
-    @Test
-    @DisplayName("MemberDTO 유효성 검사하기")
-    @WithMockUser()
-    public void testInvalidMembersDTO() throws Exception {
-        // 가짜 MemberDTO 객체 생성
-        MembersDTO membersDTO = new MembersDTO();
-        membersDTO.setName(null); // 이름 필드가 null이므로 유효성 검사 실패
-        membersDTO.setLoginEmail("invalid-email"); // 이메일 형식이 유효하지 않으므로 유효성 검사 실패
-        membersDTO.setPassword("short"); // 패스워드 길이가 짧아서 유효성 검사 실패
-        membersDTO.setConfirmPassword("short");
-        membersDTO.setPhoneNumber(null); // 전화번호 필드가 null이므로 유효성 검사 실패
-        
-        mockMvc.perform(MockMvcRequestBuilders.post("/register")
-            .with(csrf()) // 403 에러 방지해결
-            .flashAttr("memberDTO", membersDTO)) // 위에서 만든 가짜 객체를 전달해준다.
-            .andExpect(MockMvcResultMatchers.status().isOk())
-            .andExpect(MockMvcResultMatchers.view().name("유효성 검사에 실패했습니다."))
-            .andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("membersDTO", "name", "loginEmail", "password", "phoneNumber"));
-    }
-
-    // 403 에러(권한문제) > with(csrf()) 추가 > 401 발생
-    // 401 에러 > withMockUser() 추가 > 400 발생
-    // 400 에러(잘못된 요청) > 실제 컨트롤러 클래스에 유효성 검사 로직을 추가 > 해결 x
-    //                      > 
 }
 
-/*
- * 1. Controller에서 API테스트를 위해 @WebMvcTest를 사용한다.(Spring에서 제공하는 test 어노테이션)   
- */
