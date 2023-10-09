@@ -25,7 +25,7 @@ public class MemberController implements MemberInterface{
     // 회원가입
     @Override
     @PostMapping("/register")
-    public ResponseEntity<String> registerController(@Valid @RequestBody MembersDTO memberdto, BindingResult bindingResult) {
+    public ResponseEntity<String> registerController(@RequestBody @Valid MembersDTO memberdto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             //유효성 검사 오류가 발생한 경우
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
