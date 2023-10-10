@@ -9,14 +9,19 @@
   <img src="https://img.shields.io/badge/springboot 3.1.2-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> 
   <img src="https://img.shields.io/badge/springsecurity 6.1.1-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white"> 
   <img src="https://img.shields.io/badge/mysql 8.0.32-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
+  <img src="https://img.shields.io/badge/JUnit%205-25A162?style=for-the-badge&logo=junit5&logoColor=white">
+  <img src="https://img.shields.io/badge/Mockito-EBAC3D?style=for-the-badge&logo=mockito&logoColor=white">
 </div>
+
 
 ## 핵심기술
 - Spring MVC 아키텍처 기반 구현
 - RestAPI 아키텍처 기반 설계
 - JWT 토큰을 사용하여 인증 처리
 - 웹서버(SpringBoot)와 서버 API(Flask) 통신을 위해 RestTemplate 사용
-   
+- JUnit5와 Mockito를 이용한 각 계층 Test 코드 작성
+- @Validated를 이용한 유효성 검사 그룹화 및 Test 코드 작성
+    
 ## DatabaseModel
 <img src = "https://github.com/honeydanji/Team_Project/assets/129818881/bc9a2438-cecf-497e-8e57-855483f777ce">
 
