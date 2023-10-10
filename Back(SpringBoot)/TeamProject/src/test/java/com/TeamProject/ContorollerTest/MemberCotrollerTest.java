@@ -1,10 +1,14 @@
 package com.TeamProject.ContorollerTest;
 
+import static org.mockito.ArgumentMatchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,6 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -86,15 +91,40 @@ public class MemberCotrollerTest {
         // 가짜 MemberDTO 객체 생성
         MembersDTO membersDTO = new MembersDTO();
         membersDTO.setName("Test");
-        membersDTO.setLoginEmail("test"); // 이메일 형식 무시
         membersDTO.setPassword("TestTestTest");
         membersDTO.setConfirmPassword("TestTestTest");
         membersDTO.setPhoneNumber("TestTestTest");
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/register")
+        // Mock BindingResult 객체
+        BindingResult bindingResult = mock(BindingResult.class);
+
+        // 1. @NotNull
+        ResultActions resultActions = 
+            mockMvc.perform(MockMvcRequestBuilders.post("/register")
             .with(csrf())
             .contentType(MediaType.APPLICATION_JSON)
-            .content(asJsonString(membersDTO)))
+            .content(asJsonString(membersDTO))
+            .flashAttr("org.springframework.validation.BindingResult.membersDTO", bindingResult));
+            
+        resultActions
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andExpect(MockMvcResultMatchers.content().string("유효성 검사 오류 발생: 이메일을 입력해 주세요."));
+
+        // 2. @Email
+        membersDTO.setName("Test");
+        membersDTO.setLoginEmail("Test");
+        membersDTO.setPassword("TestTestTest");
+        membersDTO.setConfirmPassword("TestTestTest");
+        membersDTO.setPhoneNumber("TestTestTest");
+
+        resultActions =
+            mockMvc.perform(MockMvcRequestBuilders.post("/register")
+            .with(csrf())
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(asJsonString(membersDTO))
+            .flashAttr("org.springframework.validation.BindingResult.membersDTO", bindingResult));
+
+        resultActions
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
             .andExpect(MockMvcResultMatchers.content().string("유효성 검사 오류 발생: 이메일 형식을 지켜서 입력해 주세요."));
     }
@@ -107,21 +137,13 @@ public class MemberCotrollerTest {
         MembersDTO membersDTO = new MembersDTO();
         membersDTO.setName("Test");
         membersDTO.setLoginEmail("test3680@test.com");
-        membersDTO.setPassword("test#$%^");
         membersDTO.setConfirmPassword("test");
         membersDTO.setPhoneNumber("test");
 
         // Mock BindingResult 객체
         BindingResult bindingResult = mock(BindingResult.class);
 
-        // Passowrd 1번 오류 : 비밀번호 자릿수
-        FieldError passwordError1 = new FieldError("membersDTO", "password", "비밀번호는 10자 이상 15자 이하로 입력해 주세요.");
-        when(bindingResult.getFieldError("password")).thenReturn(passwordError1);
-
-        // Password 2번 오류 : 특수문자 
-        FieldError passwordError2 = new FieldError("membersDTO", "password", "특수문자는 3개 이하로만 사용 가능합니다.");
-        when(bindingResult.getFieldError("password")).thenReturn(passwordError2);
-
+        // RsultActions : 결과가 여러개일 때 사용
         ResultActions resultActions = 
                     mockMvc.perform(MockMvcRequestBuilders.post("/register")
                             .with(csrf())
@@ -129,17 +151,47 @@ public class MemberCotrollerTest {
                             .content(asJsonString(membersDTO))
                             .flashAttr("org.springframework.validation.BindingResult.membersDTO", bindingResult));
 
-        // 유효성 검사 오류 여부 확인
-        // resultActions.andExpect(status().isBadRequest());
+        // 1. @NotNull
+        resultActions
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.content().string("유효성 검사 오류 발생: 비밀번호를 입력해 주세요."));
+        // 2. @Size
+        membersDTO.setName("Test");
+        membersDTO.setLoginEmail("test3680@test.com");
+        membersDTO.setPassword("test");
+        membersDTO.setConfirmPassword("test");
+        membersDTO.setPhoneNumber("test");
 
-        // // 필드별 유효성 검사 오류 확인
-        resultActions.andExpectAll(MockMvcResultMatchers.status().isBadRequest(),
-                                MockMvcResultMatchers.content().string("유효성 검사 오류 발생: 비밀번호는 10자 이상 15자 이하로 입력해 주세요."),
-                                MockMvcResultMatchers.content().string("유효성 검사 오류 발생: 특수문자는 3개 이하로만 사용 가능합니다."));
+        resultActions = 
+                mockMvc.perform(MockMvcRequestBuilders.post("/register")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(membersDTO))
+                        .flashAttr("org.springframework.validation.BindingResult.membersDTO", bindingResult));
+        
+        resultActions
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.content().string("유효성 검사 오류 발생: 비밀번호는 10자 이상 15자 이하로 입력해 주세요."));
+               
+
+        // 3. @Pattern
+        membersDTO.setName("Test");
+        membersDTO.setLoginEmail("test3680@test.com");
+        membersDTO.setPassword("test$%^&*#");
+        membersDTO.setConfirmPassword("test");
+        membersDTO.setPhoneNumber("test");
+
+        resultActions =
+                mockMvc.perform(MockMvcRequestBuilders.post("/register")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(membersDTO))
+                        .flashAttr("org.springframework.validation.BindingResult.membersDTO", bindingResult));
+
+        resultActions
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.content().string("유효성 검사 오류 발생: 특수문자는 3개 이하로만 사용 가능합니다."));
     }
-
-    // @Test
-    // @DisplayName("전화번호 유효성 검사")
     
     // 객체를 JSON 문자열로 변환하기 위한 도우미 메서드
     private String asJsonString(Object obj) {

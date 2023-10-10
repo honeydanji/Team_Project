@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.TeamProject.Controller.Interface.MemberInterface;
 import com.TeamProject.Dto.MembersDTO;
 import com.TeamProject.Service.SpringBootService.MemberService;
+import com.TeamProject.Validation.MemberValidation.ValidationSequence;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -25,13 +26,12 @@ public class MemberController implements MemberInterface{
     // 회원가입
     @Override
     @PostMapping("/register")
-    public ResponseEntity<String> registerController(@RequestBody @Valid MembersDTO memberdto, BindingResult bindingResult) {
+    public ResponseEntity<String> registerController(@RequestBody @Validated(ValidationSequence.class) MembersDTO memberdto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             //유효성 검사 오류가 발생한 경우
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
             return ResponseEntity.badRequest().body("유효성 검사 오류 발생: " + fieldErrors.get(0).getDefaultMessage());
         }
-        
         return memberservice.registerService(memberdto);
     }
 }
