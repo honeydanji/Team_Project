@@ -1,30 +1,25 @@
 package com.TeamProject.ContorollerTest;
 
-import static org.mockito.ArgumentMatchers.contains;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 
 import com.TeamProject.Controller.MemberController;
 import com.TeamProject.Dto.MembersDTO;
@@ -72,6 +67,7 @@ public class MemberCotrollerTest {
         // 가짜 MemberDTO 객체 생성
         MembersDTO membersDTO = new MembersDTO();
         membersDTO.setName(null); // 이름 필드가 null이므로 유효성 검사 실패
+        membersDTO.setLoginEmail("test3680@naver.com");
         membersDTO.setPassword("TestTestTest");
         membersDTO.setConfirmPassword("TestTestTest");
         membersDTO.setPhoneNumber("TestTestTest");
@@ -80,7 +76,8 @@ public class MemberCotrollerTest {
             .with(csrf()) // 403 에러 방지 >> csrf 토큰 전송
             .contentType(MediaType.APPLICATION_JSON) // JSON 형식으로 요청
             .content(asJsonString(membersDTO))) // 객체를 JSON 문자열로 변환하여 전달
-            .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            // .andExpect(MockMvcResultMatchers.status().isBadRequest())
+            .andExpect(MockMvcResultMatchers.status().is(HttpStatus.BAD_REQUEST.value()))
             .andExpect(MockMvcResultMatchers.content().string("유효성 검사 오류 발생: 이름을 입력해 주세요."));
     }
 
@@ -108,6 +105,7 @@ public class MemberCotrollerTest {
             
         resultActions
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
+
             .andExpect(MockMvcResultMatchers.content().string("유효성 검사 오류 발생: 이메일을 입력해 주세요."));
 
         // 2. @Email

@@ -4,6 +4,7 @@ import org.hibernate.validator.group.GroupSequenceProvider;
 
 import com.TeamProject.Validation.MemberValidation.EmailValidationGroups;
 import com.TeamProject.Validation.MemberValidation.MembersDTOGroupSequenceProvider;
+import com.TeamProject.Validation.MemberValidation.NameValidationGroups;
 import com.TeamProject.Validation.MemberValidation.PasswordValidationGroups;
 
 import jakarta.validation.constraints.Email;
@@ -18,7 +19,8 @@ import lombok.Setter;
 @GroupSequenceProvider(MembersDTOGroupSequenceProvider.class)
 public class MembersDTO {
 
-    @NotNull(message = "이름을 입력해 주세요.")
+    @NotNull(message = "이름을 입력해 주세요.",
+                groups = NameValidationGroups.NotNullGroup.class)
     private String name;
 
     @NotNull(message = "이메일을 입력해 주세요.",
