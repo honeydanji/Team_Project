@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Spring Boot의 기본 로깅 설정을 포함합니다. -->
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+    <!-- FILE appender 설정: 로그를 파일에 저장합니다. -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/application.log</file> <!-- 로그 파일의 경로와 이름 -->
+        <append>true</append> <!-- 기존 로그 파일에 추가할지 여부 (true: 추가, false: 덮어씀) -->
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{35} - %msg%n</pattern>
+            <!-- 로그 레이아웃 형식 설정 -->
+        </encoder>
+    </appender>
+
+    <!-- CONSOLE appender 설정: 로그를 콘솔에 출력합니다. -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{35} - %msg%n</pattern>
+            <!-- 콘솔에 출력될 로그 형식 설정 -->
+        </encoder>
+    </appender>
+
+    <!-- ROOT logger 설정: 어떤 로그 메시지를 기록할지 레벨 및 출력 대상을 지정합니다. -->
+    <root level="debug"> <!-- 로그 레벨 설정 (debug: 정보 이상의 로그를 기록) -->
+        <appender-ref ref="CONSOLE" /> <!-- CONSOLE appender를 사용하여 콘솔에 출력 -->
+        <appender-ref ref="FILE" />    <!-- FILE appender를 사용하여 파일에 출력 -->
+    </root>
+</configuration>
