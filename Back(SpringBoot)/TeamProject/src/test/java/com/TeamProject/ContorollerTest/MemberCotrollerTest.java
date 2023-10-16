@@ -47,10 +47,7 @@ public class MemberCotrollerTest {
         memberDTO.setConfirmPassword("1234");
         memberDTO.setPhoneNumber("1234567890");
         memberDTO.setCompanyName("Test");
-        
-        // memberService.registerService 메서드 호출 시의 동작을 가짜(mock)로 설정
-        when(memberService.registerService(memberDTO)).thenReturn(ResponseEntity.ok("회원 등록 성공"));
-        
+
         // /register 엔드포인트로 POST 요청을 보내고, MembersDTO 객체를 JSON 형식으로 전송
         mockMvc.perform(
                 post("/register")
@@ -88,6 +85,7 @@ public class MemberCotrollerTest {
         // 가짜 MemberDTO 객체 생성
         MembersDTO membersDTO = new MembersDTO();
         membersDTO.setName("Test");
+        membersDTO.setLoginEmail(null);
         membersDTO.setPassword("TestTestTest");
         membersDTO.setConfirmPassword("TestTestTest");
         membersDTO.setPhoneNumber("TestTestTest");
@@ -105,7 +103,6 @@ public class MemberCotrollerTest {
             
         resultActions
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
-
             .andExpect(MockMvcResultMatchers.content().string("유효성 검사 오류 발생: 이메일을 입력해 주세요."));
 
         // 2. @Email
