@@ -58,12 +58,12 @@ public class HistoryTableService {
         if(userEmail == null){
             return null;
         }else {
-            List<Integer> his = historytablerepository.historyIdByUserEmail(userId); // 로그인 유저 historyId 가져오기(Integer)
+            List<Integer> his = historytablerepository.findHistoryIdByUserId(userId); // 로그인 유저 historyId 가져오기(Integer)
             Map<Object, Object> miniMap = new HashMap<>();
             
-            for(int i = 0; i < historytablerepository.historyIdByUserEmail(userId).size(); i++) {
-                miniMap.put(historytablerepository.uploadDateByUserEmail(userId).get(i), 
-                            twosegmentationrepository.segmentationByHistoryId(historytablerepository.findByUserIdAndUploadDate(userId, historytablerepository.uploadDateByUserEmail(userId).get(i)).get(historytablerepository.findByUserIdAndUploadDate(userId, historytablerepository.uploadDateByUserEmail(userId).get(i)).size()-1))); // null > list
+            for(int i = 0; i < historytablerepository.findHistoryIdByUserId(userId).size(); i++) {
+                miniMap.put(historytablerepository.findUploadDateByUserId(userId).get(i), 
+                            twosegmentationrepository.findTwoSegmentationPathByHistoryId(historytablerepository.findByUserIdAndUploadDate(userId, historytablerepository.findUploadDateByUserId(userId).get(i)).get(historytablerepository.findByUserIdAndUploadDate(userId, historytablerepository.findUploadDateByUserId(userId).get(i)).size()-1))); // null > list
             }
 
 
@@ -82,9 +82,9 @@ public class HistoryTableService {
         Members userId = membersrepository.findByLoginEmail(authentication.getName());
     
         // 날짜, userId 출력
-        List<Integer> historyId = historytablerepository.findByUploadDateANDUserId(uploadDate, userId);
+        List<Integer> historyId = historytablerepository.findByUploadDateAndUserId(uploadDate, userId);
 
-        for(int i = 0; i < historytablerepository.findByUploadDateANDUserId(uploadDate, userId).size(); i++) {
+        for(int i = 0; i < historytablerepository.findByUploadDateAndUserId(uploadDate, userId).size(); i++) {
             HistoryView a = historyviewrepository.findByHistoryId(historyId.get(i));
             map.put(Integer.toString(i), a);
         }
@@ -114,13 +114,13 @@ public class HistoryTableService {
         int cansnack = 0;
     
         // 날짜, userId 출력
-        List<Integer> historyId = historytablerepository.findByUploadDateANDUserId(uploadDate, userId);
-        for(int i = 0; i < historytablerepository.findByUploadDateANDUserId(uploadDate, userId).size(); i++) {
+        List<Integer> historyId = historytablerepository.findByUploadDateAndUserId(uploadDate, userId);
+        for(int i = 0; i < historytablerepository.findByUploadDateAndUserId(uploadDate, userId).size(); i++) {
             HistoryTable his = historytablerepository.findByHistoryId(historyId.get(i));
             TwoSegmentationImage segmentationId = twosegmentationrepository.findByHistoryId(his);
-            classCount += twosegmentationcoordinatesrepository.countBySegmentationId(segmentationId);
-            List<String> inputClass = twosegmentationcoordinatesrepository.twoObjecIdByTwoSegmentationId(segmentationId);
-            List<Double> inputAcc = twosegmentationcoordinatesrepository.twoObjectAccBySegmentationId(segmentationId);
+            classCount += twosegmentationcoordinatesrepository.countByTwoSegmentationId(segmentationId);
+            List<String> inputClass = twosegmentationcoordinatesrepository.findTwoObjecIdByTwoSegmentationId(segmentationId);
+            List<Double> inputAcc = twosegmentationcoordinatesrepository.findTwoObjectAccByTwoSegmentationId(segmentationId);
             for(int j = 0; j < inputClass.size(); j++) {
                 switch(inputClass.get(j)) {
                     case "box" : box++; break;

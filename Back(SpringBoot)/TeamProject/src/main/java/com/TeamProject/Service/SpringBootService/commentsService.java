@@ -22,7 +22,6 @@ public class CommentsService {
     private final HistoryTableRepository historytablerepository; // 히스토리테이블
     private final MembersRepository membersrepository; // 멤버테이블
 
-    @Transactional
     public ResponseEntity<String> commentUpload(int historyId, String contents, Authentication authentication) {
 
         String userEmail = authentication.getName(); // 로그인 ID
@@ -54,7 +53,6 @@ public class CommentsService {
         }
     }
 
-    @Transactional
     public ResponseEntity<String> commentUpdate(int historyId, String contents, Authentication authentication) {
 
         String userEmail = authentication.getName(); // 로그인 ID
@@ -78,7 +76,6 @@ public class CommentsService {
         }
     }
 
-    @Transactional
     public ResponseEntity<String> commentDelete(int historyId, Authentication authentication) {
 
         String userEmail = authentication.getName(); // 로그인 ID
