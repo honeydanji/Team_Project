@@ -21,7 +21,7 @@ public class MemberService {
 
     public ResponseEntity<String> registerService(MembersDTO memberdto) {
 
-        if(memberrepository.findByLoginEmail(memberdto.getLoginEmail()).equals(null)) {
+        if(memberrepository.findByLoginEmail(memberdto.getLoginEmail()) == null) {
             if (!memberdto.getPassword().equals(memberdto.getConfirmPassword())) {
             return ResponseEntity.ok("비밀번호를 확인해주세요.");
         } else {

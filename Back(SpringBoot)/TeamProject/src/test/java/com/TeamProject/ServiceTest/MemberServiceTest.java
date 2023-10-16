@@ -26,20 +26,16 @@ public class MemberServiceTest {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Test
-    @DisplayName("회원가입 테스트")
+    @DisplayName("회원가입 테스트 : 회원가입 성공")
     public void testRegisterService() {
+        
         // 가짜 MemberDTO 객체 생성
         MembersDTO fakeMemberDTO = new MembersDTO();
         fakeMemberDTO.setName("Test");
-        fakeMemberDTO.setLoginEmail("Test3680@test.com");
+        fakeMemberDTO.setLoginEmail("Teest3680@test.com");
         fakeMemberDTO.setPassword("test");
         fakeMemberDTO.setConfirmPassword("test");
         fakeMemberDTO.setPhoneNumber("010-0000-0000");
-
-        // 가짜 회원 객체생성 및 반환 설정
-        Members fakeMember = new Members();
-        Mockito.when(bCryptPasswordEncoder.encode(fakeMemberDTO.getPassword())).thenReturn("encodedPassword");
-        Mockito.when(membersRepository.save(Mockito.any())).thenReturn(fakeMember);
 
         // MemberService 객체 생성
         MemberService memberService = new MemberService(membersRepository, bCryptPasswordEncoder);
@@ -50,7 +46,7 @@ public class MemberServiceTest {
         // 결과 검증
         assertEquals("회원가입 성공.", responseEntity.getBody());
     }
-
+    
     @Test
     @DisplayName("비밀번호와 확인비밀번호가 일치 하지 않는 경우")
     public void testRegisterService_PasswordMismatch() {
